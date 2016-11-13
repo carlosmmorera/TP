@@ -1,0 +1,65 @@
+package TP.PR1.MV;
+
+import java.util.Scanner;
+
+public class Engine {
+	private ByteCodeProgram program;
+	private boolean end;
+	
+	public Engine(){
+		this.program = new ByteCodeProgram();
+		this.end = false;
+	}
+	
+	public void start(){
+		Scanner entrada = new Scanner(System.in);
+		String line;
+		
+		Command com;
+		
+		while(!this.end){	
+			System.out.print("> ");
+			line=entrada.nextLine();
+			com=CommandParser.parse(line);
+			
+			if (com.getcom() != null){
+				if (!com.execute(this)) System.out.println("Error: Ejecucion incorrecta del comando");
+			}
+			else System.out.println("Error: Comando incorrecto");
+			if (this.program.getTam() > 0) this.program.mostrar();
+		}
+		System.out.println("Fin de la ejecucion...");
+	}
+	public void help(){
+		System.out.println("HELP: Muestra esta ayuda");
+		System.out.println("QUIT: Cierra la aplicacion");
+		System.out.println("RUN: Ejecuta el programa");
+		System.out.println("NEWINST BYTECODE: Introduce una nueva instruccion al programa");
+		System.out.println("RESET: Vacia el programa actual");
+		System.out.println("REPLACE N: Reemplaza la instruccion N por la solicitada al usuario");
+	}
+	public void quit(){ this.end=true; }
+	public boolean run(){
+		boolean error=false;
+		CPU cpu = new CPU();
+		int indice=0, max = this.program.getTam();
+		ByteCode instr;
+		
+		while (!error && !cpu.getEnd() && indice < max){
+			instr = this.program.instn(indice);
+			error = !cpu.execute(instr);
+			++indice;
+			if (!error) {
+				System.out.println("El estado de la maquina tras ejecutar el bytecode "
+						+ instr.toString() + " es:");
+				cpu.mostrarCPU();
+			}
+		}
+		return !error;
+	}
+	public boolean newinst(ByteCode instruction){
+		return this.program.pushbc(instruction);
+	}
+	public void reset(){ this.program.reset(); }
+	public boolean replace(int rep){ return this.program.replace(rep); }
+}

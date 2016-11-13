@@ -1,0 +1,15 @@
+package TP.PR1.MV;
+
+public class OperandStack {
+	private int[] stack;
+	private int numoperand;
+	
+	public OperandStack(){
+		this.stack=new int[100];
+		this.numoperand=0;
+	}
+	public void pushop(int op){
+		this.stack[this.numoperand]= op;
+		++this.numoperand;
+	}
+}

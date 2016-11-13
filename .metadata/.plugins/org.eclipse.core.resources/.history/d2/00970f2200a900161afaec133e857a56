@@ -1,0 +1,23 @@
+package TP.PR1.MV;
+
+public class Command {
+	private ENUM_COMMAND command;
+	private ByteCode instruction;
+	private int replace;
+	
+	public Command(ENUM_COMMAND com){
+		this.command=com;
+	}
+	public Command(ENUM_COMMAND com, ByteCode inst){
+		this.command=com;
+		this.instruction=inst;
+	}
+	public Command(int rep){
+		this.command=REPLACE;
+		this.replace=rep;
+	}
+	
+	public boolean execute(Engine engine){
+		
+	}
+}

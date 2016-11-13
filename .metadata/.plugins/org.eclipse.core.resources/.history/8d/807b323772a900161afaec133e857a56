@@ -1,0 +1,53 @@
+package TP.PR1.MV;
+
+import java.util.Scanner;
+
+public class Engine {
+	private ByteCodeProgram program;
+	private boolean end;
+	
+	public Engine(){
+		this.program = new ByteCodeProgram();
+		this.end = false;
+	}
+	
+	public void start(){
+		Scanner entrada = new Scanner(System.in);
+		String line;
+		
+		Command com;
+		
+		while(!this.end){			
+			line=entrada.nextLine();
+			com=CommandParser.parse(line);
+			
+			if (com.getcom() != null){
+				if (!com.execute(this)) System.out.println("Error: Ejecucion incorrecta del comando");
+			}
+			else System.out.println("Error: Comando incorrecto");
+			this.program.mostrar();
+		}
+		System.out.println("Fin de la ejecucion...");
+	}
+	public void help(){
+		System.out.println("HELP: Muestra esta ayuda");
+		System.out.println("QUIT: Cierra la aplicacion");
+		System.out.println("RUN: Ejecuta el programa");
+		System.out.println("NEWINST BYTECODE: Introduce una nueva instruccion al programa");
+		System.out.println("RESET: Vacia el programa actual");
+		System.out.println("REPLACE N: Reemplaza la instruccion N por la solicitada al usuario");
+	}
+	public void quit(){ this.end=true; }
+	public boolean run(){
+		
+	}
+	public boolean newinst(ByteCode instruction){
+		return this.program.pushbc(instruction);
+	}
+	public void reset(){
+		
+	}
+	public boolean replace(){
+		
+	}
+}

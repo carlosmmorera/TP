@@ -1,0 +1,19 @@
+package TP.PR1.MV;
+
+public class ByteCode {
+	private ENUM_BYTECODE name;
+	private int param;
+	
+	public ByteCode(){
+		this.name=ENUM_BYTECODE.HALT;
+		this.param=0;
+	}
+	public ByteCode(ENUM_BYTECODE bc){
+		this.name=bc;
+		this.param=0;
+	}
+	public ByteCode(ENUM_BYTECODE bc, int par){
+		this.name=bc;
+		this.param=par;
+	}
+}

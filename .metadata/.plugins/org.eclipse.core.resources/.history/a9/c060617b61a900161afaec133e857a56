@@ -1,0 +1,15 @@
+package TP.PR1.MV;
+
+public class Engine {
+	private ByteCodeProgram program;
+	private boolean end;
+	
+	public Engine(){
+		this.program = new ByteCodeProgram();
+		this.end = false;
+	}
+	
+	public void start(){
+		
+	}
+}

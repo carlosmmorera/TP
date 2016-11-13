@@ -1,0 +1,8 @@
+package TP.PR1.MV;
+
+public class ByteCodeParser {
+	public static ByteCode parse(String s){
+		String[] subcadenas=s.split(" ");
+		
+	}
+}

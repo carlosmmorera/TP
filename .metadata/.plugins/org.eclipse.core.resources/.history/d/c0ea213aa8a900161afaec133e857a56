@@ -1,0 +1,10 @@
+package TP.PR1.MV;
+
+public class OperandStack {
+	private int[] stack;
+	
+	public OperandStack(){
+		this.stack=new int[100];
+	}
+	
+}

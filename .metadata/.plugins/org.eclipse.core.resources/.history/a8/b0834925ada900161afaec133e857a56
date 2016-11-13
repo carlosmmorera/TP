@@ -1,0 +1,21 @@
+package TP.PR1.MV;
+
+public class Memory {
+	private Integer[] memory;
+	
+	public Memory(){
+		this.memory = new Integer[100];
+		for (Integer x : memory) x = null;
+	}
+	public boolean write(int pos, int value){
+		if (pos >= 0){
+			this.memory[pos] = value;
+			return true;
+		}
+		else return false;
+	}
+	
+	public int read(int pos){
+		return this.memory[pos];
+	}
+}

@@ -1,0 +1,11 @@
+package TP.PR1.MV;
+
+public class ByteCodeProgram {
+	private ByteCode[] program;
+	int newinst;
+	
+	public ByteCodeProgram(){
+		this.program = new ByteCode[100];
+		this.newinst=0;
+	}
+}

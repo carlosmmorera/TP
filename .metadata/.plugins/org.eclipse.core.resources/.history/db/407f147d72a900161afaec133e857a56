@@ -1,0 +1,48 @@
+package TP.PR1.MV;
+
+public class Command {
+	private ENUM_COMMAND command;
+	private ByteCode instruction;
+	private int replace;
+	
+	public Command(ENUM_COMMAND com){
+		this.command=com;
+		this.instruction = new ByteCode();
+	}
+	public Command(ByteCode inst){
+		this.command=ENUM_COMMAND.NEWINST;
+		this.instruction=inst;
+	}
+	public Command(int rep){
+		this.command=ENUM_COMMAND.REPLACE;
+		this.replace=rep;
+	}
+	
+	public boolean execute(Engine engine){
+		System.out.println("Comienza la ejecucion de " + toString());
+		
+		switch (this.command){
+		case HELP: engine.help(); return true;
+		case RUN: return engine.run();
+		case NEWINST: return engine.newinst(this.instruction);
+		case RESET: engine.reset(); return true;
+		case REPLACE: return engine.replace(this.replace);
+		default: return false;
+		}
+	}
+	
+	public String toString(){
+		String cadena;
+		
+		switch(this.command){
+		case HELP: cadena="HELP"; break;
+		case RUN: cadena="RUN"; break;
+		case NEWINST: cadena="NEWINST "; cadena+=this.instruction.toString(); break;
+		case RESET: cadena="RESET"; break;
+		case REPLACE: cadena="REPLACE "; cadena+=Integer.toString(this.replace); break;
+		default: cadena="";
+		}
+		return cadena;
+	}
+	public ENUM_COMMAND getcom(){ return this.command; }
+}

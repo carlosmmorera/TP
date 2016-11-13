@@ -1,0 +1,27 @@
+package TP.PR1.MV;
+
+import java.util.Scanner;
+
+public class Engine {
+	private ByteCodeProgram program;
+	private boolean end;
+	
+	public Engine(){
+		this.program = new ByteCodeProgram();
+		this.end = false;
+	}
+	
+	public void start(){
+		Scanner entrada = new Scanner(System.in);
+		String line=entrada.nextLine();
+		
+		Command quit=new Command(ENUM_COMMAND.QUIT);
+		Command com=CommandParser.parse(line);
+		while(com != quit){
+			
+			
+			line=entrada.nextLine();
+			com=CommandParser.parse(line);
+		}
+	}
+}

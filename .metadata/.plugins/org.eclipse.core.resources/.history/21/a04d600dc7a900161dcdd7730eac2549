@@ -1,0 +1,71 @@
+package TP.PR1.MV;
+
+public class CPU {
+	private Memory memoria;
+	private OperandStack pila;
+	private boolean end;
+	
+	public CPU(){
+		this.memoria=new Memory();
+		this.pila=new OperandStack();
+		this.end=false;
+	}
+	public boolean execute(ByteCode instr){
+		ENUM_BYTECODE inst = instr.getEnum();
+		int op2 = 0;
+		
+		switch (inst){
+		case PUSH: pila.pushop(instr.getParam()); return true;
+		case LOAD: return this.load(instr.getParam());
+		case STORE: if (pila.haypop()) return this.memoria.write(instr.getParam(), pila.pop());
+					else return false; 
+		case ADD: 	if (pila.haypop()) {
+							op2=pila.pop();
+							if (pila.haypop()) {pila.pushop(pila.pop() + op2); return true; }
+							else return false;
+					}
+					else return false;
+		case SUB: if (pila.haypop()) {
+						op2=pila.pop();
+						if (pila.haypop()) {pila.pushop(pila.pop() - op2); return true; }
+						else return false;
+					}
+					else return false;
+		case MUL: if (pila.haypop()) {
+					op2=pila.pop();
+					if (pila.haypop()) {pila.pushop(pila.pop() * op2); return true; }
+					else return false;
+				}
+				else return false;
+		case DIV: if (pila.haypop()) {
+					op2=pila.pop();
+					if (pila.haypop()) {pila.pushop(pila.pop()/op2); return true; }
+					else return false;
+				}
+				else return false;
+		case OUT: if (pila.haypop()) {
+					System.out.println(Integer.toString(pila.pop()));
+					return true;
+				}
+				else return false;
+		case HALT: this.end = true; return true;
+		default: return false;
+		}
+	}
+	public boolean load(int pos){
+		Integer elem = this.memoria.read(pos);
+		if (elem != null){
+			this.pila.pushop(elem);
+			return true;
+		}
+		else return false;
+	}
+	public void mostrarCPU(){
+		System.out.println("Estado de la CPU:");
+		this.memoria.mostrar();
+		this.pila.mostrar();
+	}
+	public boolean getEnd(){
+		return this.end;
+	}
+}

@@ -1,0 +1,17 @@
+package TP.PR1.MV;
+
+public class CommandParser {
+	public static Command parse(String line){
+		String[] subcadenas=line.split(" ");
+		Command comando;
+		
+		if (subcadenas[0] == "help")comando=new Command(HELP);
+		else if ()
+		switch(subcadenas[0]){
+		case "help": comando=new Command(HELP);
+		case "quit":
+			
+		default: return null;	
+		}
+	}
+}
