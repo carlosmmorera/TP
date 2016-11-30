@@ -1,12 +1,21 @@
 package TP.PR1.MV;
 
-//Clase que gestiona los comandos
+/**
+ * Clase que gestiona los comandos
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 17/11/2016
+ *
+ */
 public class Command {
 	private ENUM_COMMAND command;
 	private ByteCode instruction;
 	private int replace;
 	
-	//He creado tres constructoras dependiendo de los parámetros
+	/**
+	 * Creamos tres constuctores dependiendo de los parámteros que recibo
+	 * 
+	 */
 	public Command(ENUM_COMMAND com){
 		this.command=com;
 		this.instruction = new ByteCode();
@@ -19,7 +28,11 @@ public class Command {
 		this.command=ENUM_COMMAND.REPLACE;
 		this.replace=rep;
 	}
-	//Método que ejecuta el comando
+	/**
+	 * Método que ejecuta el comando
+	 * @param engine
+	 * @return un booleano dependiendo de si la ejecución fue correcta
+	 */
 	public boolean execute(Engine engine){
 		System.out.println("Comienza la ejecucion de " + toString());
 		
@@ -33,7 +46,10 @@ public class Command {
 		default: return false;
 		}
 	}
-	//Método que transforma los comandos en cadenas de caracteres
+	/**
+	 * Método que transforma los comandos en cadenas de caracteres
+	 * @return una string con el nombre del operando seleccionado
+	 */
 	public String toString(){
 		String cadena;
 		

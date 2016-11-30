@@ -1,75 +1,95 @@
 package TP.PR1.MV;
-
-//Clase que gestiona la memoria
+/**
+ * Clase que gestiona la memoria
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 17/11/2016
+ *
+ */
 public class Memory {
-	/*@param memory  es un array que usamos como memoria
+	final int TAM_INI = 100;
+	/**memory array que usamos como memoria
 	 * 
-	 * @param tam nos indica el tamaño de la memoria
+	 * tam nos indica el tamaño de la memoria
 	 * 
-	 * @param posiciones es un array que guarda las posiciones
+	 * posiciones es un array que guarda las posiciones
 	 * en que están guardados elementos de la memoria y así se evita
 	 * tener que recorrer la memoria entera cada vez que queramos mostrarla
 	 * 
-	 * @param tampos nos indica el tamaño de posiciones
+	 * tampos nos indica el tamaño de posiciones
 	 * 
-	 * @param numelem nos indica cuántos elementos tenemos guardados en memoria*/
+	 * numelem nos indica cuántos elementos tenemos guardados en memoria
+	 */
 	private Integer[] memory;
 	private int tam;
 	private int[] posiciones;
 	private int tampos;
 	private int numelem;
+	/**
+	 * Constructor de la clase que inicializa la memoria a 100 por defecto
+	 */
 	
-	//Inicializo la memoria a 100 por defecto
  	public Memory(){
-		this.memory = new Integer[100];
-		this.posiciones = new int[100];
+ 		this.memory = new Integer[TAM_INI];
+		this.posiciones = new int[TAM_INI];
 		this.tampos=100;
 		this.tam=100;
 		for (Integer x : memory) x = null;
 		this.numelem=0;
 	}
- 	//Método que escribe en memoria
+ 	/**
+ 	 * Método que escribe en memoria
+ 	 * @param pos posición de la memoria en la que hay que escribir
+ 	 * @param value valor que hay que escribir en la memoria
+ 	 * @return un booleano dependiendo de si la ejecución ha sido correcta
+ 	 */
 	public boolean write(int pos, int value){
 		//compruebo que la posición sea correcta
 		if (pos >= 0){
-			/*Mientras la memoria no conste de suficiente espacio
-			 * como para poder guardar los datos en la posición solicitada
-			 * la aumento redimensionando el vector*/
-			while (pos >= this.tam) this.resize();
+		/*Mientras la memoria no conste de suficiente espacio
+		* como para poder guardar los datos en la posición solicitada
+		* la aumento redimensionando el vector*/
+			if (pos >= this.tam) this.resize(pos);
 			//Escribo el elemento en su posición
 			this.memory[pos] = value;
-			//Redimensiono el vector posiciones si hiciera falta
-			if (numelem == tampos) this.resizepos();
-			
+					
 			//Añado la posición del elemento recién guardado al vector posiciones
-			posiciones[numelem] = pos;
-			++this.numelem;
+			this.insertarpos(pos);
 			return true;
 		}
 		else return false;
 	}
-	//Método que lee de memorira
+	/**
+	 * Método que lee de memoria
+	 * @param pos posición de la memoria que tenemos que leer
+	 * @return un entero que se corresponde con el numero 
+	 * que hay en esa posición de la memoria
+	 */
 	public int read(int pos){
 		//Redimensiono la memoria tanto como haga falta
-		while (pos >= this.tam) this.resize();
+		if (pos >= this.tam) this.resize(pos);
 		return this.memory[pos];
 	}
-	//Método que redimensiona la memoria
-	public void resize(){
+	/**
+	 * Método que redimensiona la memoria
+	 */
+	public void resize(int pos){
 		//Creo un vector del doble del tamaño actual
-		Integer newmemory[]=new Integer[2*tam];
+		Integer newmemory[]=new Integer[2*pos];
 		//Copio todos los elementos en el nuevo vector
 		for (int i=0; i<tam; ++i)
 			newmemory[i] = this.memory[i];
 		//inicializo el vector a todo null
-		for (int i=tam; i<2*tam; ++i){
+		for (int i=tam; i<2*pos; ++i){
 			newmemory[i] = null;
 		}
 		//Actualizo los atributos
-		this.tam = 2*tam;
+		this.tam = 2*pos;
 		this.memory = newmemory;
 	}
-	//Método que redimensiona el vector de posiciones
+	/**
+	 * Método que redimensiona el vector de posiciones
+	 */
 	public void resizepos(){
 		//Creo un vector del doble de su tamaño actual
 		int newposiciones[]=new int[2*tampos];
@@ -80,7 +100,9 @@ public class Memory {
 		this.tampos = 2*tampos;
 		this.posiciones = newposiciones;
 	}
-	//Método que muestra el estado de la memoria
+	/**
+	 * Método que muestra el estado de la memoria
+	 */
 	public void mostrar(){
 		System.out.print("Memoria: ");
 		//Si la memoria no está vacía debo mostrar sus elementos
@@ -98,5 +120,35 @@ public class Memory {
 		}
 		//si está vacía lo indico
 		else System.out.println("<vacia>");
+	}
+	
+	public void insertarpos(int pos){
+		if(numelem == 0) posiciones[0]=pos;
+		else{
+			int ini = 0, fin = numelem, mitad = 0;
+			boolean encontrado = false;
+			
+			while(ini < fin && !encontrado){
+				mitad = (ini+fin)/2;
+				if(posiciones[mitad]<pos){
+					 ini=mitad+1;
+				}
+				else if (posiciones[mitad] > pos){
+					fin=mitad;
+				}
+				else encontrado = true;
+			}
+			int posic;
+			if(encontrado) posic = mitad;
+			else posic = fin;
+			
+			//Redimensiono el vector posiciones si hiciera falta
+			if (numelem == tampos) this.resizepos();
+			for (int i = numelem; i > posic; --i){
+				posiciones[i] = posiciones[i - 1];
+			}
+			posiciones[posic] = pos;
+		}
+		++numelem;
 	}
 }

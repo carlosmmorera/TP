@@ -1,18 +1,28 @@
 package TP.PR1.MV;
 
 import java.util.Scanner;
-
+/**
+ * Clase que gestiona la ejecución de la máquina virtual
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 17/11/2016
+ *
+ */
 public class Engine {
 	private ByteCodeProgram program;
 	private boolean end;
 	
-	//Constructor de la clase
+	/**
+	 * Constructor de la clase
+	 */
 	public Engine(){
 		this.program = new ByteCodeProgram();
 		this.end = false;
 	}
 	
-	//Método que dirige todo el programa
+	/**
+	 * Método que dirige todo el programa
+	 */
 	public void start(){
 		Scanner entrada = new Scanner(System.in);
 		String line;
@@ -30,7 +40,8 @@ public class Engine {
 			//Si no ha habido un error escribiendo el comando se ejecuta
 			if (com != null){
 				//Muestro mensaje de error si hubo un error en la ejecución
-				if (!com.execute(this)) System.out.println("Error: Ejecucion incorrecta del comando");
+				if (!com.execute(this)) 
+					System.out.println("Error: Ejecucion incorrecta del comando");
 			}
 			//Muestro mensaje de error si hubo un error en la escritura
 			else System.out.println("Error: Comando incorrecto");
@@ -39,7 +50,9 @@ public class Engine {
 		}
 		System.out.println("Fin de la ejecucion...");
 	}
-	//Método que implementa el comando HELP
+	/**
+	 * Método que implementa el comando HELP
+	 */
 	public void help(){
 		System.out.println("HELP: Muestra esta ayuda");
 		System.out.println("QUIT: Cierra la aplicacion");
@@ -48,9 +61,14 @@ public class Engine {
 		System.out.println("RESET: Vacia el programa actual");
 		System.out.println("REPLACE N: Reemplaza la instruccion N por la solicitada al usuario");
 	}
-	//Método que implementa el comando QUIT
+	/**
+	 * Método que implementa el comando QUIT
+	 */
 	public void quit(){ this.end=true; }
-	//Método que implementa el comando RUN
+	/**
+	 * Método que implementa el comando RUN
+	 * @return un booleano dependiendo de si la ejecución fue correcta
+	 */
 	public boolean run(){
 		/*Utilizaré el boolean error para parar la ejecución
 		 * si se produjera un error en medio*/
@@ -82,13 +100,23 @@ public class Engine {
 		}
 		return !error;
 	}
-	//Método que ejecuta el comando NEWINST
+	/**
+	 * Método que ejecuta el comando NEWINST
+	 * @param instruction
+	 * @return un booleano dependiendo de si @see {@link TP.PR1.MV.ByteCodeProgram#pushbc(ByteCode)}
+	 */
 	public boolean newinst(ByteCode instruction){
 		//Añade la instrucción al programa
 		return this.program.pushbc(instruction);
 	}
-	//Método que ejecuta el comando RESET
+	/**
+	 * Método que ejecuta el comando RESET
+	 */
 	public void reset(){ this.program.reset(); }
-	//Método que ejecuta el comando REPLACE
+	/**
+	 * Método que ejecuta el comando REPLACE
+	 * @param rep
+	 * @return un booleano dependiendo de si @see {@link TP.PR1.MV.ByteCodeProgram#replace(int)}
+	 */
 	public boolean replace(int rep){ return this.program.replace(rep); }
 }

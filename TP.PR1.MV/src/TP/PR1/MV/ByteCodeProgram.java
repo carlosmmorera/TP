@@ -1,20 +1,32 @@
 package TP.PR1.MV;
 
 import java.util.Scanner;
-
-//Clase que gestiona el programa
+/**
+ * Clase que gestiona el programa
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 17/11/2016
+ *
+ */
 public class ByteCodeProgram {
-	/*@param program es un array que guarda todas las instrucciones dle programa
-	 * @param newinst guarda el número de instrucciones de las que consta el array*/
+	final int TAM_INI = 100;
+	/**
+	 * program es un array que guarda todas las instrucciones del programa
+	 * newinst guarda el número de instrucciones de las que consta el array
+	 */
 	private ByteCode[] program;
 	int newinst;
 	
-	//Inicializo el vector por defecto a 100
+	/**
+	 * Constructor de la clase que inicializa el vector por defecto a 100
+	 */
 	public ByteCodeProgram(){
-		this.program = new ByteCode[100];
+		this.program = new ByteCode[TAM_INI];
 		this.newinst=0;
 	}
-	////Método que muestra el programa almacenado
+	/**
+	 * Método que muestra el programa almacenado
+	 */
 	public void mostrar(){
 		System.out.println("Programa almacenado:");
 		String cadena;
@@ -26,9 +38,14 @@ public class ByteCodeProgram {
 			System.out.println(cadena);
 		}
 	}
-	//Método que inserta una nueva instrucción en el programa
+	/**
+	 * Método que inserta una nueva instrucción en el programa
+	 * @param bc
+	 * @return un booleano dependiendo de si la ejecución de la instrucción 
+	 * ha sido correcta
+	 */
+	
 	public boolean pushbc(ByteCode bc){
-		//Si la instrucción es correcta la inserta
 		if (bc.comprobarbc()){
 			this.program[this.newinst] = bc;
 			++this.newinst;
@@ -36,10 +53,15 @@ public class ByteCodeProgram {
 		}
 		else return false;
 	}
-	//Método que resetea, poniendo el número de elementos del vector a 0
+	/**
+	 * Método que resetea, poniendo el número de elementos del vector a 0
+	 */
 	public void reset(){ this.newinst=0; }
-	
-	//Método que reemplaza la instrucción n-ésima del programa por otra dada
+	/**
+	 * Método que reemplaza la instrucción n-ésima del programa por otra dada
+	 * @param n el número de la instrucción que hay que cambiar
+	 * @return un booleano dependiendo si el bytecode es correcto o no
+	 */
 	public boolean replace(int n){
 		if (n > 0 && n < this.newinst){
 			System.out.print("Nueva instruccion: ");
@@ -48,9 +70,9 @@ public class ByteCodeProgram {
 			Scanner entrada = new Scanner(System.in);
 			String strbc=entrada.nextLine();
 			
-			//Parseo la instrucción dada por el usuario
+			
 			ByteCode bc = ByteCodeParser.parse(strbc);
-			//Inserto la nueva instrucción si es correcta
+			
 			if (bc.comprobarbc()){
 				this.program[n]=bc;
 				return true;
@@ -59,11 +81,17 @@ public class ByteCodeProgram {
 		}
 		else return false;
 	}
-	//Método que devuelve la instrucción n-ésima del programa
+	/**
+	 * @param n posición de memoria a la que queremos acceder
+	 * @return la instrucción n-ésima del programa
+	 */
 	public ByteCode instn(int n){
 		return this.program[n];
 	}
-	//Método que devuelve el número de instrucciones del programa
+	/**
+	 * 
+	 * @return  el número de instrucciones del programa
+	 */
 	public int getTam(){
 		return this.newinst;
 	}

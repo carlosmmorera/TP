@@ -1,7 +1,18 @@
 package TP.PR1.MV;
 
-//Clase que se encarga de parsear las instrucciones bytecode
+/**
+ * Clase que se encarga de parsear las instrucciones bytecode
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 17/11/2016
+ *
+ */
 public class ByteCodeParser {
+	/**
+	 * Método que parsea la cadena s
+	 * @param s
+	 * @return el bytecode correspondiente a la cadena
+	 */
 	public static ByteCode parse(String s){
 		//Divido la cadena dada en palabras separadas por espacios
 		String[] subcadenas=s.split(" ");

@@ -1,7 +1,18 @@
 package TP.PR1.MV;
 
-//Clase que gestiona el parseo de comandos
+/**
+ * Clase que gestiona el parseo de comandos
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 17/11/2016
+ *
+ */
 public class CommandParser {
+	/**
+	 * 
+	 * @param line string que se va a parsear
+	 * @return el comando que se corresponde con la string
+	 */
 	public static Command parse(String line){
 		//Divido el string en un string por cada paralabra separada de un espacio
 		String[] subcadenas=line.split(" ");

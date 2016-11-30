@@ -1,28 +1,44 @@
 package TP.PR1.MV;
 
-//Clase de las instrucciones bytecode
+/**
+ * Esta clase define las instrucciones bytecode
+ * 
+ * @author Carlos Moreno 
+ * @author Manuel Suárez
+ * @version: 17/11/2016
+ *
+ */
 public class ByteCode {
+	//Campos de la clase
 	private ENUM_BYTECODE name;
 	private int param;
 	
-	//Tres constructores dependiendo de los parámetros
+	/**
+	 * Diseño tres constructores en función de los parámetros que recibe
+	 */
 	public ByteCode(){
 		this.name= null;
 	}
+
 	public ByteCode(ENUM_BYTECODE bc){
 		this.name=bc;
-		/*Si tan solo te dan el nombre de la instrucción y se trata de push,
+		/**Si tan solo te dan el nombre de la instrucción y se trata de push,
 		 * load o store (que requieren de parámetros) la inicialización es
-		 * incorrecta y por tanto le asigno null*/
+		 * incorrecta y por tanto le asigno null
+		 * */
 		if (bc == ENUM_BYTECODE.PUSH) this.name = null;
 		else if (bc == ENUM_BYTECODE.LOAD) this.name = null;
 		else if (bc == ENUM_BYTECODE.STORE) this.name = null;
 	}
+	
 	public ByteCode(ENUM_BYTECODE bc, int par){
 		this.name=bc;
 		this.param=par;
 	}
-	//Método que transforma las instrucciones bytecode en String
+	/**
+	* Método que transforma las instrucciones bytecode en String
+	* @return una string con el nombre del operando
+	*/
 	public String toString(){
 		String cadena;
 		String par=Integer.toString(this.param);
@@ -44,15 +60,22 @@ public class ByteCode {
 		else cadena = "";
 		return cadena;
 	}
-	//Método que comprueba que la instrucción está bien definida
+	/**
+	 * Método que comprueba que la instrucción está bien definida
+	 * @return un booleano que indica si el bytecode es correcto
+	 */
 	public boolean comprobarbc(){
 		return this.name != null;
 	}
-	//Método que devuelve el parámetro
+	/**
+	 * @return el parámetro del bytecode
+	 */
 	public int getParam(){
 		return this.param;
 	}
-	//Método que devuelve la instrucción sin el parámetro
+	/**
+	 * @return la instrucción sin el parámetro
+	 */
 	public ENUM_BYTECODE getEnum(){
 		return this.name;
 	}
