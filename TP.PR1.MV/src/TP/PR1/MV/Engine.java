@@ -46,7 +46,8 @@ public class Engine {
 			//Muestro mensaje de error si hubo un error en la escritura
 			else System.out.println("Error: Comando incorrecto");
 			//Si el programa tiene instrucciones añadidas se saca muestra al usuario
-			if (this.program.getTam() > 0) this.program.mostrar();
+			if (this.program.getTam() > 0) 
+				System.out.println(this.program.toString());
 		}
 		System.out.println("Fin de la ejecucion...");
 	}
@@ -95,7 +96,7 @@ public class Engine {
 				//Si no hubo errores muestro el estado actual de la máquina
 				System.out.println("El estado de la maquina tras ejecutar el bytecode "
 						+ instr.toString() + " es:");
-				cpu.mostrarCPU();
+				System.out.println(cpu.toString());
 			}
 		}
 		return !error;

@@ -40,45 +40,45 @@ public class CPU {
 		//Para push introduzco en la cina de la pila el parámetro dado
 		case PUSH: if (pila.push(instr.getParam())) return true;
 		else return false;
-//Llamo al método de esta clase
-case LOAD: return this.load(instr.getParam());
-//Si hay elementos en la pila los escribo en memoria en la posición dada
-case STORE: if (!pila.vacia()) 
+		//Llamo al método de esta clase
+		case LOAD: return this.load(instr.getParam());
+		//Si hay elementos en la pila los escribo en memoria en la posición dada
+		case STORE: if (!pila.vacia()) 
 			return this.memoria.write(instr.getParam(), pila.pop());
-		else return false; 
-//Sumo los dos elementos superiores de la pila (si existen)
-case ADD: 	if (!pila.vacia()) {
+			else return false; 
+		//Sumo los dos elementos superiores de la pila (si existen)
+		case ADD: 	if (!pila.vacia()) {
 				op2=pila.pop();
 				if (!pila.vacia() && pila.push(pila.pop() + op2)) 
 					return true; 
 				else return false;
-		}
-		else return false;
-//Resto los dos elementos superiores de la pila (si existen)
-case SUB: if (!pila.vacia()) {
+			}
+			else return false;
+		//Resto los dos elementos superiores de la pila (si existen)
+		case SUB: if (!pila.vacia()) {
 			op2=pila.pop();
 			if (!pila.vacia() && pila.push(pila.pop() - op2))
 				return true;
 			else return false;
-		}
-		else return false;
-//Multiplico los dos elementos superiores de la pila (si existen)
-case MUL: if (!pila.vacia()) {
-		op2=pila.pop();
-		if (!pila.vacia() && pila.push(pila.pop() * op2)) 
-			return true;
-		else return false;
-	}
-	else return false;
-/*Divido los dos elementos superiores de la pila (si existen y teniendo
-* cuidado de que el divisor no sea 0)*/
-case DIV: if (!pila.vacia()) {
-		op2=pila.pop();
-		if (!pila.vacia() && op2 != 0 && pila.push(pila.pop()/op2)) 
-			return true; 
-		else return false;
-	}
-	else return false;
+			}
+			else return false;
+		//Multiplico los dos elementos superiores de la pila (si existen)
+		case MUL: if (!pila.vacia()) {
+			op2=pila.pop();
+			if (!pila.vacia() && pila.push(pila.pop() * op2)) 
+				return true;
+			else return false;
+			}
+			else return false;
+		/*Divido los dos elementos superiores de la pila (si existen y teniendo
+		 * cuidado de que el divisor no sea 0)*/
+		case DIV: if (!pila.vacia()) {
+			op2=pila.pop();
+			if (!pila.vacia() && op2 != 0 && pila.push(pila.pop()/op2)) 
+				return true; 
+			else return false;
+			}
+			else return false;
 		//Saca por pantalla el elemento de la cima de la pila
 		case OUT: if (!pila.vacia()) {
 					System.out.println(Integer.toString(pila.pop()));
@@ -97,18 +97,17 @@ case DIV: if (!pila.vacia()) {
 	 */
 	public boolean load(int pos){
 		//Leo el elemento de memoria
-				Integer elem = this.memoria.read(pos);
-				//Si la posición no era vacía, introduzco el elemento en la pila
-				if (elem != null && this.pila.push(elem)) return true;
-				else return false;
+				int elem = this.memoria.read(pos);
+				return this.pila.push(elem);
 	}
 	/**
 	 * Método que muestra el estado de la CPU, mostrando el de la pila y memoria
 	 */
-	public void mostrarCPU(){
-		System.out.println("Estado de la CPU:");
-		this.memoria.mostrar();
-		this.pila.mostrar();
+	public String toString(){
+		String cadena = "Estado de la CPU:\n";
+		cadena += this.memoria.toString();
+		cadena += this.pila.toString();
+		return cadena;
 	}
 	/**
 	 * 

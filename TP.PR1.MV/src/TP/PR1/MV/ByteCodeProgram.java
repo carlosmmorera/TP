@@ -27,16 +27,15 @@ public class ByteCodeProgram {
 	/**
 	 * Método que muestra el programa almacenado
 	 */
-	public void mostrar(){
-		System.out.println("Programa almacenado:");
-		String cadena;
+	public String toString(){
+		String cadena = "\nPrograma almacenado:\n";
 		
 		//Recorre todo el array
-		for (int i=0; i<this.newinst; ++i){
-			cadena = Integer.toString(i);
-			cadena += ": " + this.program[i].toString();
-			System.out.println(cadena);
+		for (int i=0; i < this.newinst; ++i){
+			cadena += Integer.toString(i);
+			cadena += ": " + this.program[i].toString() + '\n';
 		}
+		return cadena;
 	}
 	/**
 	 * Método que inserta una nueva instrucción en el programa
@@ -66,7 +65,7 @@ public class ByteCodeProgram {
 		if (n > 0 && n < this.newinst){
 			System.out.print("Nueva instruccion: ");
 			
-			//pido la nueva instrucción
+			//Pido la nueva instrucción
 			Scanner entrada = new Scanner(System.in);
 			String strbc=entrada.nextLine();
 			

@@ -68,7 +68,9 @@ public class Memory {
 	public int read(int pos){
 		//Redimensiono la memoria tanto como haga falta
 		if (pos >= this.tam) this.resize(pos);
-		return this.memory[pos];
+		
+		if (this.memory[pos] != null) return this.memory[pos];
+		else return 0;
 	}
 	/**
 	 * Método que redimensiona la memoria
@@ -103,27 +105,33 @@ public class Memory {
 	/**
 	 * Método que muestra el estado de la memoria
 	 */
-	public void mostrar(){
-		System.out.print("Memoria: ");
+	public String toString(){
+		String cadena = "Memoria: ";
+		
 		//Si la memoria no está vacía debo mostrar sus elementos
 		if (this.numelem > 0){
 			/*Recorro el vector posiciones para ir directamente a las 
 			 * posiciones de la memoria en las que haya algún elemento*/
 			for (int i = 0; i < numelem - 1; ++i){
 				int pos = this.posiciones[i];
-				System.out.print("[" + Integer.toString(pos) + 
-						"]: " + Integer.toString(this.memory[pos]) + " ");
+				cadena += "[" + Integer.toString(pos) + 
+						"]: " + Integer.toString(this.memory[pos]) + " ";
 			}
 			int pos = this.posiciones[numelem - 1];
-			System.out.println("[" + Integer.toString(pos) + 
-					"]: " + Integer.toString(this.memory[pos]));
+			cadena += "[" + Integer.toString(pos) + 
+					"]: " + Integer.toString(this.memory[pos]) + '\n';
 		}
 		//si está vacía lo indico
-		else System.out.println("<vacia>");
+		else cadena += "<vacia>\n";
+		
+		return cadena;
 	}
 	
 	public void insertarpos(int pos){
-		if(numelem == 0) posiciones[0]=pos;
+		if(numelem == 0) {
+			posiciones[0]=pos;
+			++numelem;
+		}
 		else{
 			int ini = 0, fin = numelem, mitad = 0;
 			boolean encontrado = false;
@@ -138,17 +146,19 @@ public class Memory {
 				}
 				else encontrado = true;
 			}
-			int posic;
-			if(encontrado) posic = mitad;
-			else posic = fin;
-			
-			//Redimensiono el vector posiciones si hiciera falta
-			if (numelem == tampos) this.resizepos();
-			for (int i = numelem; i > posic; --i){
-				posiciones[i] = posiciones[i - 1];
+			if(!encontrado){
+				int posic;
+				posic = fin;
+				
+				//Redimensiono el vector posiciones si hiciera falta
+				if (numelem == tampos) this.resizepos();
+				for (int i = numelem; i > posic; --i){
+					posiciones[i] = posiciones[i - 1];
+				}
+				posiciones[posic] = pos;
+				
+				++numelem;
 			}
-			posiciones[posic] = pos;
 		}
-		++numelem;
 	}
 }

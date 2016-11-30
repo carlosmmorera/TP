@@ -57,15 +57,17 @@ public class OperandStack {
 	/**
 	 * Método que muestra el estado de la pila
 	 */
-	public void mostrar(){
-		System.out.print("Pila: ");
+	public String toString(){
+		String cadena = "Pila: ";
 		if (this.numoperand > 0){
 			for (int i = 0; i < numoperand - 1; ++i){
-				System.out.print(Integer.toString(this.stack[i]) + " ");
+				cadena += Integer.toString(this.stack[i]) + " ";
 			}
-			System.out.println(Integer.toString(this.stack[numoperand - 1]));
+			cadena += Integer.toString(this.stack[numoperand - 1]) + '\n';
 		}
-		else System.out.println("<vacia>");
+		else cadena += "<vacia>\n";
+		
+		return cadena;
 	}
 	public boolean pilallena(){
 		return this.numoperand == TAM;
