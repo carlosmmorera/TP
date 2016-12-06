@@ -1,0 +1,6 @@
+package tp.pr2.ByteCode;
+
+public abstract class ByteCode {
+	abstract public boolean execute(CPU cpu);
+	abstract public ByteCode parse(String[] s);
+}
