@@ -5,7 +5,9 @@ import tp.pr2.CPU.CPU;
 
 public class Div extends Arithmetics{
 	public boolean execute(CPU cpu){
-		
+		int op2 = cpu.pilapop();
+		if (op2 != 0 ) return cpu.push(cpu.pilapop() / op2);
+		else return false;
 	}
 	public ByteCode parse(String[] s){
 		if (s[0].equalsIgnoreCase("DIV")) return new Div();
