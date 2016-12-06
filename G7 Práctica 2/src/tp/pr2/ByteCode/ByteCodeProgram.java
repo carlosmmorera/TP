@@ -98,4 +98,10 @@ public class ByteCodeProgram {
 	public int getTam(){
 		return this.newinst;
 	}
+	public ByteCode getbcatn(int n){
+		if (n < this.newinst){
+			return this.program[n];
+		}
+		else return null;
+	}
 }

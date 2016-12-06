@@ -1,7 +1,7 @@
 package tp.pr2.CPU;
 
-import pruebas.ByteCode;
-import pruebas.ENUM_BYTECODE;
+import tp.pr2.ByteCode.ByteCode;
+import tp.pr2.ByteCode.ByteCodeProgram;
 
 /**
  * Clase que gestiona la ejecución de las instrucciones bytecode
@@ -20,21 +20,30 @@ public class CPU {
 	private Memory memoria;
 	private OperandStack pila;
 	private boolean end;
+	private int programCounter;
+	private ByteCodeProgram bcProgram;
 	
 	/**
 	 * Constructor de la clase
 	 */
 	public CPU(){
-		this.memoria=new Memory();
-		this.pila=new OperandStack();
-		this.end=false;
+		this.memoria = new Memory();
+		this.pila = new OperandStack();
+		this.end = false;
+		this.programCounter = 0;
+		this.bcProgram = null;
 	}
 	/**
 	 * Método que ejecuta la instrucción bytecode dada
 	 * @param instr instrucción a ejecutar
 	 * @return un booleano dependiendo de si la ejecución fue correcta 
 	 */
-	
+	public boolean run(){
+		
+	}
+	public boolean haynelempila(int n){
+		return n <= this.pila.getnumoperand();
+	}
 	public boolean execute(ByteCode instr){
 		ENUM_BYTECODE inst = instr.getEnum();
 		int op2 = 0;
@@ -52,7 +61,7 @@ public class CPU {
 			else return false; 
 		//Sumo los dos elementos superiores de la pila (si existen)
 		case ADD: 	if (!pila.vacia()) {
-				op2=pila.pop();
+				op2 = pila.pop();
 				if (!pila.vacia() && pila.push(pila.pop() + op2)) 
 					return true; 
 				else return false;
@@ -120,5 +129,8 @@ public class CPU {
 	 */
 	public boolean getEnd(){
 		return this.end;
+	}
+	public ByteCode getInstr(){
+		return this.bcProgram.getbcatn(this.programCounter);
 	}
 }

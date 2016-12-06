@@ -21,8 +21,8 @@ public class OperandStack {
 	 * Constructor de la clase
 	 */
 	public OperandStack(){
-		this.stack=new int[TAM];
-		this.numoperand=0;
+		this.stack = new int[TAM];
+		this.numoperand = 0;
 	}
 	/**
 	 * Método que introduce un operando en la pila
@@ -72,5 +72,8 @@ public class OperandStack {
 	}
 	public boolean pilallena(){
 		return this.numoperand == TAM;
+	}
+	public int getnumoperand(){
+		return this.numoperand;
 	}
 }
