@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="tp.pr2.CPU.CPU"/>
+<fullyQualifiedTypeName name="tp.pr2.ByteCode.ByteCodeProgram"/>
+<fullyQualifiedTypeName name="tp.pr2.ByteCode.ByteCode"/>
+</qualifiedTypeNameHistroy>
