@@ -8,7 +8,7 @@ public class Reset extends Command {
 	}
 	public Command parse(String[] s) {
 		if (s.length == 1 && s[0].equalsIgnoreCase("RESET"))
-		return new Reset();
+			return new Reset();
 		else return null;
 	}
 	public String textHelp() {

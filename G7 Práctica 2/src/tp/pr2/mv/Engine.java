@@ -63,7 +63,7 @@ public class Engine {
 	/**
 	 * Método que implementa el comando QUIT
 	 */
-	public boolean quit(){ this.end=true; return true; }
+	public boolean quit(){ this.end = true; return true; }
 	/**
 	 * Método que implementa el comando RUN
 	 * @return un booleano dependiendo de si la ejecución fue correcta

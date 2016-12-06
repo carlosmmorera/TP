@@ -1,0 +1,10 @@
+package tp.pr2.ByteCode;
+
+public abstract class Arithmetics extends ByteCode{
+	public ByteCode parse(String[] s){
+		if (s.length == 1){
+			
+		}
+		else return null;
+	}
+}

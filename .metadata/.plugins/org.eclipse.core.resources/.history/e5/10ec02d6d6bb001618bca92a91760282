@@ -1,0 +1,8 @@
+package tp.pr2.ByteCode;
+
+public class Mul extends Arithmetics{
+	public ByteCode parse(String[] s){
+		if (s[0].equalsIgnoreCase("MUL")) return new Mul();
+		else return null;
+	}
+}

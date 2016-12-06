@@ -1,0 +1,8 @@
+package tp.pr2.ByteCode;
+
+public class Div {
+	public ByteCode parse(String[] s){
+		if (s[0].equalsIgnoreCase("DIV")) return new Div();
+		else return null;
+	}
+}
