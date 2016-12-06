@@ -5,6 +5,9 @@ import tp.pr2.mv.Engine;
 public class Replace extends Command {
 	private int pos;
 	
+	public Replace(){
+		this.pos = 0;
+	}
 	public Replace(int p){
 		this.pos = p;
 	}

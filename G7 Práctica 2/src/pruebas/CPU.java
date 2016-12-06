@@ -1,5 +1,8 @@
 package pruebas;
 
+import tp.pr2.Program.Memory;
+import tp.pr2.Program.OperandStack;
+
 /**
  * Clase que gestiona la ejecución de las instrucciones bytecode
  * @author Carlos Moreno

@@ -2,11 +2,7 @@ package tp.pr2.mv;
 
 import java.util.Scanner;
 
-import pruebas.ByteCode;
-import pruebas.ByteCodeProgram;
-import pruebas.CPU;
-import pruebas.Command;
-import pruebas.CommandParser;
+import tp.pr2.Command.*;
 /**
  * Clase que gestiona la ejecución de la máquina virtual
  * @author Carlos Moreno
@@ -39,9 +35,9 @@ public class Engine {
 		while(!this.end){	
 			System.out.print("> ");
 			//Se lee el comando
-			line=entrada.nextLine();
+			line = entrada.nextLine();
 			//Se parsea
-			com=CommandParser.parse(line);
+			com = CommandParser.parse(line);
 			
 			//Si no ha habido un error escribiendo el comando se ejecuta
 			if (com != null){
@@ -61,13 +57,7 @@ public class Engine {
 	 * Método que implementa el comando HELP
 	 */
 	public boolean help(){
-		System.out.println("HELP: Muestra esta ayuda");
-		System.out.println("QUIT: Cierra la aplicacion");
-		System.out.println("RUN: Ejecuta el programa");
-		System.out.println("NEWINST BYTECODE: Introduce una nueva instruccion al programa");
-		System.out.println("RESET: Vacia el programa actual");
-		System.out.println("REPLACE N: Reemplaza la instruccion N por la solicitada al usuario");
-	
+		CommandParser.showHelp();
 		return true;
 	}
 	/**
