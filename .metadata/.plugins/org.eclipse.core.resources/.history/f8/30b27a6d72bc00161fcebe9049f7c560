@@ -42,7 +42,7 @@ public class CPU {
 		ByteCode bc = null;
 		
 		while (!this.bcProgram.cerrarPrograma(this.programCounter) && !error){
-			bc = getInstr();
+			bc = this.bcProgram.getbcatn(this.programCounter);
 			++this.programCounter;
 			error = !bc.execute(this);
 			

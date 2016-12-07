@@ -25,12 +25,12 @@ public class CPU {
 	/**
 	 * Constructor de la clase
 	 */
-	public CPU(ByteCodeProgram prog){
+	public CPU(){
 		this.memoria = new Memory();
 		this.pila = new OperandStack();
 		this.end = false;
 		this.programCounter = 0;
-		this.bcProgram = prog;
+		this.bcProgram = null;
 	}
 	/**
 	 * Método que ejecuta la instrucción bytecode dada
@@ -38,20 +38,14 @@ public class CPU {
 	 * @return un booleano dependiendo de si la ejecución fue correcta 
 	 */
 	public boolean run(){
-		boolean error = false;
+		boolean error = false, halt = false;
 		ByteCode bc = null;
 		
-		while (!this.bcProgram.cerrarPrograma(this.programCounter) && !error){
-			bc = getInstr();
+		while (!this.bcProgram.cerrarPrograma(this.programCounter) && !error
+				&& !halt){
+			bc = this.bcProgram.getbcatn(this.programCounter);
 			++this.programCounter;
 			error = !bc.execute(this);
-			
-			if (!error) {
-				//Si no hubo errores muestro el estado actual de la máquina
-				System.out.println("El estado de la maquina tras "
-						+ "ejecutar el bytecode " + bc.toString() + " es:");
-				System.out.println(toString());
-			}
 		}
 		return !error;
 	}
@@ -76,6 +70,14 @@ public class CPU {
 		cadena += this.memoria.toString();
 		cadena += this.pila.toString();
 		return cadena;
+	}
+	/**
+	 * 
+	 * @return un booleano dependiendo de si se ha detenido
+	 *  la ejecución de un programa por ejecutar HALT
+	 */
+	public boolean getEnd(){
+		return this.end;
 	}
 	public ByteCode getInstr(){
 		return this.bcProgram.getbcatn(this.programCounter);

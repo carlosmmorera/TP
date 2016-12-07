@@ -65,9 +65,35 @@ public class Engine {
 	 * @return un booleano dependiendo de si la ejecución fue correcta
 	 */
 	public boolean run(){
+		/*Utilizaré el boolean error para parar la ejecución
+		 * si se produjera un error en medio*/
+		boolean error=false;
 		//Inicializo una CPU
-		CPU cpu = new CPU(this.program);
-		return cpu.run();
+		CPU cpu = new CPU();
+		/*Utilizo el índice para realizar todas las instrucciones
+		 * El método getTam() devuelve la cantidad de instrucciones que
+		 * posee el programa*/
+		int indice=0, max = this.program.getTam();
+		ByteCode instr;
+		
+		/*Hasta que no se produzca un error en mitad de la ejecución, se
+		 * ejecute el bytecode HALT o hayamos ejecutado todas las instrucciones
+		 * ejecutaremos lo siguiente*/
+		while (!error && !cpu.getEnd() && indice < max){
+			//Tomo instr como la instrucción n-ésima
+			instr = this.program.instn(indice);
+			//compruebo si se produce un error en la ejecución
+			error = !cpu.execute(instr);
+			//Aumento el índice para pasar a la siguiente instrucción
+			++indice;
+			if (!error) {
+				//Si no hubo errores muestro el estado actual de la máquina
+				System.out.println("El estado de la maquina tras ejecutar el bytecode "
+						+ instr.toString() + " es:");
+				System.out.println(cpu.toString());
+			}
+		}
+		return !error;
 	}
 	/**
 	 * Método que ejecuta el comando RESET

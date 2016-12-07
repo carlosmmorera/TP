@@ -42,7 +42,7 @@ public class CPU {
 		ByteCode bc = null;
 		
 		while (!this.bcProgram.cerrarPrograma(this.programCounter) && !error){
-			bc = getInstr();
+			bc = this.bcProgram.getbcatn(this.programCounter);
 			++this.programCounter;
 			error = !bc.execute(this);
 			
@@ -76,6 +76,14 @@ public class CPU {
 		cadena += this.memoria.toString();
 		cadena += this.pila.toString();
 		return cadena;
+	}
+	/**
+	 * 
+	 * @return un booleano dependiendo de si se ha detenido
+	 *  la ejecución de un programa por ejecutar HALT
+	 */
+	public boolean getEnd(){
+		return this.end;
 	}
 	public ByteCode getInstr(){
 		return this.bcProgram.getbcatn(this.programCounter);
