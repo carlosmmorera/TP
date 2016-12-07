@@ -1,7 +1,6 @@
 package tp.pr2.CPU;
 
-import tp.pr2.ByteCode.ByteCode;
-import tp.pr2.ByteCode.ByteCodeProgram;
+import tp.pr2.ByteCode.*;
 
 /**
  * Clase que gestiona la ejecución de las instrucciones bytecode
@@ -39,36 +38,18 @@ public class CPU {
 	 * @return un booleano dependiendo de si la ejecución fue correcta 
 	 */
 	public boolean run(){
+		boolean error = false, halt = false;
+		ByteCode bc = null;
+		while (!this.bcProgram.cerrarPrograma(this.programCounter) && !error
+				&& !halt){
+			bc = this.bcProgram.getbcatn(this.programCounter);
+			error = !bc.execute(this);
+		}
+		return !error;
 		
 	}
 	public boolean haynelempila(int n){
 		return n <= this.pila.getnumoperand();
-	}
-	public boolean execute(ByteCode instr){
-		ENUM_BYTECODE inst = instr.getEnum();
-		int op2 = 0;
-		
-		//Dependiendo de la instrucción ejecuto un método u otro
-		switch (inst){
-		//Para push introduzco en la cina de la pila el parámetro dado
-		case PUSH: if (pila.push(instr.getParam())) return true;
-		else return false;
-		//Llamo al método de esta clase
-		case LOAD: return this.load(instr.getParam());
-		//Si hay elementos en la pila los escribo en memoria en la posición dada
-		case STORE: if (!pila.vacia()) 
-			return this.memoria.write(instr.getParam(), pila.pop());
-			else return false; 
-		//Saca por pantalla el elemento de la cima de la pila
-		case OUT: if (!pila.vacia()) {
-					System.out.println(Integer.toString(pila.pop()));
-					return true;
-				}
-				else return false;
-		//Acaba la ejecución de un programa
-		case HALT: this.end = true; return true;
-		default: return false;
-		}
 	}
 	/**
 	 * Método que implementa la instrucción LOAD
@@ -77,8 +58,8 @@ public class CPU {
 	 */
 	public boolean load(int pos){
 		//Leo el elemento de memoria
-				int elem = this.memoria.read(pos);
-				return this.pila.push(elem);
+		int elem = this.memoria.read(pos);
+		return this.pila.push(elem);
 	}
 	/**
 	 * Método que muestra el estado de la CPU, mostrando el de la pila y memoria
@@ -105,5 +86,31 @@ public class CPU {
 	}
 	public boolean push(int n){
 		return pila.push(n);
+	}
+	public boolean goTo(int n){
+		if (n >= 0 && n < this.bcProgram.getTam()){
+			this.programCounter = n - 1;
+			return true;
+		}
+		else return false;
+	}
+	public boolean store(int n){
+		if (!pila.vacia()) 
+			return this.memoria.write(n, pila.pop());
+		else return false; 
+	}
+	public boolean halt(){
+		this.end = true;
+		return true;
+	}
+	public boolean out(){
+		if (!pila.vacia()) {
+			System.out.println(Integer.toString(pila.pop()));
+			return true;
+		}
+		else return false;
+	}
+	public void aumentarContProgram(){
+		++this.programCounter;
 	}
 }

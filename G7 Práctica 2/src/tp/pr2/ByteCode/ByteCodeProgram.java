@@ -1,6 +1,5 @@
 package tp.pr2.ByteCode;
 
-
 import java.util.Scanner;
 
 /**
@@ -101,5 +100,8 @@ public class ByteCodeProgram {
 			return this.program[n];
 		}
 		else return null;
+	}
+	public boolean cerrarPrograma(int n){
+		return n == this.newinst;
 	}
 }

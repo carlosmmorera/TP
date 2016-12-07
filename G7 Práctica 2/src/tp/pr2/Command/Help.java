@@ -4,7 +4,8 @@ import tp.pr2.mv.Engine;
 
 public class Help extends Command {
 	public boolean execute(Engine engine){
-		return engine.help();
+		CommandParser.showHelp();
+		return true;
 	}
 	public Command parse(String[] s){
 		if (s.length == 1 && s[0].equalsIgnoreCase("HELP"))
