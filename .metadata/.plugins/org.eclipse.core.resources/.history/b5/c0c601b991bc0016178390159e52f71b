@@ -70,9 +70,8 @@ public class Memory {
 		//Redimensiono la memoria tanto como haga falta
 		if (pos >= this.tam) this.resize(pos);
 		
-		if (this.memory[pos] == null) write(pos, 0);
-		
-		return this.memory[pos];
+		if (this.memory[pos] != null) return this.memory[pos];
+		else return 0;
 	}
 	/**
 	 * Método que redimensiona la memoria
