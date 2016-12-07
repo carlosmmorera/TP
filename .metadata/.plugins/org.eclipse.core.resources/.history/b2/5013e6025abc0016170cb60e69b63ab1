@@ -1,0 +1,17 @@
+package tp.pr2.ConditionalJumps;
+
+import tp.pr2.ByteCode.ByteCode;
+
+public class IfLe extends ConditionalJumps{
+	private int pos;
+	public IfLe(int n){
+		this.pos = n;
+	}
+	public IfLe(){
+		this.pos = 0;
+	}
+	public ByteCode parse(String[] s){
+		if (s[0].equalsIgnoreCase("IFLE")) return new IfLe(Integer.parseInt(s[1]));
+		else return null;
+	}
+}

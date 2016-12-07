@@ -1,0 +1,14 @@
+package tp.pr2.ConditionalJumps;
+
+import tp.pr2.ByteCode.ByteCode;
+
+public class IfLeq extends ConditionalJumps{
+	private int pos;
+	public IfLeq(int n){
+		this.pos = n;
+	}
+	public ByteCode parse(String[] s){
+		if (s[0].equalsIgnoreCase("IFLEQ")) return new IfLeq(Integer.parseInt(s[1]));
+		else return null;
+	}
+}

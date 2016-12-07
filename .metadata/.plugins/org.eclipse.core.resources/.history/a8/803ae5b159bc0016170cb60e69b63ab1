@@ -1,0 +1,15 @@
+package tp.pr2.ConditionalJumps;
+
+import tp.pr2.Arithmetics.Add;
+import tp.pr2.ByteCode.ByteCode;
+
+public class IfNeq extends ConditionalJumps{
+	private int pos;
+	public IfNeq(int n){
+		this.pos = n;
+	}
+	public ByteCode parse(String[] s){
+		if (s[0].equalsIgnoreCase("IFNEQ")) return new IfNeq(Integer.parseInt(s[1]));
+		else return null;
+	}
+}

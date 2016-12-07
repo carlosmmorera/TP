@@ -3,8 +3,6 @@ package tp.pr2.ByteCode;
 
 import java.util.Scanner;
 
-import pruebas.ByteCode;
-import pruebas.ByteCodeParser;
 /**
  * Clase que gestiona el programa
  * @author Carlos Moreno

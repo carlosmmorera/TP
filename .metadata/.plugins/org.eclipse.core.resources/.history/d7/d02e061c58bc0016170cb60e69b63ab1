@@ -1,0 +1,26 @@
+package tp.pr2.ConditionalJumps;
+
+import tp.pr2.ByteCode.ByteCode;
+import tp.pr2.CPU.CPU;
+
+public abstract class ConditionalJumps extends ByteCode{
+	final static int NUMCONDJUMPS = 4;
+	public boolean execute(CPU cpu){
+		
+	}
+	public ByteCode parse(String[] s){
+		if (s.length == 2){
+			ByteCode bc = null;
+			int i = 0;
+			boolean encontrado = false;
+			
+			while (i < NUMARITH && !encontrado){
+				bc = arth[i].parse(s);
+				encontrado = bc != null;
+				++i;
+			}
+			return bc;
+		}
+		else return null;
+	}
+}
