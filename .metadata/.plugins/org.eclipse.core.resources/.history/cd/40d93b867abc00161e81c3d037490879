@@ -36,7 +36,7 @@ public class CommandParser {
 	
 	public static void showHelp(){
 		for (int i = 0; i < NUMCOMANDOS; ++i){
-			System.out.print(commands[i].textHelp());
+			System.out.println(commands[i].textHelp());
 		}
 	}
 }

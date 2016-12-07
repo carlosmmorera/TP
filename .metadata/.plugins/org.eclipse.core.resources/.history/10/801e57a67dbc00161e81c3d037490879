@@ -3,7 +3,6 @@ package tp.pr2.mv;
 import java.util.Scanner;
 
 
-
 import tp.pr2.ByteCode.*;
 import tp.pr2.CPU.CPU;
 import tp.pr2.Command.*;
@@ -68,13 +67,9 @@ public class Engine {
 	 * @return un booleano dependiendo de si la ejecución fue correcta
 	 */
 	public boolean run(){
-		boolean error = false;
 		//Inicializo una CPU
 		CPU cpu = new CPU(this.program);
-		error = !cpu.run();
-		//Si no hubo errores muestro el estado actual de la máquina
-		if (!error) System.out.println("Estado de la CPU:\n" + cpu.toString());
-		return !error;
+		return cpu.run();
 	}
 	/**
 	 * Método que ejecuta el comando RESET

@@ -45,6 +45,13 @@ public class CPU {
 			bc = getInstr();
 			++this.programCounter;
 			error = !bc.execute(this);
+			
+			if (!error) {
+				//Si no hubo errores muestro el estado actual de la máquina
+				System.out.println("El estado de la maquina tras "
+						+ "ejecutar el bytecode " + bc.toString() + " es:");
+				System.out.println(toString());
+			}
 		}
 		return !error;
 	}

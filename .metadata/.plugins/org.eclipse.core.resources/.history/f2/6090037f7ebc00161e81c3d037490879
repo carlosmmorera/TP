@@ -63,7 +63,7 @@ public class ByteCodeProgram {
 	 * @return un booleano dependiendo si el bytecode es correcto o no
 	 */
 	public boolean replace(int n){
-		if (n >= 0 && n < this.newinst){
+		if (n > 0 && n < this.newinst){
 			System.out.print("Nueva instruccion: ");
 			
 			//Pido la nueva instrucción

@@ -74,7 +74,6 @@ public class Engine {
 		error = !cpu.run();
 		//Si no hubo errores muestro el estado actual de la máquina
 		if (!error) System.out.println("Estado de la CPU:\n" + cpu.toString());
-		return !error;
 	}
 	/**
 	 * Método que ejecuta el comando RESET
