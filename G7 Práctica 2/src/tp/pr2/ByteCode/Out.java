@@ -11,4 +11,7 @@ public class Out extends ByteCode{
 			return new Out();
 		else return null;
 	}
+	public String toString(){
+		return "OUT";
+	}
 }

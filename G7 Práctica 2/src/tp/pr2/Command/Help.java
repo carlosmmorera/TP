@@ -16,4 +16,7 @@ public class Help extends Command {
 		return " HELP: Muestra esta ayuda " +
 				System.getProperty("line.separator");
 	}
+	public String toString(){
+		return "HELP";
+	}
 }

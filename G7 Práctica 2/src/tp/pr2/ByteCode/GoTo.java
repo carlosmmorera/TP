@@ -18,4 +18,7 @@ public class GoTo extends ByteCode{
 			return new GoTo(Integer.parseInt(s[1]));
 		else return null;
 	}
+	public String toString(){
+		return "GOTO " + this.n;
+	}
 }

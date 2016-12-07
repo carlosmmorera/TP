@@ -29,4 +29,7 @@ public class Replace extends Command {
 		return " REPLACE N: Reemplaza la instruccion N por la solicitada"
 				+ " al usuario " + System.getProperty("line.separator");
 	}
+	public String toString(){
+		return "REPLACE " + this.pos;
+	}
 }

@@ -13,4 +13,7 @@ public class Div extends Arithmetics{
 		if (s[0].equalsIgnoreCase("DIV")) return new Div();
 		else return null;
 	}
+	public String toString(){
+		return "DIV";
+	}
 }

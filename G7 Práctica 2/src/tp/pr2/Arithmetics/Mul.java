@@ -12,4 +12,7 @@ public class Mul extends Arithmetics{
 		if (s[0].equalsIgnoreCase("MUL")) return new Mul();
 		else return null;
 	}
+	public String toString(){
+		return "MUL";
+	}
 }

@@ -18,4 +18,7 @@ public class Load extends ByteCode{
 			return new Load(Integer.parseInt(s[1]));
 		else return null;
 	}
+	public String toString(){
+		return "LOAD " + this.n;
+	}
 }

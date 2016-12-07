@@ -18,4 +18,7 @@ public class Store extends ByteCode{
 			return new Store(Integer.parseInt(s[1]));
 		else return null;
 	}
+	public String toString(){
+		return "STORE " + this.n;
+	}
 }

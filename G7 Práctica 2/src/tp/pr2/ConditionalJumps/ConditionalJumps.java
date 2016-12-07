@@ -10,6 +10,12 @@ public abstract class ConditionalJumps extends ByteCode{
 		new IfEq(), new IfNeq(), new IfLe(), new IfLeq()
 	};
 	protected int pos;
+	public ConditionalJumps(int p){
+		this.pos = p;
+	}
+	public ConditionalJumps(){
+		this.pos = 0;
+	}
 	public boolean execute(CPU cpu){
 		if (cpu.haynelempila(NUMOPERANDOS)){
 			ByteCode bc = cpu.getInstr();

@@ -12,4 +12,7 @@ public class Sub extends Arithmetics{
 		if (s[0].equalsIgnoreCase("SUB")) return new Sub();
 		else return null;
 	}
+	public String toString(){
+		return "SUB";
+	}
 }

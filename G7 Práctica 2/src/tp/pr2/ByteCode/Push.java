@@ -18,4 +18,7 @@ public class Push extends ByteCode{
 			return new Push(Integer.parseInt(s[1]));
 		else return null;
 	}
+	public String toString(){
+		return "PUSH " + this.n;
+	}
 }

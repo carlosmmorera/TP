@@ -5,10 +5,10 @@ import tp.pr2.CPU.CPU;
 
 public class IfLeq extends ConditionalJumps{
 	public IfLeq(int n){
-		this.pos = n;
+		super(n);
 	}
 	public IfLeq(){
-		this.pos = 0;
+		super();
 	}
 	public boolean execute(CPU cpu){
 		int op1 = cpu.pilapop();
@@ -19,5 +19,8 @@ public class IfLeq extends ConditionalJumps{
 	public ByteCode parse(String[] s){
 		if (s[0].equalsIgnoreCase("IFLEQ")) return new IfLeq(Integer.parseInt(s[1]));
 		else return null;
+	}
+	public String toString(){
+		return "IFLEQ " + this.pos;
 	}
 }

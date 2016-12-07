@@ -3,6 +3,7 @@ package tp.pr2.mv;
 import java.util.Scanner;
 
 import tp.pr2.ByteCode.ByteCode;
+import tp.pr2.ByteCode.ByteCodeParser;
 import tp.pr2.ByteCode.ByteCodeProgram;
 import tp.pr2.CPU.CPU;
 import tp.pr2.Command.*;
@@ -83,12 +84,25 @@ public class Engine {
 	
 	public boolean readByteCodeProgram(){
 		Scanner entrada = new Scanner(System.in);
+		ByteCode bc = null;
+		boolean error = false;
 		
 		String instruccion = entrada.nextLine();
-		while (!instruccion.equalsIgnoreCase("END")){
-			
-			
+		
+		while (!error && !instruccion.equalsIgnoreCase("END")){
+			System.out.println("Introduce el bytecode. Una instruccion "
+					+ "por línea:\n");
+			bc = ByteCodeParser.parse(instruccion);
+			while (bc == null){
+				System.out.println("ERROR: ByteCode incorrecto");
+				System.out.println("Introduzca de nuevo el ByteCode\n");
+				instruccion = entrada.nextLine();
+				
+				bc = ByteCodeParser.parse(instruccion);
+			}
+			error = !this.program.pushbc(bc);
 			instruccion = entrada.nextLine();
 		}
+		return !error;
 	}
 }

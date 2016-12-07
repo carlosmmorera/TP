@@ -12,4 +12,7 @@ public class Add extends Arithmetics{
 		if (s[0].equalsIgnoreCase("ADD")) return new Add();
 		else return null;
 	}
+	public String toString(){
+		return "ADD";
+	}
 }

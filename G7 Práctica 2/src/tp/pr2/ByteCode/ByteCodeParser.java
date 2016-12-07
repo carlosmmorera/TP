@@ -12,16 +12,16 @@ public class ByteCodeParser {
 	final static int NUMBC = 14;
 	public static ByteCode parse(String line){
 		//Divido el string en un string por cada paralabra separada de un espacio
-				String[] subcadenas = line.split(" ");
-				ByteCode bc = null;
-				int i=0;
-				boolean encontrado = false;
+		String[] subcadenas = line.split(" ");
+		ByteCode bc = null;
+		int i=0;
+		boolean encontrado = false;
 				
-				while (i < NUMBC && !encontrado){
-					bc = bytecodes[i].parse(subcadenas);
-					encontrado = bc != null;
-					++i;
-				}
-				return bc;
+		while (i < NUMBC && !encontrado){
+			bc = bytecodes[i].parse(subcadenas);
+			encontrado = bc != null;
+			++i;
+		}
+		return bc;
 	}
 }

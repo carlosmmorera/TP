@@ -41,7 +41,7 @@ public class CPU {
 		boolean error = false;
 		ByteCode bc = null;
 		
-		while (!this.bcProgram.cerrarPrograma(this.programCounter) && !error){
+		while (!acabar() && !error){
 			bc = getInstr();
 			++this.programCounter;
 			error = !bc.execute(this);
@@ -108,5 +108,8 @@ public class CPU {
 			return true;
 		}
 		else return false;
+	}
+	public boolean acabar(){
+		return this.end && this.bcProgram.cerrarPrograma(this.programCounter);
 	}
 }

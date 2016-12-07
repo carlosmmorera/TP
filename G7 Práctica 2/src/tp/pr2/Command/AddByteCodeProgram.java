@@ -15,4 +15,7 @@ public class AddByteCodeProgram extends Command {
 		return " BYTECODE: Permite introducir todo un programa " +
 				System.getProperty("line.separator");
 	}
+	public String toString(){
+		return "BYTECODE";
+	}
 }

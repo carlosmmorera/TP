@@ -5,10 +5,10 @@ import tp.pr2.CPU.CPU;
 
 public class IfLe extends ConditionalJumps{
 	public IfLe(int n){
-		this.pos = n;
+		super(n);
 	}
 	public IfLe(){
-		this.pos = 0;
+		super();
 	}
 	public boolean execute(CPU cpu){
 		int op1 = cpu.pilapop();
@@ -19,5 +19,8 @@ public class IfLe extends ConditionalJumps{
 	public ByteCode parse(String[] s){
 		if (s[0].equalsIgnoreCase("IFLE")) return new IfLe(Integer.parseInt(s[1]));
 		else return null;
+	}
+	public String toString(){
+		return "IFLE " + this.pos;
 	}
 }

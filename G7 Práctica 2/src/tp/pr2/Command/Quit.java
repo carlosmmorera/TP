@@ -15,4 +15,7 @@ public class Quit extends Command {
 		return " QUIT: Cierra la aplicacion " +
 				System.getProperty("line.separator");
 	}
+	public String toString(){
+		return "QUIT";
+	}
 }

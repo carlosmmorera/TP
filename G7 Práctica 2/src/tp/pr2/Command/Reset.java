@@ -15,4 +15,7 @@ public class Reset extends Command {
 		return " RESET: Vacia el programa actual " +
 		System.getProperty("line.separator");
 	}
+	public String toString(){
+		return "RESET";
+	}
 }

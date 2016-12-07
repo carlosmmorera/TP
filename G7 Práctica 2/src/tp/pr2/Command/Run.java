@@ -15,4 +15,7 @@ public class Run extends Command {
 		return " RUN: Ejecuta el programa " +
 				System.getProperty("line.separator");
 	}
+	public String toString(){
+		return "RUN";
+	}
 }
