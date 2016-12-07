@@ -4,7 +4,6 @@ import tp.pr2.ByteCode.ByteCode;
 import tp.pr2.CPU.CPU;
 
 public class IfLeq extends ConditionalJumps{
-	private int pos;
 	public IfLeq(int n){
 		this.pos = n;
 	}

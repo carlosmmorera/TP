@@ -9,6 +9,7 @@ public abstract class ConditionalJumps extends ByteCode{
 	private final static ConditionalJumps[] condj = {
 		new IfEq(), new IfNeq(), new IfLe(), new IfLeq()
 	};
+	protected int pos;
 	public boolean execute(CPU cpu){
 		if (cpu.haynelempila(NUMOPERANDOS)){
 			ByteCode bc = cpu.getInstr();

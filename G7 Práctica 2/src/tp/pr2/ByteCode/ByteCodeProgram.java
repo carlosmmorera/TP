@@ -46,7 +46,7 @@ public class ByteCodeProgram {
 	 */
 	
 	public boolean pushbc(ByteCode bc){
-		if (bc.comprobarbc()){
+		if (bc != null){
 			this.program[this.newinst] = bc;
 			++this.newinst;
 			return true;
@@ -73,8 +73,8 @@ public class ByteCodeProgram {
 			
 			ByteCode bc = ByteCodeParser.parse(strbc);
 			
-			if (bc.comprobarbc()){
-				this.program[n]=bc;
+			if (bc != null){
+				this.program[n] = bc;
 				return true;
 			}
 			else return false;

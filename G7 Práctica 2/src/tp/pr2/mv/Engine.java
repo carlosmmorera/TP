@@ -2,7 +2,9 @@ package tp.pr2.mv;
 
 import java.util.Scanner;
 
+import tp.pr2.ByteCode.ByteCode;
 import tp.pr2.ByteCode.ByteCodeProgram;
+import tp.pr2.CPU.CPU;
 import tp.pr2.Command.*;
 /**
  * Clase que gestiona la ejecución de la máquina virtual

@@ -43,10 +43,10 @@ public class CPU {
 		while (!this.bcProgram.cerrarPrograma(this.programCounter) && !error
 				&& !halt){
 			bc = this.bcProgram.getbcatn(this.programCounter);
+			++this.programCounter;
 			error = !bc.execute(this);
 		}
 		return !error;
-		
 	}
 	public boolean haynelempila(int n){
 		return n <= this.pila.getnumoperand();
@@ -89,7 +89,7 @@ public class CPU {
 	}
 	public boolean goTo(int n){
 		if (n >= 0 && n < this.bcProgram.getTam()){
-			this.programCounter = n - 1;
+			this.programCounter = n;
 			return true;
 		}
 		else return false;
@@ -109,8 +109,5 @@ public class CPU {
 			return true;
 		}
 		else return false;
-	}
-	public void aumentarContProgram(){
-		++this.programCounter;
 	}
 }

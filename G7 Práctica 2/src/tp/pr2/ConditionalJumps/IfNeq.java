@@ -1,11 +1,9 @@
 package tp.pr2.ConditionalJumps;
 
-import tp.pr2.Arithmetics.Add;
 import tp.pr2.ByteCode.ByteCode;
 import tp.pr2.CPU.CPU;
 
 public class IfNeq extends ConditionalJumps{
-	private int pos;
 	public IfNeq(int n){
 		this.pos = n;
 	}
