@@ -103,6 +103,6 @@ public class CPU {
 		else return false;
 	}
 	public boolean acabar(){
-		return this.end && this.bcProgram.cerrarPrograma(this.programCounter);
+		return this.end || this.bcProgram.cerrarPrograma(this.programCounter);
 	}
 }

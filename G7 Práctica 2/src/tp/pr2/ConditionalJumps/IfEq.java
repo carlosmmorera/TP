@@ -10,17 +10,14 @@ public class IfEq extends ConditionalJumps{
 	public IfEq(){
 		super();
 	}
-	public boolean execute(CPU cpu){
-		int op1 = cpu.pilapop();
-		
-		if (op1 == cpu.pilapop()) return true;
+	public boolean ejec(CPU cpu, int op1, int op2){
+		if (op1 == op2) return true;
 		else return cpu.goTo(this.pos);
-	}
-	public ByteCode parse(String[] s){
-		if (s[0].equalsIgnoreCase("IFEQ")) return new IfEq(Integer.parseInt(s[1]));
-		else return null;
 	}
 	public String toString(){
 		return "IFEQ " + this.pos;
+	}
+	public ByteCode create(int n){
+		return new IfEq(n);
 	}
 }

@@ -73,7 +73,7 @@ public class Engine {
 		CPU cpu = new CPU(this.program);
 		error = !cpu.run();
 		//Si no hubo errores muestro el estado actual de la máquina
-		if (!error) System.out.println("Estado de la CPU:\n" + cpu.toString());
+		if (!error) System.out.println(cpu.toString());
 		return !error;
 	}
 	/**

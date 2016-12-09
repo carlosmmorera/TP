@@ -12,7 +12,18 @@ public abstract class Arithmetics extends ByteCode{
 	public boolean execute(CPU cpu){
 		if (cpu.haynelempila(NUMOPERANDOS)){
 			ByteCode bc = cpu.getInstr();
-			return bc.execute(cpu);
+			int i = 0;
+			boolean encontrado = false;
+			
+			while (i < NUMARITH && !encontrado){
+				encontrado = bc.getClass() == arth[i].getClass();
+				if (!encontrado) ++i;
+			}
+			if (encontrado){
+				int op2 = cpu.pilapop();
+				return arth[i].ejec(cpu, cpu.pilapop(), op2);
+			}
+			else return false;
 		}
 		else return false;
 	}
@@ -23,12 +34,13 @@ public abstract class Arithmetics extends ByteCode{
 			boolean encontrado = false;
 			
 			while (i < NUMARITH && !encontrado){
-				bc = arth[i].parse(s);
-				encontrado = bc != null;
+				encontrado = s[0].equalsIgnoreCase(arth[i].toString());
+				if (encontrado) bc = arth[i];
 				++i;
 			}
 			return bc;
 		}
 		else return null;
 	}
+	abstract public boolean ejec(CPU cpu, int op1, int op2);
 }

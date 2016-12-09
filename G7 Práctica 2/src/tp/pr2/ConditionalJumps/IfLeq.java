@@ -10,17 +10,14 @@ public class IfLeq extends ConditionalJumps{
 	public IfLeq(){
 		super();
 	}
-	public boolean execute(CPU cpu){
-		int op1 = cpu.pilapop();
-		
-		if (cpu.pilapop() <= op1) return true;
+	public boolean ejec(CPU cpu, int op1, int op2){
+		if (op1 <= op2) return true;
 		else return cpu.goTo(this.pos);
-	}
-	public ByteCode parse(String[] s){
-		if (s[0].equalsIgnoreCase("IFLEQ")) return new IfLeq(Integer.parseInt(s[1]));
-		else return null;
 	}
 	public String toString(){
 		return "IFLEQ " + this.pos;
+	}
+	public ByteCode create(int n){
+		return new IfLeq(n);
 	}
 }

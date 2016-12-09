@@ -19,7 +19,18 @@ public abstract class ConditionalJumps extends ByteCode{
 	public boolean execute(CPU cpu){
 		if (cpu.haynelempila(NUMOPERANDOS)){
 			ByteCode bc = cpu.getInstr();
-			return bc.execute(cpu);
+			int i = 0;
+			boolean encontrado = false;
+			
+			while (i < NUMCONDJUMPS && !encontrado){
+				encontrado = bc.getClass() == condj[i].getClass();
+				if (!encontrado) ++i;
+			}
+			if (encontrado){
+				int op2 = cpu.pilapop();
+				return condj[i].ejec(cpu, cpu.pilapop(), op2);
+			}
+			else return false;
 		}
 		else return false;
 	}
@@ -30,12 +41,14 @@ public abstract class ConditionalJumps extends ByteCode{
 			boolean encontrado = false;
 			
 			while (i < NUMCONDJUMPS && !encontrado){
-				bc = condj[i].parse(s);
-				encontrado = bc != null;
+				encontrado = s[0].equalsIgnoreCase(condj[i].toString());
+				if (encontrado) bc = condj[i].create(Integer.parseInt(s[1]));
 				++i;
 			}
 			return bc;
 		}
 		else return null;
 	}
+	abstract public ByteCode create(int n);
+	abstract public boolean ejec(CPU cpu, int op1, int op2);
 }
