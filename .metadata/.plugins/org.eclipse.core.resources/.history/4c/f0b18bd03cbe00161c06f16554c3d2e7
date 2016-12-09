@@ -4,11 +4,7 @@ import tp.pr2.CPU.CPU;
 
 public class Out extends ByteCode{
 	public boolean execute(CPU cpu){
-		if (cpu.out()){
-			cpu.aumentarCont();
-			return true;
-		}
-		else return false;
+		return cpu.out();
 	}
 	public ByteCode parse(String[] s){
 		if (s.length == 1 && s[0].equalsIgnoreCase("OUT"))

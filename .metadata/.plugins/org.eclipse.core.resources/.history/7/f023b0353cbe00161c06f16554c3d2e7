@@ -21,11 +21,7 @@ public abstract class Arithmetics extends ByteCode{
 			}
 			if (encontrado){
 				int op2 = cpu.pilapop();
-				if (arth[i].ejec(cpu, cpu.pilapop(), op2)){
-					cpu.aumentarCont();
-					return true;
-				}
-				else return false;
+				return arth[i].ejec(cpu, cpu.pilapop(), op2);
 			}
 			else return false;
 		}

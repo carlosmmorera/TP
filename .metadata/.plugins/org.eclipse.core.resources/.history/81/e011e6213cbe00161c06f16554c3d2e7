@@ -43,6 +43,7 @@ public class CPU {
 		
 		while (!acabar() && !error){
 			bc = getInstr();
+			++this.programCounter;
 			error = !bc.execute(this);
 		}
 		return !error;
@@ -103,8 +104,5 @@ public class CPU {
 	}
 	public boolean acabar(){
 		return this.end || this.bcProgram.cerrarPrograma(this.programCounter);
-	}
-	public void aumentarCont(){
-		++this.programCounter;
 	}
 }

@@ -11,7 +11,10 @@ public class IfLe extends ConditionalJumps{
 		super();
 	}
 	public boolean ejec(CPU cpu, int op1, int op2){
-		if (op1 < op2) return true;
+		if (op1 < op2){
+			cpu.aumentarCont();
+			return true;
+		}
 		else return cpu.goTo(this.pos);
 	}
 	public String toString(){

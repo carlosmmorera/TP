@@ -5,9 +5,7 @@ import tp.pr2.ConditionalJumps.*;
 
 public class ByteCodeParser {
 	/*Solo añado add e IfEq al array de bytecodes, porque a la hora de parsearlos
-	 * también parsearemos el resto de Arithmetics y Conditional Jumps. De esta forma
-	 * evitamos entrar en el parseo de Arithmetics y Conditional Jumps varias veces
-	 * repetidas, cuando ya sabemos que no coincide.*/
+	 * también parsearemos el resto de Arithmetics y Conditional Jumps*/
 	private final static ByteCode[] bytecodes = {
 		new Add(), new IfEq(), new GoTo(), new Halt(), new Load(),
 		new Out(), new Push(), new Store()

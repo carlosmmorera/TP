@@ -41,8 +41,7 @@ public abstract class ConditionalJumps extends ByteCode{
 			boolean encontrado = false;
 			
 			while (i < NUMCONDJUMPS && !encontrado){
-				String[] condjump = condj[i].toString().split(" ");
-				encontrado = s[0].equalsIgnoreCase(condjump[0]);
+				encontrado = s[0].equalsIgnoreCase(condj[i].toString());
 				if (encontrado) bc = condj[i].create(Integer.parseInt(s[1]));
 				++i;
 			}
