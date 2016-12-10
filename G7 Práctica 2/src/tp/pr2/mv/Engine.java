@@ -73,7 +73,10 @@ public class Engine {
 		CPU cpu = new CPU(this.program);
 		error = !cpu.run();
 		//Si no hubo errores muestro el estado actual de la máquina
-		if (!error) System.out.println(cpu.toString());
+		if (!error){
+			System.out.println("El estado de la maquina tras ejecutar el programa es:");
+			System.out.println(cpu.toString());
+		}
 		return !error;
 	}
 	/**
@@ -92,6 +95,8 @@ public class Engine {
 		Scanner entrada = new Scanner(System.in);
 		ByteCode bc = null;
 		boolean error = false;
+		
+		resetProgram();
 		
 		System.out.println("Introduce el bytecode. Una instruccion "
 				+ "por línea:\n");

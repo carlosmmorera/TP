@@ -1,7 +1,7 @@
 package tp.pr2.ByteCode;
 
-import tp.pr2.Arithmetics.*;
-import tp.pr2.ConditionalJumps.*;
+import tp.pr2.ByteCode.Arithmetics.*;
+import tp.pr2.ByteCode.ConditionalJumps.*;
 
 public class ByteCodeParser {
 	/*Solo añado add e IfEq al array de bytecodes, porque a la hora de parsearlos
