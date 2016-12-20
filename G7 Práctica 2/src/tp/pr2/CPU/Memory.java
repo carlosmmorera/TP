@@ -4,12 +4,13 @@ package tp.pr2.CPU;
  * Clase que gestiona la memoria
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 17/11/2016
+ * @version 12/12/2016
  *
  */
 public class Memory {
 	final int TAM_INI = 100;
-	/**memory array que usamos como memoria
+	/**
+	 * memory array que usamos como memoria
 	 * 
 	 * tam nos indica el tamaño de la memoria
 	 * 
@@ -33,23 +34,21 @@ public class Memory {
  	public Memory(){
  		this.memory = new Integer[TAM_INI];
 		this.posiciones = new int[TAM_INI];
-		this.tampos=100;
-		this.tam=100;
+		this.tampos = 100;
+		this.tam = 100;
 		for (Integer x : memory) x = null;
-		this.numelem=0;
+		this.numelem = 0;
 	}
  	/**
  	 * Método que escribe en memoria
  	 * @param pos posición de la memoria en la que hay que escribir
  	 * @param value valor que hay que escribir en la memoria
- 	 * @return un booleano dependiendo de si la ejecución ha sido correcta
+ 	 * @return booleano dependiendo de si la ejecución ha sido correcta
  	 */
 	public boolean write(int pos, int value){
 		//compruebo que la posición sea correcta
 		if (pos >= 0){
-		/*Mientras la memoria no conste de suficiente espacio
-		* como para poder guardar los datos en la posición solicitada
-		* la aumento redimensionando el vector*/
+		//Redimensiono el vector para que exista la posición pedida
 			if (pos >= this.tam) this.resize(pos);
 			//Escribo el elemento en su posición
 			this.memory[pos] = value;
@@ -76,15 +75,16 @@ public class Memory {
 	}
 	/**
 	 * Método que redimensiona la memoria
+	 * @param pos es la posición a la que queremos acceder y por la que
+	 * necesitamos acceder a la memori
 	 */
 	public void resize(int pos){
-		//Creo un vector del doble del tamaño actual
-		Integer newmemory[]=new Integer[2*pos];
+		Integer newmemory[] = new Integer[2*pos];
 		//Copio todos los elementos en el nuevo vector
-		for (int i=0; i<tam; ++i)
+		for (int i = 0; i < tam; ++i)
 			newmemory[i] = this.memory[i];
 		//inicializo el vector a todo null
-		for (int i=tam; i<2*pos; ++i){
+		for (int i = tam; i < 2*pos; ++i){
 			newmemory[i] = null;
 		}
 		//Actualizo los atributos
@@ -96,9 +96,9 @@ public class Memory {
 	 */
 	public void resizepos(){
 		//Creo un vector del doble de su tamaño actual
-		int newposiciones[]=new int[2*tampos];
+		int newposiciones[] = new int[2*tampos];
 		//Copio los elementos del vector antiguo en el nuevo
-		for (int i=0; i<tampos; ++i)
+		for (int i = 0; i < tampos; ++i)
 			newposiciones[i] = this.posiciones[i];
 		//Actualizo los atributos
 		this.tampos = 2*tampos;
@@ -106,13 +106,14 @@ public class Memory {
 	}
 	/**
 	 * Método que muestra el estado de la memoria
+	 * @return string que muestra el estado de la memoria
 	 */
 	public String toString(){
 		String cadena = "Memoria: ";
 		
 		//Si la memoria no está vacía debo mostrar sus elementos
 		if (this.numelem > 0){
-			/*Recorro el vector posiciones para ir directamente a las 
+			/* Recorro el vector posiciones para ir directamente a las 
 			 * posiciones de la memoria en las que haya algún elemento*/
 			for (int i = 0; i < numelem - 1; ++i){
 				int pos = this.posiciones[i];
@@ -128,10 +129,13 @@ public class Memory {
 		
 		return cadena;
 	}
-	
+	/**
+	 * Método que añade la posición del elemento guardado al vector posiciones
+	 * @param pos posición que se guarda
+	 */
 	public void insertarpos(int pos){
 		if(numelem == 0) {
-			posiciones[0]=pos;
+			posiciones[0]= pos;
 			++numelem;
 		}
 		else{
@@ -140,12 +144,8 @@ public class Memory {
 			
 			while(ini < fin && !encontrado){
 				mitad = (ini+fin)/2;
-				if(posiciones[mitad]<pos){
-					 ini=mitad+1;
-				}
-				else if (posiciones[mitad] > pos){
-					fin=mitad;
-				}
+				if(posiciones[mitad] < pos) ini = mitad+1;
+				else if (posiciones[mitad] > pos) fin = mitad;
 				else encontrado = true;
 			}
 			if(!encontrado){

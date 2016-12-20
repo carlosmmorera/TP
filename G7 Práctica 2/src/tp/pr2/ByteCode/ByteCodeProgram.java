@@ -3,14 +3,14 @@ package tp.pr2.ByteCode;
 import java.util.Scanner;
 
 /**
- * Clase que gestiona el programa
+ * Clase que gestiona el programa de bytecodes introducido
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 17/11/2016
+ * @version 12/12/2016
  *
  */
 public class ByteCodeProgram {
-	final int TAM_INI = 100;
+	final int TAM_MAX = 100;
 	/**
 	 * program es un array que guarda todas las instrucciones del programa
 	 * newinst guarda el número de instrucciones de las que consta el array
@@ -22,17 +22,19 @@ public class ByteCodeProgram {
 	 * Constructor de la clase que inicializa el vector por defecto a 100
 	 */
 	public ByteCodeProgram(){
-		this.program = new ByteCode[TAM_INI];
-		this.newinst=0;
+		this.program = new ByteCode[TAM_MAX];
+		this.newinst = 0;
 	}
 	/**
 	 * Método que muestra el programa almacenado
+	 * @return cadena que es la representación por escrito de todas
+	 * las instrucciones almacenadas en el programa
 	 */
 	public String toString(){
 		String cadena = "\nPrograma almacenado:\n";
 		
 		//Recorre todo el array
-		for (int i=0; i < this.newinst; ++i){
+		for (int i = 0; i < this.newinst; ++i){
 			cadena += Integer.toString(i);
 			cadena += ": " + this.program[i].toString() + '\n';
 		}
@@ -40,13 +42,13 @@ public class ByteCodeProgram {
 	}
 	/**
 	 * Método que inserta una nueva instrucción en el programa
-	 * @param bc
-	 * @return un booleano dependiendo de si la ejecución de la instrucción 
-	 * ha sido correcta
+	 * @param bc instrucción a insertar
+	 * @return un booleano dependiendo de si el parseo de la
+	 * instrucción fue correcto y de si caben más elementos en
+	 * el array del programa
 	 */
-	
 	public boolean pushbc(ByteCode bc){
-		if (bc != null){
+		if (bc != null && this.newinst < TAM_MAX){
 			this.program[this.newinst] = bc;
 			++this.newinst;
 			return true;
@@ -56,11 +58,12 @@ public class ByteCodeProgram {
 	/**
 	 * Método que resetea, poniendo el número de elementos del vector a 0
 	 */
-	public void reset(){ this.newinst=0; }
+	public void reset(){ this.newinst = 0; }
 	/**
 	 * Método que reemplaza la instrucción n-ésima del programa por otra dada
 	 * @param n el número de la instrucción que hay que cambiar
-	 * @return un booleano dependiendo si el bytecode es correcto o no
+	 * @return un booleano dependiendo si el bytecode es correcto o no y de
+	 * si existe la instrucción n-ésima en el programa
 	 */
 	public boolean replace(int n){
 		if (n >= 0 && n < this.newinst){
@@ -68,8 +71,7 @@ public class ByteCodeProgram {
 			
 			//Pido la nueva instrucción
 			Scanner entrada = new Scanner(System.in);
-			String strbc=entrada.nextLine();
-			
+			String strbc = entrada.nextLine();
 			
 			ByteCode bc = ByteCodeParser.parse(strbc);
 			
@@ -82,26 +84,35 @@ public class ByteCodeProgram {
 		else return false;
 	}
 	/**
-	 * @param n posición de memoria a la que queremos acceder
-	 * @return la instrucción n-ésima del programa
-	 */
-	public ByteCode instn(int n){
-		return this.program[n];
-	}
-	/**
-	 * 
-	 * @return  el número de instrucciones del programa
+	 * Método que devuelve el tamaño del programa
+	 * @return el número de instrucciones del array del programa
 	 */
 	public int getTam(){
 		return this.newinst;
 	}
-	public ByteCode getbcatn(int n){
-		if (n < this.newinst){
+	/**
+	 * Método con el que se obtiene la instrucción n-ésima del programa
+	 * @param n el número de la instrucción que se quiere obtener
+	 *
+	 * @return el ByteCode correspondiente ubicado en la posición 
+	 * n-ésima en caso de que ésta 
+	 * sea menor que @see {@link ByteCodeProgram#newinst}
+	 */
+	public ByteCode getBcAtn(int n){
+		if (n >= 0 && n < this.newinst){
 			return this.program[n];
 		}
 		else return null;
 	}
-	public boolean cerrarPrograma(int n){
-		return n == this.newinst;
+	/**
+	 * Método que comprueba si hay que cerrar el programa por haber llegado
+	 * al final
+	 * @param programCounter: el contador de programa incorporado en esta
+	 * versión de la práctica
+	 * @return un booleano dependiendo de si el programCounter apunta al final
+	 * del programa
+	 */
+	public boolean cerrarPrograma(int programCounter){
+		return programCounter == this.newinst;
 	}
 }

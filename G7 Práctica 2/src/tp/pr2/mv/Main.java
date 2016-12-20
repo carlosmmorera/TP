@@ -3,7 +3,7 @@ package tp.pr2.mv;
 /**
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 17/11/2016
+ * @version 12/12/2016
  *
  */
 public class Main {

@@ -4,8 +4,7 @@ package tp.pr2.CPU;
  * Clase que gestiona la pila
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 17/11/2016
- *
+ * @version 12/12/2016
  */
 public class OperandStack {
 	final int TAM = 100;
@@ -27,6 +26,7 @@ public class OperandStack {
 	/**
 	 * Método que introduce un operando en la pila
 	 * @param op operando a introducir
+	 * @return un booleano dependiendo de si se ejecutó la instrucción con éxito
 	 */
 	public boolean push(int op){
 		if (!this.pilallena()){
@@ -40,8 +40,8 @@ public class OperandStack {
 		else return false;
 	}
 	/**
-	 * Método que comprueba si se puede hacer pop
-	 * @return un booleano dependiendo de si la pila esta vacia o no
+	 * Método que comprueba si la pila está vacía
+	 * @return booleano dependiendo de si la pila esta vacia o no
 	 */
 	public boolean vacia(){
 		return numoperand == 0;
@@ -70,10 +70,18 @@ public class OperandStack {
 		
 		return cadena;
 	}
+	/**
+	 * Método que comprueba si la pila está llena
+	 * @return booleano dependiendo de si la pila está llena
+	 */
 	public boolean pilallena(){
 		return this.numoperand == TAM;
 	}
-	public int getnumoperand(){
+	/**
+	 * Método que devuelve el numero de operandos que hay
+	 * @return el numero de operandos que hay 
+	 */
+	public int getNumOperand(){
 		return this.numoperand;
 	}
 }

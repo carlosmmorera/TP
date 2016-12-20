@@ -6,8 +6,7 @@ import tp.pr2.ByteCode.*;
  * Clase que gestiona la ejecución de las instrucciones bytecode
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 17/11/2016
- *
+ * @version 12/12/2016
  */
 public class CPU {
 	/**
@@ -15,6 +14,8 @@ public class CPU {
 	 * pila es un objeto de la clase @see TP.PR1.MV.OperandStack
 	 * end es un booleano que indica cuando acaba la ejecución 
 	 * de las intrucciones bytecode
+	 * programCounter es un entero que representa al contador de programa
+	 * bcProgram es un objeto de la clase @see tp.pr2.ByteCode.ByteCodeProgram
 	 */
 	private Memory memoria;
 	private OperandStack pila;
@@ -24,6 +25,7 @@ public class CPU {
 	
 	/**
 	 * Constructor de la clase
+	 * @param prog es el programa con el que se inicializa la CPU
 	 */
 	public CPU(ByteCodeProgram prog){
 		this.memoria = new Memory();
@@ -33,8 +35,7 @@ public class CPU {
 		this.bcProgram = prog;
 	}
 	/**
-	 * Método que ejecuta la instrucción bytecode dada
-	 * @param instr instrucción a ejecutar
+	 * Método que ejecuta el programa dado
 	 * @return un booleano dependiendo de si la ejecución fue correcta 
 	 */
 	public boolean run(){
@@ -47,13 +48,18 @@ public class CPU {
 		}
 		return !error;
 	}
+	/**
+	 * Método que comprueba el número de elementos que hay en pila
+	 * @param n: número de elementos que queremos comprobar
+	 * @return boolean dependiendo de si hay n elementos en la pila
+	 */
 	public boolean haynelempila(int n){
-		return n <= this.pila.getnumoperand();
+		return n <= this.pila.getNumOperand();
 	}
 	/**
 	 * Método que implementa la instrucción LOAD
 	 * @param pos posición de memoria
-	 * @return un booleano si la carga fue corr ecta
+	 * @return booleano dependiendo de si la carga fue correcta
 	 */
 	public boolean load(int pos){
 		//Leo el elemento de memoria
@@ -69,15 +75,37 @@ public class CPU {
 		cadena += this.pila.toString();
 		return cadena;
 	}
+	/**
+	 * Método que devuelve el BC que se debe ejecutar
+	 * @return ByteCode de la instrucción que se va
+	 * ejecutar @see {@link ByteCodeProgram#getBcAtn(int)}
+	 */
 	public ByteCode getInstr(){
-		return this.bcProgram.getbcatn(this.programCounter);
+		return this.bcProgram.getBcAtn(this.programCounter);
 	}
+	/**
+	 * Método que extrae un elemento de la cima de la pila
+	 * @return int que será el elemento en la cima de la
+	 * pila @see {@link OperandStack#pop()}
+	 */
 	public int pilapop(){
 		return pila.pop();
 	}
+	/**
+	 * Método que introduce un elemento en la pila
+	 * @param n elemento a introducir
+	 * @return int que será el elemento que introduciremos
+	 * en la pila @see {@link OperandStack#push(int)}
+	 */
 	public boolean push(int n){
 		return pila.push(n);
 	}
+	/**
+	 * Método que salta a la n-ésima instrucción del programa
+	 * @param n número de instrucción a la que se desea saltar
+	 * @return booleano dependiendo de si la ejecución de la instrucción
+	 * ha tenido éxito
+	 */
 	public boolean goTo(int n){
 		if (n >= 0 && n < this.bcProgram.getTam()){
 			this.programCounter = n;
@@ -85,15 +113,31 @@ public class CPU {
 		}
 		else return false;
 	}
+	/**
+	 * Método que ejecuta el ByteCode store
+	 * @param n posición de memoria
+	 * @return booleano dependiendo de si la ejecución de la instrucción
+	 * ha tenido éxito
+	 */
 	public boolean store(int n){
 		if (!pila.vacia()) 
 			return this.memoria.write(n, pila.pop());
 		else return false; 
 	}
+	/**
+	 * Método que ejecuta el ByteCode Halt
+	 * @return booleano dependiendo de si la ejecución de la instrucción
+	 * ha tenido éxito
+	 */
 	public boolean halt(){
 		this.end = true;
 		return true;
 	}
+	/**
+	 * Método que ejecuta el ByteCode Out
+	 * @return booleano dependiendo de si la ejecución de la instrucción
+	 * ha tenido éxito
+	 */
 	public boolean out(){
 		if (!pila.vacia()) {
 			System.out.println(Integer.toString(pila.pop()));
@@ -101,9 +145,16 @@ public class CPU {
 		}
 		else return false;
 	}
+	/**
+	 * Método que comprueba si el programa debe acabar o no
+	 * @return booleano dependiendo de si el programa debe acabar
+	 */
 	public boolean acabar(){
-		return this.end || this.bcProgram.cerrarPrograma(this.programCounter);
+		return (this.end || this.bcProgram.cerrarPrograma(this.programCounter));
 	}
+	/**
+	 * Método que aumenta en uno el valor del contador de programa
+	 */
 	public void aumentarCont(){
 		++this.programCounter;
 	}
