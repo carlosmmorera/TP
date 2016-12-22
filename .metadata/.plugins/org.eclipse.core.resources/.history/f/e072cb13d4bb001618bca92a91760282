@@ -1,7 +1,0 @@
-package tp.pr2.ByteCode;
-
-public abstract class Arithmetics extends ByteCode{
-	abstract public ByteCode parse(String[] s){
-		
-	}
-}
