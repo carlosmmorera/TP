@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;tp.pr2.ByteCode&apos; to &apos;G7 Práctica 3/src&apos;&#x0D;&#x0A;- Original project: &apos;G7 Práctica 2&apos;&#x0D;&#x0A;- Destination element: &apos;G7 Práctica 3/src&apos;&#x0D;&#x0A;- Original element: &apos;G7 Práctica 2/src/tp.pr2.ByteCode&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=G7 Práctica 3/src" element1="/src&lt;tp.pr2.ByteCode" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1482424445326" version="1.0"/>
+</session>
