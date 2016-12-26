@@ -1,0 +1,6 @@
+package tp.pr3.ProgramCompiler;
+
+public interface Instruction {
+	Instruction lexParse(String[] words, LexicalParser lexparser);
+	void compile(Compiler compiler) throws ...;
+}
