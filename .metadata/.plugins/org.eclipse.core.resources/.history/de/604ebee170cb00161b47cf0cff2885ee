@@ -103,8 +103,4 @@ public class Engine {
 		this.generateByteCode();
 		}
 		catch
-	}
-	public boolean cargarInstrProg(String s){
-		return this.sProgram.cargarInst(s);
-	}
 }

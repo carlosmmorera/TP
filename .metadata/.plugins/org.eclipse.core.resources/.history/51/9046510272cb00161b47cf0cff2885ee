@@ -13,14 +13,12 @@ public class LoadFich implements Command{
 	public boolean execute(Engine engine){
 		String linea;
 		Scanner entrada = new Scanner(new BufferedReader(new FileReader(this.nombre)));
-		boolean error = false;
 		
-		while(entrada.hasNextLine() && !error){
+		while(entrada.hasNextLine()){
 			linea = entrada.nextLine();
-			error = !engine.cargarInstrProg(linea);
+			engine.cargarInstrProg(linea);
 		}
 		entrada.close(); //Ver si funciona
-		return !error;
 	}
 	public Command parse(String[] s){
 		if (s.length == 2 && s[0].equalsIgnoreCase("LOAD"))
