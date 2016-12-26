@@ -4,7 +4,6 @@ import java.util.Scanner;
 import tp.pr3.ByteCode.*;
 import tp.pr3.CPU.CPU;
 import tp.pr3.Command.*;
-import tp.pr3.ProgramCompiler.*;
 /**
  * Clase que gestiona la ejecución de la máquina virtual
  * @author Carlos Moreno
@@ -97,10 +96,7 @@ public class Engine {
 	 */
 	public boolean replace(int rep){ return this.bytecodeProgram.replace(rep); }
 	
-	public void compile() throws LexicalAnalysisException, ArrayException {
-		try {
-		this.lexicalAnalysis();
-		this.generateByteCode();
-		}
-		catch
+	public boolean compile(){
+		
+	}
 }
