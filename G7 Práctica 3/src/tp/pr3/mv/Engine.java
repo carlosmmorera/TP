@@ -17,14 +17,16 @@ public class Engine {
 	 * end es un booleano que indica si se ha acabado la introducción 
 	 * de instrucciones BC o no
 	 */
-	private ByteCodeProgram program;
+	private SourceProgram sProgram;
+	private ParsedProgram parsedProgram;
+	private ByteCodeProgram bytecodeProgram;
 	private boolean end;
 	final static Scanner entrada = new Scanner(System.in);
 	/**
 	 * Constructor de la clase
 	 */
 	public Engine(){
-		this.program = new ByteCodeProgram();
+		this.bytecodeProgram = new ByteCodeProgram();
 		this.end = false;
 	}
 	
@@ -48,14 +50,14 @@ public class Engine {
 				System.out.println("Comienza la ejecucion de " + com.toString()
 						+ '\n');
 				//Muestro mensaje de error si hubo un error en la ejecución
-				if (!com.execute(this)) 
+				if (!com.execute(this))
 					System.out.println("Error: Ejecucion incorrecta del comando");
 			}
 			//Muestro mensaje de error si hubo un error en la escritura
 			else System.out.println("Error: Comando incorrecto");
 			//Si el programa tiene instrucciones añadidas se muestra al usuario
-			if (this.program.getTam() > 0) 
-				System.out.println(this.program.toString());
+			if (this.bytecodeProgram.getTam() > 0) 
+				System.out.println(this.bytecodeProgram.toString());
 		}
 		System.out.println("Fin de la ejecucion...");
 	}
@@ -71,7 +73,7 @@ public class Engine {
 	public boolean run(){
 		boolean error = false;
 		//Inicializo una CPU
-		CPU cpu = new CPU(this.program);
+		CPU cpu = new CPU(this.bytecodeProgram);
 		error = !cpu.run();
 		//Si no hubo errores muestro el estado actual de la máquina
 		if (!error){
@@ -85,42 +87,16 @@ public class Engine {
 	 * Método que ejecuta el comando RESET
 	 * @return un booleano dependiendo de si la ejecución del comando fue correcta
 	 */
-	public boolean resetProgram(){ this.program.reset(); return true; }
+	public boolean resetProgram(){ this.bytecodeProgram.reset(); return true; }
 	/**
 	 * Método que ejecuta el comando REPLACE
 	 * @param rep instrucción a reemplazar
 	 * @return un booleano dependiendo de 
 	 * si @see {@link ByteCodeProgram#replace(int)}
 	 */
-	public boolean replace(int rep){ return this.program.replace(rep); }
-	/**
-	 * Método que se encarga de leer el nuevo BC 
-	 * @return un booleano que es true si se pudo efectuar la operacion
-	 * conrrectamente y false en caso contrario
-	 */
-	public boolean readByteCodeProgram(){
-		ByteCode bc = null;
-		boolean error = false;
+	public boolean replace(int rep){ return this.bytecodeProgram.replace(rep); }
+	
+	public boolean compile(){
 		
-		resetProgram();
-		
-		System.out.println("Introduce el bytecode. Una instruccion "
-				+ "por línea:\n");
-		
-		String instruccion = entrada.nextLine();
-		
-		while (!error && !instruccion.equalsIgnoreCase("END")){
-			bc = ByteCodeParser.parse(instruccion);
-			while (bc == null){
-				System.out.println("ERROR: ByteCode incorrecto");
-				System.out.println("Introduzca de nuevo el ByteCode\n");
-				instruccion = entrada.nextLine();
-				
-				bc = ByteCodeParser.parse(instruccion);
-			}
-			error = !this.program.pushbc(bc);
-			instruccion = entrada.nextLine();
-		}
-		return !error;
 	}
 }

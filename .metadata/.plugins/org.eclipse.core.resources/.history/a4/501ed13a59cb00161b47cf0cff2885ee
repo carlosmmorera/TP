@@ -1,0 +1,11 @@
+package tp.pr3.Command;
+
+import tp.pr3.mv.Engine;
+
+public class Compile implements Command{
+	@Override
+	public boolean execute(Engine engine)
+	throws LexicalAnalysisException, ArrayException {
+	return engine.compile();
+	}
+}
