@@ -97,7 +97,7 @@ public class Engine {
 	 */
 	public boolean replace(int rep){ return this.bytecodeProgram.replace(rep); }
 	
-	public void compile() throws LexicalAnalysisException, ArrayException {
+	public boolean compile() throws LexicalAnalysisException, ArrayException {
 		try {
 		this.lexicalAnalysis();
 		this.generateByteCode();

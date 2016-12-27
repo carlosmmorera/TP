@@ -10,7 +10,7 @@ import tp.pr3.CPU.CPU;
  * @author Manuel Suárez
  * @version 12/12/2016
  */
-public abstract class ConditionalJumps extends ByteCode{
+public abstract class ConditionalJumps implements ByteCode{
 	final static int NUMOPERANDOS = 2;
 	/**
 	 * pos es la instrucción a la que se salta si se cumple la condición

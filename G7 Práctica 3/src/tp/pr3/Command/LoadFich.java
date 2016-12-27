@@ -1,26 +1,32 @@
 package tp.pr3.Command;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Scanner;
+import java.io.IOException;
 import tp.pr3.mv.Engine;
 
 public class LoadFich implements Command{
 	private String nombre;
+	
+	public LoadFich(){
+		this.nombre = "";
+	}
 	public LoadFich(String s){
 		this.nombre = s;
 	}
 	public boolean execute(Engine engine){
-		String linea;
-		Scanner entrada = new Scanner(new BufferedReader(new FileReader(this.nombre)));
-		boolean error = false;
-		
-		while(entrada.hasNextLine() && !error){
-			linea = entrada.nextLine();
-			error = !engine.cargarInstrProg(linea);
+		try {
+			return this.ejec(engine);
+		} 
+		catch (FileNotFoundException e){
+			System.out.println("Archivo no encontrado");
+			return false;
 		}
-		entrada.close(); //Ver si funciona
-		return !error;
+		catch (IOException e){
+			System.out.println("Error en la lectura del archivo");
+			return false;
+		}
 	}
 	public Command parse(String[] s){
 		if (s.length == 2 && s[0].equalsIgnoreCase("LOAD"))
@@ -33,5 +39,18 @@ public class LoadFich implements Command{
 	}
 	public String toString(){
 		return "LOAD " + this.nombre;
+	}
+	public boolean ejec(Engine engine) throws IOException{
+		String s;
+		BufferedReader fIn = new BufferedReader(new FileReader(this.nombre));
+		boolean error = false;
+		
+		s = fIn.readLine();
+		while(s != null && !error){
+			error = !engine.cargarInstrProg(s);
+			s = fIn.readLine();
+		}
+		fIn.close();
+		return !error;
 	}
 }

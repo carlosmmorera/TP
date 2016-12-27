@@ -1,5 +1,7 @@
 package tp.pr3.Command;
 
+import tp.pr3.ProgramCompiler.Compile;
+
 /**
  * Clase que gestiona el parseo de comandos
  * @author Carlos Moreno
@@ -13,8 +15,8 @@ public class CommandParser {
 	 * las clases que heredan de Command
 	 */
 	private final static Command[] commands = {
-		new Help(), new Quit(), new Reset(),
-		new Replace(), new Run(), new AddByteCodeProgram() 
+		new Help(), new Quit(), new Replace(), new Run(),
+		new LoadFich(), new Compile(),
 	};
 	/**
 	 * Método que parsea el comando introducido por el usuario

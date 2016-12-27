@@ -11,7 +11,7 @@ import tp.pr3.CPU.CPU;
  * @version 12/12/2016
  *
  */
-public abstract class Arithmetics extends ByteCode{
+public abstract class Arithmetics implements ByteCode{
 	final static int NUMOPERANDOS = 2;
 	
 	/**
