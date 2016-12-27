@@ -7,7 +7,7 @@ import tp.pr3.CPU.CPU;
  * @author Manuel Suárez
  * @version 12/12/2016
  */
-public class Push extends ByteCode{
+public class Push implements ByteCode{
 	private int n;
 	/**
 	 * Constructores de la clase

@@ -8,7 +8,7 @@ import tp.pr3.CPU.CPU;
  * @version 12/12/2016
  *
  */
-public class Halt implements ByteCode{
+public class Halt extends ByteCode{
 	/**
 	 * Método que ejecuta el ByteCode (para el programa)
 	 * @param cpu: @see {@link tp.pr2.CPU.CPU}

@@ -6,4 +6,9 @@
 <fullyQualifiedTypeName name="tp.pr2.CPU.CPU"/>
 <fullyQualifiedTypeName name="tp.pr2.ByteCode.ByteCode"/>
 <fullyQualifiedTypeName name="tp.pr2.ByteCode.ByteCodeParser"/>
+<fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.SourceProgram"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="tp.pr3.ByteCode.ByteCode"/>
 </qualifiedTypeNameHistroy>

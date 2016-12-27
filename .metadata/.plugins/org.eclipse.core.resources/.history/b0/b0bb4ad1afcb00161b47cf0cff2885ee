@@ -1,6 +1,6 @@
-package tp.pr2.ByteCode;
+package tp.pr3.ByteCode;
 
-import tp.pr2.CPU.CPU;
+import tp.pr3.CPU.CPU;
 /**
  * Clase abstracta que gestiona todos los ByteCode
  * 

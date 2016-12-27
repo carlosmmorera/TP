@@ -8,7 +8,7 @@ import tp.pr3.CPU.CPU;
  * @version 12/12/2016
  *
  */
-public class GoTo implements ByteCode{
+public class GoTo extends ByteCode{
 	private int n;
 	/**
 	 * Constructores de la clase

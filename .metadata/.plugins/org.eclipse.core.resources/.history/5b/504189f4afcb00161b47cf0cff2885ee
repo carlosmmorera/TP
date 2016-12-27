@@ -7,7 +7,7 @@ import tp.pr3.CPU.CPU;
  * @author Manuel Suárez
  * @version 12/12/2016
  */
-public class Out implements ByteCode{
+public class Out extends ByteCode{
 	/**
 	 * Método que ejecuta el ByteCode Out
 	 * @param cpu: @see {@link tp.pr2.CPU.CPU}

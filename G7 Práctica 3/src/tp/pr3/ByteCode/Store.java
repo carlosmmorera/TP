@@ -7,7 +7,7 @@ import tp.pr3.CPU.CPU;
  * @author Manuel Suárez
  * @version 12/12/2016
  */
-public class Store extends ByteCode{
+public class Store implements ByteCode{
 	private int n;
 	/**
 	 * Constructores de la clase

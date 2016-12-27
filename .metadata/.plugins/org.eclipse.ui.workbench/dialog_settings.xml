@@ -22,6 +22,7 @@
 		<item value="true" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\USUARIO\TP\G7 Práctica 2\src\tp\pr2\Command"/>
 			<item value="C:\Users\USUARIO\TP\G7 Práctica 2\src\tp\pr2\mv"/>
 			<item value="C:\Users\USUARIO\TP\G7 Práctica 2\src\tp\pr2\CPU"/>
 			<item value="C:\Users\USUARIO\TP\G7 Práctica 2\src\tp\pr2\ByteCode"/>

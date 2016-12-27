@@ -11,7 +11,7 @@ import tp.pr3.CPU.CPU;
  * @version 12/12/2016
  *
  */
-public abstract class ByteCode {
+public interface ByteCode {
 	abstract public boolean execute(CPU cpu);
 	abstract public ByteCode parse(String[] s);
 }
