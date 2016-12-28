@@ -4,6 +4,7 @@ import java.util.Scanner;
 import tp.pr3.ByteCode.*;
 import tp.pr3.CPU.CPU;
 import tp.pr3.Command.*;
+import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.*;
 /**
  * Clase que gestiona la ejecución de la máquina virtual
@@ -102,9 +103,17 @@ public class Engine {
 		this.lexicalAnalysis();
 		this.generateByteCode();
 		}
-		catch
+		catch{
+			
+		}
 	}
 	public boolean cargarInstrProg(String s){
 		return this.sProgram.cargarInst(s);
+	}
+	private void lexicalAnalysis() throws LexicalAnalysisException {
+		
+	}
+	private void generateByteCode() throws ArrayException{
+		
 	}
 }

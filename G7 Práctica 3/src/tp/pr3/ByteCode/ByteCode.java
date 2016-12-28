@@ -12,6 +12,6 @@ import tp.pr3.CPU.CPU;
  *
  */
 public interface ByteCode {
-	abstract public boolean execute(CPU cpu);
-	abstract public ByteCode parse(String[] s);
+	public boolean execute(CPU cpu);
+	public ByteCode parse(String[] s);
 }

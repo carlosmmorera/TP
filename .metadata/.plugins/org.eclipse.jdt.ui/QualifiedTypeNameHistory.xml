@@ -15,4 +15,12 @@
 <fullyQualifiedTypeName name="java.io.EOFException"/>
 <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
 <fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.Compile"/>
+<fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.Instruction.Instruction"/>
+<fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.Term.TermParser"/>
+<fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.ParsedProgram"/>
+<fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.Term.Term"/>
+<fullyQualifiedTypeName name="tp.pr3.ByteCode.ConditionalJumps.ConditionalJumps"/>
+<fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.LexicalParser"/>
+<fullyQualifiedTypeName name="tp.pr3.Exception.LexicalAnalysisException"/>
+<fullyQualifiedTypeName name="tp.pr3.Exception.ArrayException"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,22 @@
+package tp.pr3.ProgramCompiler.Instruction;
+
+import tp.pr3.ProgramCompiler.Term.*;
+
+public class SimpleAssignment implements Instruction{
+	private String var_name;
+	private Term rhs;
+	
+	final int NUMCOMPONENTES = 3;
+	Instruction lexParse(String[] words, LexicalParser lexparser){
+		char name = words.charAt(0);
+		if (words.length != NUMCOMPONENTES || words[0] < 'a' || words[0] > 'z'
+				|| words[1] != '=') return null;
+		else{
+			Term term = TermParser.parse(words[2]);
+			lexParser.increaseProgramCounter();
+		}
+	}
+	void compile(Compiler compiler) throws ...{
+		
+	}
+}

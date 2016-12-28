@@ -1,0 +1,15 @@
+package tp.pr3.ProgramCompiler.Instruction;
+
+import tp.pr3.ProgramCompiler.Term.Term;
+
+public class SimpleAssignment implements Instruction{
+	private String var_name;
+	private Term rhs;
+	
+	Instruction lexParse(String[] words, LexicalParser lexparser){
+		
+	}
+	public void compile(Compiler compiler) throws ...{
+		
+	}
+}

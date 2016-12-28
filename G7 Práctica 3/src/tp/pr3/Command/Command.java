@@ -10,7 +10,7 @@ import tp.pr3.mv.Engine;
  *
  */
 public interface Command {
-	abstract public boolean execute(Engine engine);
-	abstract public Command parse(String[] s);
-	abstract public String textHelp();
+	public boolean execute(Engine engine);
+	public Command parse(String[] s);
+	public String textHelp();
 }

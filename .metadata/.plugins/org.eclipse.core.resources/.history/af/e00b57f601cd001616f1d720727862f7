@@ -1,0 +1,9 @@
+package tp.pr3.ProgramCompiler.Instruction;
+
+import tp.pr3.ProgramCompiler.ParsedProgram;
+
+public class While implements Instruction{
+	Condition condition;
+	ParsedProgram whileBody;
+	
+}

@@ -1,0 +1,15 @@
+package tp.pr3.ProgramCompiler.Instruction.While;
+
+import tp.pr3.ProgramCompiler.Term.Term;
+
+public class Condition {
+	private Term term1;
+	private Term term2;
+	
+	public Condition parse(String t1, String op, String t2, LexicalParser parser){
+		
+	}
+	public void compile(Compiler compiler){
+		
+	}
+}
