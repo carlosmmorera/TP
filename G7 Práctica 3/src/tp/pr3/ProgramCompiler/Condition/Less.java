@@ -1,5 +1,12 @@
 package tp.pr3.ProgramCompiler.Condition;
 
-public class Less extends Condition{
+import tp.pr3.ProgramCompiler.LexicalParser;
 
+public class Less extends Condition{
+	public Condition parseAux(String t1, String op, String t2,
+			LexicalParser parser){
+		if (op.equalsIgnoreCase("<")) return Less(Integer.parseInt(t1), 
+				Integer.parseInt(t2));
+		else return null;
+	}
 }

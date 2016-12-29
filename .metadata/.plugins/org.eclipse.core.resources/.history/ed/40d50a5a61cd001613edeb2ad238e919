@@ -1,0 +1,10 @@
+package tp.pr3.ProgramCompiler.Term;
+
+public class TermParser {
+	private final static Term[] terms = {
+		new Variable(), new Number(),
+	};
+	public static Term parse(String s){
+		
+	}
+}

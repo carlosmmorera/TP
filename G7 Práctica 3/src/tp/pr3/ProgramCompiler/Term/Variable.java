@@ -2,6 +2,13 @@ package tp.pr3.ProgramCompiler.Term;
 
 public class Variable implements Term {
 	private String varName;
+	
+	public Variable(){
+		this.varName = "";
+	}
+	public Variable(String s){
+		this.varName = s;
+	}
 	@Override
 	public Term parse(String term) {
 		if (term.length() != 1) return null;
@@ -10,7 +17,6 @@ public class Variable implements Term {
 			if ('a' <= name && name <= 'z') return new Variable(term);
 			else return null;
 		}
-		
 	}	
 	@Override
 	public ByteCode compile(Compiler compiler){
