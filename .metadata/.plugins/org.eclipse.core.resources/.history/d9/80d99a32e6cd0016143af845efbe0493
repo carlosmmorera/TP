@@ -1,0 +1,13 @@
+package tp.pr3.ProgramCompiler.Instruction;
+
+public class ParserInstruction {
+	final int LONG_MAX_INSTRUCTION = 4;
+	
+	public static Instruction parse(String line){
+		String[] s = line.split(" ");
+		if (s.length > 4) return null;
+		else{
+			
+		}
+	}
+}

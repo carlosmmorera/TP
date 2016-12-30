@@ -1,0 +1,35 @@
+package tp.pr3.ProgramCompiler.Instruction;
+
+import tp.pr3.ProgramCompiler.LexicalParser;
+import tp.pr3.ProgramCompiler.Term.*;
+
+public class SimpleAssignment implements Instruction{
+	private String var_name;
+	private Term rhs;
+	
+	final int NUMCOMPONENTES = 3;
+	
+	public SimpleAssignment(){
+		this.var_name = "";
+	}
+	public SimpleAssignment(String)
+	public Instruction lexParse(String[] words, LexicalParser lexparser){
+		if (words.length != NUMCOMPONENTES || words[1].length() != 1) return null;
+		else{
+			char op = words[1].charAt(0);
+			
+			if (op != '=') return null;
+			else {
+				Term term = TermParser.parse(words[2]);
+				if (term == null) return null;
+				else{
+					lexparser.increaseProgramCounter();
+					return new SimpleAssignment(words[0], term);
+				}
+			}
+		}
+	}
+	public void compile(Compiler compiler) throws ...{
+		
+	}
+}

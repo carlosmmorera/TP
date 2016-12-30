@@ -1,5 +1,7 @@
 package tp.pr3.ProgramCompiler.Term;
 
+import tp.pr3.ByteCode.ByteCode;
+
 public class Number implements Term{
 	private int value;
 	
@@ -19,5 +21,11 @@ public class Number implements Term{
 	}
 	private Term StringToInt(String term) throws NumberFormatException{
 		return new Number(Integer.parseInt(term));
+	}
+	public ByteCode compile(Compiler compiler){
+		
+	}
+	public String toString(){
+		return Integer.toString(this.value);
 	}
 }

@@ -1,0 +1,44 @@
+package tp.pr3.ProgramCompiler;
+
+import tp.pr3.Exception.LexicalAnalysisException;
+
+public class LexicalParser {
+	private SourceProgram sProgram;
+	private int programCounter;
+	
+//	public LexicalParser(){
+//		this.sProgram = new SourceProgram();
+//		this.programCounter = 0;
+//	}
+//	public LexicalParser(SourceProgram srcPr){
+//		this.sProgram = srcPr;
+//		this.programCounter = 0;
+//	}
+//	public LexicalParser(SourceProgram srcPr, int n){
+//		this.sProgram = srcPr;
+//		this.programCounter = n;
+//	}
+	
+	//TIENE QUE INCREMENTAR EL CONTADOR
+	public void lexicalParser(ParsedProgram pProgram, String stopKey)
+			throws LexicalAnalysisException{
+		String instr = "";
+		
+		
+		while (this.programCounter < this.sProgram.getNumeroInstrucciones()&&
+				!instr.equalsIgnoreCase(stopKey)){
+			instr = sProgram.getInstructionAt(this.programCounter);
+			if (instr.equalsIgnoreCase(stopKey)){
+				stop = true;
+			}
+			else {
+				Instruction instruction = ParserInstruction.parse(instr,this);
+			//Añadir instruccion a pProgram
+			}
+		}
+		//algo después
+	}
+	public void increaseProgramCounter(){
+		this.programCounter++;
+	}
+}

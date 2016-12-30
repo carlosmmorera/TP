@@ -12,12 +12,11 @@ public class SourceProgram {
 		this.numInstruc = 0;
 		this.tam = TAM_INI;
 	}
-	public boolean cargarInst(String s){
+	public void cargarInst(String s){
 		if (this.numInstruc == this.tam) this.resize();
 		
 		this.sProgram[this.numInstruc] = s;
 		++this.numInstruc;
-		return true;
 	}
 	public void resize(){
 		int newtam = 2*this.tam;
@@ -28,5 +27,12 @@ public class SourceProgram {
 		}
 		this.sProgram = newsProgram;
 		this.tam = newtam;
+	}
+	public int getNumeroInstrucciones(){
+		return this.numInstruc;
+	}
+	public String getInstructionAt(int n){
+		if (n >= 0 && n < this.numInstruc) return this.sProgram[n];
+		else return null;
 	}
 }

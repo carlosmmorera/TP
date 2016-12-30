@@ -8,17 +8,26 @@ public class SimpleAssignment implements Instruction{
 	private Term rhs;
 	
 	final int NUMCOMPONENTES = 3;
-	Instruction lexParse(String[] words, LexicalParser lexparser){
-		char name = words[0].charAt(0);
-		char op = words[1].charAt(0);
-		if (words.length != NUMCOMPONENTES || name < 'a' || name > 'z'
-				|| op != '=') return null;
-		else{
-			Term term = TermParser.parse(words[2]);
-			lexparser.increaseProgramCounter();
-		}
+	
+	public SimpleAssignment(){
+		this.var_name = "";
 	}
-	void compile(Compiler compiler) throws ...{
-		
+	public SimpleAssignment(String varName, Term term){
+		this.var_name = varName;
+		this.rhs = term;
+	}
+	public Instruction lexParse(String[] words, LexicalParser lexparser){
+		if (words.length != NUMCOMPONENTES || words[1].length() != 1) return null;
+		else{
+			if (!words[1].equals("=")) return null;
+			else {
+				Term term = TermParser.parse(words[2]);
+				if (term == null) return null;
+				else{
+					lexparser.increaseProgramCounter();
+					return new SimpleAssignment(words[0], term);
+				}
+			}
+		}
 	}
 }

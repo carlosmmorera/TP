@@ -1,0 +1,16 @@
+package tp.pr3.ProgramCompiler.Condition;
+
+import tp.pr3.ProgramCompiler.LexicalParser;
+import tp.pr3.ProgramCompiler.Term.Term;
+
+public class Equal extends Condition{
+	public Equal(){
+		super();
+	}
+	public Condition parseAux(Term t1, String op, Term t2,
+			LexicalParser parser){
+		//¿No habría que parsear los términos?
+		if (op.equals("==")) return Equal(t1, t2);
+		else return null;
+	}
+}

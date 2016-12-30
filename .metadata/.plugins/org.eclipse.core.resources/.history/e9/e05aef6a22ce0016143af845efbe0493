@@ -1,0 +1,17 @@
+package tp.pr3.ProgramCompiler.Instruction;
+
+import tp.pr3.ProgramCompiler.ParsedProgram;
+import tp.pr3.ProgramCompiler.Condition.Condition;
+
+public class IfThen implements Instruction{
+	Condition condition;
+	ParsedProgram ifThenBody;
+	
+	final int NUMCOMPONENTES = 4;
+	
+	public IfThen(){ }
+	public IfThen(Condition cnd, ParsedProgram iBody){
+		this.condition = cnd;
+		this.ifThenBody = iBody;
+	}
+}

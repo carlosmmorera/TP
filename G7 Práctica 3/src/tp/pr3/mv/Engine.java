@@ -108,7 +108,8 @@ public class Engine {
 		}
 	}
 	public boolean cargarInstrProg(String s){
-		return this.sProgram.cargarInst(s);
+		this.sProgram.cargarInst(s);
+		return true;
 	}
 	private void lexicalAnalysis() throws LexicalAnalysisException {
 		
