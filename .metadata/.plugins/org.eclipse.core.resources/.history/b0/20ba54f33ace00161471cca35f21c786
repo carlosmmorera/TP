@@ -102,10 +102,9 @@ public class Engine {
 		try {
 		this.lexicalAnalysis();
 		this.generateByteCode();
-		return true;
 		}
-		catch (Exception e){
-			return false;
+		catch{
+			
 		}
 	}
 	public boolean cargarInstrProg(String s){

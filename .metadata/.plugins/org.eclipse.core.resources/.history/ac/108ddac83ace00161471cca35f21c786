@@ -5,9 +5,10 @@ import tp.pr3.mv.Engine;
 
 public class Compile implements Command{
 	@Override
-	public boolean execute(Engine engine) {
+	public boolean execute(Engine engine)
+			throws LexicalAnalysisException, ArrayException {
 		try{
-			return this.ejec(engine);
+			return engine.compile();
 		}
 		catch (Exception e){
 			return false;
@@ -24,9 +25,5 @@ public class Compile implements Command{
 	}
 	public String toString(){
 		return "COMPILE";
-	}
-	private boolean ejec(Engine engine)
-			throws LexicalAnalysisException, ArrayException{
-		return engine.compile();
 	}
 }

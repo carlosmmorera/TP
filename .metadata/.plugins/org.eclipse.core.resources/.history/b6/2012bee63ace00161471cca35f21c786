@@ -10,7 +10,7 @@ public class Compile implements Command{
 			return this.ejec(engine);
 		}
 		catch (Exception e){
-			return false;
+			
 		}
 	}
 	public Command parse(String[] s){
