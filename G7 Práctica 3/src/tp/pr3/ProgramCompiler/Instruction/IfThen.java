@@ -1,6 +1,6 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
-import tp.pr3.Exception.LexicalAnalysisException;
+import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.ParsedProgram;
 import tp.pr3.ProgramCompiler.Condition.Condition;
@@ -42,5 +42,14 @@ public class IfThen implements Instruction{
 			}
 		}
 	}
-	public void compile(Compiler compiler) throws ArrayException{...}
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+		try{
+			this.condition.compile(compiler);
+			compiler.compile(this.ifThenBody);
+			this.condition.setJump(compiler.getProgramCounter());
+		}
+		catch (ArrayException e){
+			
+		}
+	}
 }

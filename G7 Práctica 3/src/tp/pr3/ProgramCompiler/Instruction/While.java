@@ -1,10 +1,9 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
-import tp.pr3.Exception.LexicalAnalysisException;
-import tp.pr3.ProgramCompiler.LexicalParser;
-import tp.pr3.ProgramCompiler.ParsedProgram;
-import tp.pr3.ProgramCompiler.Condition.Condition;
-import tp.pr3.ProgramCompiler.Condition.ConditionParser;
+import tp.pr3.ByteCode.GoTo;
+import tp.pr3.Exception.*;
+import tp.pr3.ProgramCompiler.*;
+import tp.pr3.ProgramCompiler.Condition.*;
 
 public class While implements Instruction{
 	Condition condition;
@@ -42,5 +41,16 @@ public class While implements Instruction{
 			}
 		}
 	}
-	public void compile(Compiler compiler) throws ArrayException{...}
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+		try{
+			int pc1 = compiler.getProgramCounter();
+			this.condition.compile(compiler);
+			compiler.compile(this.whileBody);
+			this.condition.setJump(compiler.getProgramCounter());
+			compiler.addByteCode(new GoTo(pc1));
+		}
+		catch (ArrayException e){
+			
+		}
+	}
 }

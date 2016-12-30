@@ -1,7 +1,6 @@
 package tp.pr3.ProgramCompiler.Condition;
 
-import tp.pr3.ByteCode.ConditionalJumps.IfLe;
-import tp.pr3.Exception.ArrayException;
+import tp.pr3.ByteCode.ConditionalJumps.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.*;
 
@@ -17,12 +16,7 @@ public class Less extends Condition{
 		if (op.equals("<")) return new Less(t1, t2);
 		else return null;
 	}
-	public void compileAux(tp.pr3.ProgramCompiler.Compiler compiler)throws ArrayException{
-		try{
-			compiler.addByteCode(new IfLe());
-		}
-		catch (ArrayException e){
-			
-		}
+	public ConditionalJumps compileAux(){
+		return new IfLe();
 	}
 }

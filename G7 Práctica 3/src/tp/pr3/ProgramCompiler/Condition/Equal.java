@@ -1,7 +1,6 @@
 package tp.pr3.ProgramCompiler.Condition;
 
-import tp.pr3.ByteCode.ConditionalJumps.IfEq;
-import tp.pr3.Exception.ArrayException;
+import tp.pr3.ByteCode.ConditionalJumps.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.Term;
 
@@ -17,12 +16,7 @@ public class Equal extends Condition{
 		if (op.equals("==")) return new Equal(t1, t2);
 		else return null;
 	}
-	public void compileAux(tp.pr3.ProgramCompiler.Compiler compiler)throws ArrayException{
-		try{
-			compiler.addByteCode(new IfEq());
-		}
-		catch (ArrayException e){
-			
-		}
+	public ConditionalJumps compileAux(){
+		return new IfEq();
 	}
 }

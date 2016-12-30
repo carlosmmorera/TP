@@ -48,6 +48,9 @@ public abstract class ConditionalJumps implements ByteCode{
 		if (s.length == 2)return parseCondJump(s);
 		else return null;
 	}
+	public void setPos(int n){
+		this.pos = n;
+	}
 	abstract public ByteCode parseCondJump(String[] s);
 	abstract public boolean ejec(CPU cpu, int op1, int op2);
 }

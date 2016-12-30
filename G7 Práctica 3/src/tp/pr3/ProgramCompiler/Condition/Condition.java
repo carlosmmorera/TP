@@ -8,7 +8,7 @@ import tp.pr3.ProgramCompiler.Term.*;
 public abstract class Condition {
 	private Term t1;
 	private Term t2;
-	private ConditionalJumps condition; //para la compilación
+	private ConditionalJumps condition;
 	
 	final int TAM_MAX_CONDITION = 2;
 	
@@ -37,12 +37,15 @@ public abstract class Condition {
 		try{
 			compiler.addByteCode(this.t1.compile(compiler));
 			compiler.addByteCode(this.t2.compile(compiler));
-			compileAux(compiler);
+			this.condition = compileAux();
+			compiler.addByteCode(this.condition);
 		}
 		catch(ArrayException e){
 			
 		}
 	}
-	abstract public void compileAux(tp.pr3.ProgramCompiler.Compiler compiler) throws 
-		ArrayException;
+	public void setJump(int n){
+		this.condition.setPos(n);
+	}
+	abstract public ConditionalJumps compileAux();
 }

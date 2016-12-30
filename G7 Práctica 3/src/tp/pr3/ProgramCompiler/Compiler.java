@@ -24,7 +24,7 @@ public class Compiler {
 		}
 	}
 	public void addByteCode(ByteCode b) throws ArrayException {
-		
+		this.bytecode.pushbc(b);
 	}
 	public int getIndex(String varName) {
 		int i = 0;
@@ -34,6 +34,13 @@ public class Compiler {
 			if (this.varTable[i].equals(varName)) encontrado = true;
 			else ++i;
 		}
+		if (!encontrado){
+			this.varTable[this.numVars] = varName;
+			++this.numVars;
+		}
 		return i;
+	}
+	public int getProgramCounter(){
+		return this.bytecode.getTam();
 	}
 }
