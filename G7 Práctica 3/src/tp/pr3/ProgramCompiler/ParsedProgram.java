@@ -30,4 +30,11 @@ public class ParsedProgram {
 		this.pProgram = newsProgram;
 		this.tam = newtam;
 	}
+	public int getNumeroInstrucciones() {
+		return this.numInstruc;
+	}
+	public Instruction getInstructionAt(int n) {
+		if (n >= 0 && n < this.numInstruc) return this.pProgram[n];
+		else return null;
+	}
 }

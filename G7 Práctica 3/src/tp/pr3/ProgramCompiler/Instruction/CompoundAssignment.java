@@ -1,8 +1,10 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
+import tp.pr3.ByteCode.*;
+import tp.pr3.ByteCode.Arithmetics.*;
+import tp.pr3.Exception.ArrayException;
 import tp.pr3.ProgramCompiler.LexicalParser;
-import tp.pr3.ProgramCompiler.Term.Term;
-import tp.pr3.ProgramCompiler.Term.TermParser;
+import tp.pr3.ProgramCompiler.Term.*;
 
 public class CompoundAssignment implements Instruction{
 	private String var_name;
@@ -42,5 +44,24 @@ public class CompoundAssignment implements Instruction{
 		if (op.length() != 1) return false;
 		else return (op.equals("+") || op.equals("-") || op.equals("*")
 				|| op.equals("/"));
+	}
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+		try{
+			compiler.addByteCode(this.term1.compile(compiler));
+			compiler.addByteCode(this.term2.compile(compiler));
+			compiler.addByteCode(this.generateBCArithmeticOper());
+			ByteCode bc = new Store(compiler.getIndex(this.var_name));
+			compiler.addByteCode(bc);
+		}
+		catch (ArrayException e){
+			
+		}
+	}
+	private ByteCode generateBCArithmeticOper(){
+		if (this.operator.equals("+")) return new Add();
+		else if (this.operator.equals("-")) return new Sub();
+		else if (this.operator.equals("*")) return new Mul();
+		else if (this.operator.equals("/")) return new Div();
+		else return null;
 	}
 }

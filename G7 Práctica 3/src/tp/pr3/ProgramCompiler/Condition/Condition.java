@@ -33,6 +33,16 @@ public abstract class Condition {
 	}
 	abstract public Condition parseAux(Term t1, String op, Term t2,
 			LexicalParser parser);
-	abstract public void compile(Compiler compiler) throws ArrayException;
-	//Otros métodos abstractos
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+		try{
+			compiler.addByteCode(this.t1.compile(compiler));
+			compiler.addByteCode(this.t2.compile(compiler));
+			compileAux(compiler);
+		}
+		catch(ArrayException e){
+			
+		}
+	}
+	abstract public void compileAux(tp.pr3.ProgramCompiler.Compiler compiler) throws 
+		ArrayException;
 }

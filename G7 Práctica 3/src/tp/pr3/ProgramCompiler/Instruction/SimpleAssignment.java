@@ -1,5 +1,7 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
+import tp.pr3.ByteCode.*;
+import tp.pr3.Exception.ArrayException;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.*;
 
@@ -28,6 +30,16 @@ public class SimpleAssignment implements Instruction{
 					return new SimpleAssignment(words[0], term);
 				}
 			}
+		}
+	}
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+		try{
+			compiler.addByteCode(this.rhs.compile(compiler));
+			ByteCode bc = new Store(compiler.getIndex(this.var_name));
+			compiler.addByteCode(bc);
+		}
+		catch (ArrayException e){
+			System.out.println(e + "Error de compilación");
 		}
 	}
 }

@@ -5,5 +5,5 @@ import tp.pr3.ProgramCompiler.LexicalParser;
 
 public interface Instruction {
 	Instruction lexParse(String[] words, LexicalParser lexParser);
-	void compile(Compiler compiler) throws ArrayException;
+	void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException;
 }

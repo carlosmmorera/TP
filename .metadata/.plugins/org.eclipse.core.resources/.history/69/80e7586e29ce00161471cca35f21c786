@@ -1,0 +1,38 @@
+//CORREGIR TODAS LAS EXCEPCIONES DE ESTA CLASE
+package tp.pr3.ProgramCompiler;
+
+import tp.pr3.ByteCode.*;
+import tp.pr3.Exception.*;
+
+public class Compiler {
+	private ByteCodeProgram bytecode;
+	private String[] varTable;
+	private int numVars;
+	
+	public void compile(ParsedProgram pProgram) throws ArrayException {
+		int i = 0;
+		try {
+			while (i < pProgram.getNumeroInstrucciones()){
+				Instruction inst = pProgram.getInstruction(i);
+				instr.compile(this);
+				++i;
+			}
+		}
+		catch (ArrayException e){
+			
+		}
+	}
+	public void addByteCode(ByteCode b) throws … {
+		
+	}
+	public int getIndex(String varName) {
+		int i = 0;
+		boolean encontrado = false;
+		
+		while (i < this.numVars && !encontrado){
+			if (this.varTable[i].equals(varName)) encontrado = true;
+			else ++i;
+		}
+		return i;
+	}
+}

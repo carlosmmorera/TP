@@ -21,7 +21,7 @@ public class Variable implements Term {
 		}
 	}	
 	@Override
-	public ByteCode compile(Compiler compiler){
+	public ByteCode compile(tp.pr3.ProgramCompiler.Compiler compiler){
 		return new Load(compiler.getIndex(this.varName));
 	}
 	public String toString(){
