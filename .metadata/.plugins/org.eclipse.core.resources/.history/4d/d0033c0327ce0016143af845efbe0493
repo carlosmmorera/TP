@@ -16,13 +16,9 @@ public class Compiler {
 				++i;
 			}
 		}
-		catch (...){
-			
+		catch ...
 		}
-	}
-	public void addByteCode(ByteCode b) throws … {
-		
-	}
+	public void addByteCode(ByteCode b) throws … {...}
 	public int getIndex(String varName) {
 		int i = 0;
 		boolean encontrado = false;

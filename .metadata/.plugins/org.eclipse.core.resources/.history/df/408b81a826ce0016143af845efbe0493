@@ -16,19 +16,15 @@ public class Compiler {
 				++i;
 			}
 		}
-		catch (...){
-			
+		catch ...
 		}
-	}
-	public void addByteCode(ByteCode b) throws … {
-		
-	}
+	public void addByteCode(ByteCode b) throws … {...}
 	public int getIndex(String varName) {
 		int i = 0;
 		boolean encontrado = false;
 		
 		while (i < this.numVars && !encontrado){
-			if (this.varTable[i].equals(varName)) encontrado = true;
+			if (this.varTable[i] == varName) encontrado = true;
 			else ++i;
 		}
 		return i;

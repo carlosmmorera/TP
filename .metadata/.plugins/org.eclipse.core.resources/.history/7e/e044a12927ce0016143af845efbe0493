@@ -1,6 +1,6 @@
 package tp.pr3.ProgramCompiler.Term;
 
-import tp.pr3.ByteCode.*;
+import tp.pr3.ByteCode.Load;
 
 public class Variable implements Term {
 	private String varName;

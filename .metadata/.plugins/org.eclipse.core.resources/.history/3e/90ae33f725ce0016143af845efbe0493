@@ -1,7 +1,5 @@
 package tp.pr3.ProgramCompiler.Term;
 
-import tp.pr3.ByteCode.*;
-
 public class Variable implements Term {
 	private String varName;
 	
@@ -22,7 +20,7 @@ public class Variable implements Term {
 	}	
 	@Override
 	public ByteCode compile(Compiler compiler){
-		return new Load(compiler.getIndex(this.varName));
+			
 	}
 	public String toString(){
 		return this.varName;

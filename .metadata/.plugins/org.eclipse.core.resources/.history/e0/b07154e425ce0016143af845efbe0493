@@ -14,23 +14,10 @@ public class Compiler {
 				Instruction inst = pProgram.getInstruction(i);
 				instr.compile(this);
 				++i;
-			}
 		}
-		catch (...){
-			
 		}
-	}
-	public void addByteCode(ByteCode b) throws … {
-		
-	}
-	public int getIndex(String varName) {
-		int i = 0;
-		boolean encontrado = false;
-		
-		while (i < this.numVars && !encontrado){
-			if (this.varTable[i].equals(varName)) encontrado = true;
-			else ++i;
+		catch ...
 		}
-		return i;
-	}
+	public void addByteCode(ByteCode b) throws … {...}
+	public int getIndex(String varName) {...}
 }
