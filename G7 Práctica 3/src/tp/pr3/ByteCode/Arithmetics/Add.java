@@ -17,8 +17,8 @@ public class Add extends Arithmetics{
 	 * @param op2 operando 2
 	 * @return booleano dependiendo de si la operación se realizó con éxito o no
 	 */
-	public boolean ejec(CPU cpu, int op1, int op2){
-		return cpu.push(op2 + op1);
+	public void ejec(CPU cpu, int op1, int op2){
+		cpu.push(op2 + op1);
 	}
 	/**
 	 * Método que parsea el operador aritmético Add

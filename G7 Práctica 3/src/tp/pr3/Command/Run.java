@@ -1,5 +1,6 @@
 package tp.pr3.Command;
 
+import tp.pr3.Exception.ArrayException;
 import tp.pr3.mv.Engine;
 /**
  * Clase que gestiona el comando Run
@@ -11,11 +12,10 @@ public class Run implements Command {
 	/**
 	 * Método que ejecuta el comando Run
 	 * @param engine: @see {@link Engine}
-	 * @return boolean dependiendo de si la ejecución del comando tuvo
-	 * éxito o no @see {@link Engine#run()}
+	 * @throws ArrayException 
 	  */
-	public boolean execute(Engine engine){
-		return engine.run();
+	public void execute(Engine engine) throws ArrayException{
+		engine.run();
 	}
 	/**
 	 * Método que parsea el comando introducido por el usuario

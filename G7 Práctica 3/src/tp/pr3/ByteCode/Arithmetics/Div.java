@@ -17,9 +17,8 @@ public class Div extends Arithmetics{
 	 * @param op2 operando 2
 	 * @return booleano dependiendo de si la operación se realizó con éxito o no
 	 */
-	public boolean ejec(CPU cpu, int op1, int op2){
-		if (op2 != 0 ) return cpu.push(op1 / op2);
-		else return false;
+	public void ejec(CPU cpu, int op1, int op2){
+		if (op2 != 0 ) cpu.push(op1 / op2);
 	}
 	/**
 	 * Método que parsea el operador aritmético Mul

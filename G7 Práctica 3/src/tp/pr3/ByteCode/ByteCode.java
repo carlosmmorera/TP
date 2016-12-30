@@ -8,10 +8,10 @@ import tp.pr3.CPU.CPU;
  * y ConditionalJumps
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  *
  */
 public interface ByteCode {
-	public boolean execute(CPU cpu);
+	public void execute(CPU cpu);
 	public ByteCode parse(String[] s);
 }

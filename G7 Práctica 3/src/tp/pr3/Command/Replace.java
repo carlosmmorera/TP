@@ -1,5 +1,6 @@
 package tp.pr3.Command;
 
+import tp.pr3.Exception.*;
 import tp.pr3.mv.Engine;
 /**
  * Clase que gestiona el comando Replace
@@ -22,8 +23,8 @@ public class Replace implements Command {
 	 * @return boolean dependiendo de si la ejecución del comando tuvo
 	 * éxito o no @see {@link Engine#replace(int)}
 	  */
-	public boolean execute(Engine engine){
-		return engine.replace(this.pos);
+	public void execute(Engine engine)throws BadFormatByteCode, ArrayException{
+		engine.replace(this.pos);
 	}
 	/**
 	 * Método que parsea el comando introducido por el usuario

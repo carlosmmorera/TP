@@ -26,12 +26,11 @@ public class IfLe extends ConditionalJumps{
 	 * @param op2 segundo operando a comparar
 	 * @return booleano dependiendo de si se ejecuta el ByteCode con éxito
 	 */
-	public boolean ejec(CPU cpu, int op1, int op2){
+	public void ejec(CPU cpu, int op1, int op2){
 		if (op1 < op2){
 			cpu.aumentarCont();
-			return true;
 		}
-		else return cpu.goTo(this.pos);
+		else cpu.goTo(this.pos);
 	}
 	/**
 	 * Método que parsea el salto condicional IfLe

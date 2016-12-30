@@ -1,5 +1,7 @@
 package tp.pr3.Command;
 
+import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.BadFormatByteCode;
 import tp.pr3.mv.Engine;
 /**
  * Clase abstracta que gestiona los comandos de la que heredan AddByteCommand,
@@ -10,7 +12,7 @@ import tp.pr3.mv.Engine;
  *
  */
 public interface Command {
-	public boolean execute(Engine engine);
+	public void execute(Engine engine) throws BadFormatByteCode, ArrayException;
 	public Command parse(String[] s);
 	public String textHelp();
 }

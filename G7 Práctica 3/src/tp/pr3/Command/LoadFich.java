@@ -15,17 +15,15 @@ public class LoadFich implements Command{
 	public LoadFich(String s){
 		this.nombre = s;
 	}
-	public boolean execute(Engine engine){
+	public void execute(Engine engine){
 		try {
-			return this.ejec(engine);
+			this.ejec(engine);
 		} 
 		catch (FileNotFoundException e){
 			System.out.println("Archivo no encontrado");
-			return false;
 		}
 		catch (IOException e){
 			System.out.println("Error en la lectura del archivo");
-			return false;
 		}
 	}
 	public Command parse(String[] s){

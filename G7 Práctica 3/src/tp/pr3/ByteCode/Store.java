@@ -24,12 +24,9 @@ public class Store implements ByteCode{
 	 * @return booleano dependiendo de si se pudo realizar la operación 
 	 * con éxito o no
 	 */
-	public boolean execute(CPU cpu){
-		if (cpu.store(this.n)){
-			cpu.aumentarCont();
-			return true;
-		}
-		else return false;
+	public void execute(CPU cpu){
+		cpu.store(this.n);
+		cpu.aumentarCont();
 	}
 	/**
 	 * Método que parsea la instruccion Store

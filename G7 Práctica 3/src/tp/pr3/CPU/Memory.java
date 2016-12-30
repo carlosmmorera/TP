@@ -45,7 +45,7 @@ public class Memory {
  	 * @param value valor que hay que escribir en la memoria
  	 * @return booleano dependiendo de si la ejecución ha sido correcta
  	 */
-	public boolean write(int pos, int value){
+	public void write(int pos, int value){
 		//compruebo que la posición sea correcta
 		if (pos >= 0){
 		//Redimensiono el vector para que exista la posición pedida
@@ -55,9 +55,7 @@ public class Memory {
 					
 			//Añado la posición del elemento recién guardado al vector posiciones
 			this.insertarpos(pos);
-			return true;
 		}
-		else return false;
 	}
 	/**
 	 * Método que lee de memoria

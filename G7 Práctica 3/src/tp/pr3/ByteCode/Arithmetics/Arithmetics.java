@@ -19,16 +19,12 @@ public abstract class Arithmetics implements ByteCode{
 	 * @param cpu elemento de la clase @see {@link tp.pr2.CPU}
 	 * @return booleano dependiendo de si la operación se ha llevado con éxito o no
 	 */
-	public boolean execute(CPU cpu){
+	public void execute(CPU cpu){
 		if (cpu.haynelempila(NUMOPERANDOS)){
 			int op2 = cpu.pilapop();
-			if (this.ejec(cpu, cpu.pilapop(), op2)){
-				cpu.aumentarCont();
-				return true;
-			}
-			else return false;
+			this.ejec(cpu, cpu.pilapop(), op2);
+			cpu.aumentarCont();
 		}
-		else return false;
 	}
 	/**
 	 * Método que parsea la instrucción aritmética
@@ -40,6 +36,6 @@ public abstract class Arithmetics implements ByteCode{
 		if (s.length == 1)return parseArith(s);
 		else return null;
 	}
-	abstract public boolean ejec(CPU cpu, int op1, int op2);
+	abstract public void ejec(CPU cpu, int op1, int op2);
 	abstract public ByteCode parseArith(String[] s);
 }

@@ -15,8 +15,8 @@ public class Halt implements ByteCode{
 	 * @return boolean dependiendo de si la ejecución del comando tuvo
 	 * éxito o no @see {@link CPU#halt()}
 	 */
-	public boolean execute(CPU cpu){
-		return cpu.halt();
+	public void execute(CPU cpu){
+		cpu.halt();
 	}
 	/**
 	 * Método que parsea la instrucción Halt 

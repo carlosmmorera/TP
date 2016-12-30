@@ -21,15 +21,10 @@ public class Load implements ByteCode{
 	/**
 	 * Método que ejecuta el ByteCode Load
 	 * @param cpu: @see {@link tp.pr2.CPU.CPU}
-	 * @return un booleano que devuelve cierto si se pudo realizar la operación 
-	 * con éxito y falso si no es así
 	 */
-	public boolean execute(CPU cpu){
-		if (cpu.load(this.n)){
-			cpu.aumentarCont();
-			return true;
-		}
-		else return false;
+	public void execute(CPU cpu){
+		cpu.load(this.n);
+		cpu.aumentarCont();
 	}
 	/**
 	 * Método que parsea la instruccion Load

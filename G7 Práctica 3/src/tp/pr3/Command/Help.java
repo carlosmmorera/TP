@@ -13,9 +13,8 @@ public class Help implements Command {
 	 * @param engine: @see {@link Engine}
 	 * @return boolean dependiendo de si la ejecución del comando tuvo éxito
 	 */
-	public boolean execute(Engine engine){
+	public void execute(Engine engine){
 		CommandParser.showHelp();
-		return true;
 	}
 	/**
 	 * Método que parsea el comando introducido por el usuario

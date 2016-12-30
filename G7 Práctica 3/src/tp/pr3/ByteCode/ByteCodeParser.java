@@ -2,11 +2,12 @@ package tp.pr3.ByteCode;
 
 import tp.pr3.ByteCode.Arithmetics.*;
 import tp.pr3.ByteCode.ConditionalJumps.*;
+import tp.pr3.Exception.BadFormatByteCode;
 /**
  * Clase que gestiona el parseo del ByteCode que se ha introducido 
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  *
  */
 public class ByteCodeParser {
@@ -27,12 +28,13 @@ public class ByteCodeParser {
 	 * Método que se encarga del parseo del ByteCode escrito por el usuario
 	 * @param line un string que representa el ByteCode introducido
 	 * @return el ByteCode introducido con su tipo adecuado
+	 * @throws BadFormatByteCode
 	 */
-	public static ByteCode parse(String line){
+	public static ByteCode parse(String line) throws BadFormatByteCode{
 		//Divido el string en un string por cada paralabra separada de un espacio
 		String[] subcadenas = line.split(" ");
 		
-		if (subcadenas.length > BC_LONG_MAX) return null;
+		if (subcadenas.length > BC_LONG_MAX) throw new BadFormatByteCode();
 		else{
 			ByteCode bc = null;
 			int i = 0;
@@ -43,7 +45,9 @@ public class ByteCodeParser {
 				if (bc != null) encontrado = true;
 				++i;
 			}
+			if (!encontrado) throw new BadFormatByteCode();
 			return bc;
+			
 		}
 	}
 }

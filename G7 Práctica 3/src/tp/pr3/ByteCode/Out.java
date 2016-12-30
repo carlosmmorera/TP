@@ -14,12 +14,9 @@ public class Out implements ByteCode{
 	 * @return booleano dependiendo de si se pudo realizar la operación 
 	 * con éxito o no
 	 */
-	public boolean execute(CPU cpu){
-		if (cpu.out()){
-			cpu.aumentarCont();
-			return true;
-		}
-		else return false;
+	public void execute(CPU cpu){
+		cpu.out();
+		cpu.aumentarCont();
 	}
 	/**
 	 * Método que parsea la instrucción Out

@@ -14,8 +14,8 @@ public class Quit implements Command {
 	 * @return boolean dependiendo de si la ejecución del comando tuvo
 	 * éxito o no @see {@link Engine#quit()}
 	  */
-	public boolean execute(Engine engine){
-		return engine.quit();
+	public void execute(Engine engine){
+		engine.quit();
 	}
 	/**
 	 * Método que parsea el comando introducido por el usuario

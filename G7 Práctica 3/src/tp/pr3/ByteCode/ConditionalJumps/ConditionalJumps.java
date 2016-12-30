@@ -31,12 +31,11 @@ public abstract class ConditionalJumps implements ByteCode{
 	 * @param cpu elemento de la clase @see {@link tp.pr2.CPU}
 	 * @return booleano dependiendo de si la operación ha sido realizada con éxito
 	 */
-	public boolean execute(CPU cpu){
+	public void execute(CPU cpu){
 		if (cpu.haynelempila(NUMOPERANDOS)){
 			int op2 = cpu.pilapop();
-			return this.ejec(cpu, cpu.pilapop(), op2);
+			this.ejec(cpu, cpu.pilapop(), op2);
 		}
-		else return false;
 	}
 	/**
 	 * Método que parsea la instruccion de salto condicional
@@ -52,5 +51,5 @@ public abstract class ConditionalJumps implements ByteCode{
 		this.pos = n;
 	}
 	abstract public ByteCode parseCondJump(String[] s);
-	abstract public boolean ejec(CPU cpu, int op1, int op2);
+	abstract public void ejec(CPU cpu, int op1, int op2);
 }

@@ -26,18 +26,14 @@ public class OperandStack {
 	/**
 	 * Método que introduce un operando en la pila
 	 * @param op operando a introducir
-	 * @return un booleano dependiendo de si se ejecutó la instrucción con éxito
 	 */
-	public boolean push(int op){
+	public void push(int op){
 		if (!this.pilallena()){
 			//lo introduce en la cima
 			this.stack[this.numoperand] = op;
 			//Aumenta el número de operandos
 			++this.numoperand;
-			
-			return true;
 		}
-		else return false;
 	}
 	/**
 	 * Método que comprueba si la pila está vacía

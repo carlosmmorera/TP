@@ -1,5 +1,7 @@
 package tp.pr3.Exception;
 
 public class LexicalAnalysisException extends Exception{
-
+	public LexicalAnalysisException(){
+		super("Error léxico en el programa fuentes");
+	}
 }

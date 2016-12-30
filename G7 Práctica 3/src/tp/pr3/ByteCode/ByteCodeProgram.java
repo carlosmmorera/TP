@@ -2,11 +2,13 @@ package tp.pr3.ByteCode;
 
 import java.util.Scanner;
 
+import tp.pr3.Exception.*;
+
 /**
  * Clase que gestiona el programa de bytecodes introducido
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  *
  */
 public class ByteCodeProgram {
@@ -43,45 +45,29 @@ public class ByteCodeProgram {
 	/**
 	 * Método que inserta una nueva instrucción en el programa
 	 * @param bc instrucción a insertar
-	 * @return un booleano dependiendo de si el parseo de la
-	 * instrucción fue correcto y de si caben más elementos en
-	 * el array del programa
+	 * @throws ArrayException
 	 */
-	public boolean pushbc(ByteCode bc){
-		if (bc != null && this.newinst < TAM_MAX){
-			this.program[this.newinst] = bc;
-			++this.newinst;
-			return true;
-		}
-		else return false;
+	public void pushbc(ByteCode bc)throws ArrayException{
+		if (this.newinst == TAM_MAX) throw new ArrayException();
+		
+		this.program[this.newinst] = bc;
+		++this.newinst;
 	}
-	/**
-	 * Método que resetea, poniendo el número de elementos del vector a 0
-	 */
-	public void reset(){ this.newinst = 0; }
 	/**
 	 * Método que reemplaza la instrucción n-ésima del programa por otra dada
 	 * @param n el número de la instrucción que hay que cambiar
-	 * @return un booleano dependiendo si el bytecode es correcto o no y de
-	 * si existe la instrucción n-ésima en el programa
+	 * @throws BadFormatByteCode, ArrayException
 	 */
-	public boolean replace(int n){
-		if (n >= 0 && n < this.newinst){
-			System.out.print("Nueva instruccion: ");
-			
-			//Pido la nueva instrucción
-			Scanner entrada = new Scanner(System.in);
-			String strbc = entrada.nextLine();
-			
-			ByteCode bc = ByteCodeParser.parse(strbc);
-			
-			if (bc != null){
-				this.program[n] = bc;
-				return true;
-			}
-			else return false;
-		}
-		else return false;
+	public void replace(int n) throws BadFormatByteCode, ArrayException{
+		AccesoPosicionInexistente(n);
+		
+		System.out.print("Nueva instruccion: ");
+		
+		//Pido la nueva instrucción
+		Scanner entrada = new Scanner(System.in);
+		String strbc = entrada.nextLine();
+		
+		this.program[n] = ByteCodeParser.parse(strbc);
 	}
 	/**
 	 * Método que devuelve el tamaño del programa
@@ -97,12 +83,13 @@ public class ByteCodeProgram {
 	 * @return el ByteCode correspondiente ubicado en la posición 
 	 * n-ésima en caso de que ésta 
 	 * sea menor que @see {@link ByteCodeProgram#newinst}
+	 * 
+	 * @throws ArrayException
 	 */
-	public ByteCode getBcAtn(int n){
-		if (n >= 0 && n < this.newinst){
-			return this.program[n];
-		}
-		else return null;
+	public ByteCode getBcAtn(int n) throws ArrayException{
+		AccesoPosicionInexistente(n);
+		
+		return this.program[n];
 	}
 	/**
 	 * Método que comprueba si hay que cerrar el programa por haber llegado
@@ -114,5 +101,13 @@ public class ByteCodeProgram {
 	 */
 	public boolean cerrarPrograma(int programCounter){
 		return programCounter == this.newinst;
+	}
+	/**
+	 * Método que comprueba si se quiere acceder a una posición inexistente del programa
+	 * @param pos: posición a la que se quiere acceder
+	 * @throws ArrayException
+	 */
+	private void AccesoPosicionInexistente(int pos) throws ArrayException{
+		if (pos < 0 || pos >= this.newinst) throw new ArrayException();
 	}
 }

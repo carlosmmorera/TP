@@ -25,8 +25,8 @@ public class GoTo implements ByteCode{
 	 * @return un booleano que devuelve cierto o false en función 
 	 * de @see {@link CPU#goTo(int)}
 	 */
-	public boolean execute(CPU cpu){
-		return cpu.goTo(this.n);
+	public void execute(CPU cpu){
+		cpu.goTo(this.n);
 	}
 	/**
 	 * Método que parsea la instrucción GoTo
