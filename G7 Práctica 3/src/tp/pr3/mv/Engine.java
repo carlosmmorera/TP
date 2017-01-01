@@ -48,20 +48,21 @@ public class Engine {
 				//Se parsea
 				com = CommandParser.parse(line);
 				
-				//Si no ha habido un error escribiendo el comando se ejecuta
-				if (com != null){
-					System.out.println("Comienza la ejecucion de " + com.toString()
-							+ '\n');
-					com.execute(this);
-				}
-				//Muestro mensaje de error si hubo un error en la escritura
-				else System.out.println("Error: Comando incorrecto");
+				System.out.println("Comienza la ejecucion de " + com.toString()
+						+ '\n');
+				com.execute(this);
 			}
 			catch (BadFormatByteCode e){
 				System.out.println(e);
 			}
 			catch (ArrayException e){
-				System.out.println(e + "del programa"); //Si solo es para replace
+				System.out.println(e);
+			}
+			catch (BadFormatCommand e){
+				System.out.println(e);
+			}
+			catch(LexicalAnalysisException e){
+				System.out.println(e);
 			}
 			finally{
 				//Si el programa tiene instrucciones añadidas se muestra al usuario
@@ -80,7 +81,7 @@ public class Engine {
 	 * Método que implementa el comando RUN
 	 * @return un booleano dependiendo de si la ejecución del comando fue correcta
 	 */
-	public void run() throws ArrayException{
+	public void run(){
 		try{
 			//Inicializo una CPU
 			CPU cpu = new CPU(this.bytecodeProgram);
@@ -90,6 +91,15 @@ public class Engine {
 			System.out.println(cpu.toString());
 		}
 		catch (ArrayException e){
+			System.out.println(e);
+		}
+		catch(DivisionByZero e){
+			System.out.println(e);
+		}
+		catch(StackException e){
+			System.out.println(e);
+		}
+		catch(StackTooSmall e){
 			System.out.println(e);
 		}
 	}
@@ -104,13 +114,8 @@ public class Engine {
 	}
 	
 	public void compile() throws LexicalAnalysisException, ArrayException {
-		try {
 		this.lexicalAnalysis();
 		this.generateByteCode();
-		}
-		catch (Exception e){
-			
-		}
 	}
 	public boolean cargarInstrProg(String s){
 		this.sProgram.cargarInst(s);

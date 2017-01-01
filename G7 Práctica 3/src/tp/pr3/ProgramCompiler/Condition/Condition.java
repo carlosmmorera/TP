@@ -33,7 +33,7 @@ public abstract class Condition {
 	}
 	abstract public Condition parseAux(Term t1, String op, Term t2,
 			LexicalParser parser);
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler){
 		try{
 			compiler.addByteCode(this.t1.compile(compiler));
 			compiler.addByteCode(this.t2.compile(compiler));

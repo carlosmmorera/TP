@@ -1,0 +1,54 @@
+package tp.pr3.ByteCode;
+
+import tp.pr3.CPU.CPU;
+import tp.pr3.Exception.ArrayException;
+/**
+ * Clase que gestiona el ByteCode Store.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
+public class Store implements ByteCode{
+	private int n;
+	/**
+	 * Constructores de la clase.
+	 */
+	public Store(){
+		this.n = 0;
+	}
+	public Store(int a){
+		this.n = a;
+	}
+	/**
+	 * Método que ejecuta el ByteCode Store.
+	 * @param cpu: @see {@link tp.pr2.CPU.CPU}.
+	 */
+	public void execute(CPU cpu)throws ArrayException{
+		cpu.store(this.n);
+		cpu.aumentarCont();
+	}
+	/**
+	 * Método que parsea la instruccion Store.
+	 * @param s recibe la cadena de caracteres que representa el ByteCode introducido.
+	 * @return ByteCode dependiendo si la cadena introducida por el
+	 * usuario se corresponde con Push o no.
+	 */
+	public ByteCode parse(String[] s){
+		try{
+			if (s.length == 2 && s[0].equalsIgnoreCase("STORE"))
+				return new Store(Integer.parseInt(s[1]));
+			else return null;
+		}
+		catch(NumberFormatException e){
+			System.out.println("Error al introducir el ByteCode STORE");
+			System.out.println("A 'STORE' debe precederle un caracter numérico");
+			return null;
+		}
+	}
+	/**
+	 * @return String con el nombre del ByteCode.
+	 */
+	public String toString(){
+		return "STORE " + this.n;
+	}
+}

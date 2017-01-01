@@ -2,10 +2,15 @@ package tp.pr3.ProgramCompiler.Instruction;
 
 import tp.pr3.ByteCode.*;
 import tp.pr3.ByteCode.Arithmetics.*;
-import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.*;
-
+/**
+ * Clase que gestiona la instrucción CompoundAssignment.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
 public class CompoundAssignment implements Instruction{
 	private String var_name;
 	private String operator;
@@ -13,7 +18,9 @@ public class CompoundAssignment implements Instruction{
 	private Term term2;
 	
 	final int NUMCOMPONENTES = 5;
-	
+	/**
+	 * Constructores de la clase.
+	 */
 	public CompoundAssignment(){
 		this.var_name = "";
 		this.operator = "";
@@ -24,6 +31,12 @@ public class CompoundAssignment implements Instruction{
 		this.term1 = t1;
 		this.term2 = t2;
 	}
+	/**
+	 * Método que parsea la instrucción.
+	 * @param words: instrucción introducida en el programa.
+	 * @param lexparser encargada del análisis léxico.
+	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
+	 */
 	public Instruction lexParse(String[] words, LexicalParser lexparser){
 		if (words.length != NUMCOMPONENTES || words[1].length() != 1) return null;
 		else {
@@ -32,11 +45,9 @@ public class CompoundAssignment implements Instruction{
 				Term t1 = TermParser.parse(words[2]);
 				Term t2 = TermParser.parse(words[4]);
 				
-				if (t1 == null || t2 == null) return null;
-				else{
-					lexparser.increaseProgramCounter();
-					return new CompoundAssignment(words[0], words[3], t1, t2);
-				}
+				if (t1==nul)
+				lexparser.increaseProgramCounter();
+				return new CompoundAssignment(words[0], words[3], t1, t2);
 			}
 		}
 	}

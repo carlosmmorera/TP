@@ -1,27 +1,25 @@
 package tp.pr3.Command;
 
-import tp.pr3.Exception.ArrayException;
 import tp.pr3.mv.Engine;
 /**
- * Clase que gestiona el comando Run
+ * Clase que gestiona el comando Run.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  */
 public class Run implements Command {
 	/**
-	 * Método que ejecuta el comando Run
-	 * @param engine: @see {@link Engine}
-	 * @throws ArrayException 
+	 * Método que ejecuta el comando Run.
+	 * @param engine: @see {@link Engine}.
 	  */
-	public void execute(Engine engine) throws ArrayException{
+	public void execute(Engine engine){
 		engine.run();
 	}
 	/**
-	 * Método que parsea el comando introducido por el usuario
-	 * @param s cadena de caracteres introducida por el usuario
+	 * Método que parsea el comando introducido por el usuario.
+	 * @param s cadena de caracteres introducida por el usuario.
 	 * @return ByteCode dependiendo de si la cadena introducida por el
-	 * usuario se corresponde con Run o no
+	 * usuario se corresponde con Run o no.
 	 */
 	public Command parse(String[] s){
 		if (s.length == 1 && s[0].equalsIgnoreCase("RUN"))
@@ -29,14 +27,14 @@ public class Run implements Command {
 		else return null;
 	}
 	/**
-	 * Método que devuele un string con información sobre el comando RUN
+	 * Método que devuele un string con información sobre el comando RUN.
 	 */
 	public String textHelp(){
 		return " RUN: Ejecuta el programa " +
 				System.getProperty("line.separator");
 	}
 	/**
-	 * Método que devuelve un string con el nombre del comando
+	 * Método que devuelve un string con el nombre del comando.
 	 */
 	public String toString(){
 		return "RUN";

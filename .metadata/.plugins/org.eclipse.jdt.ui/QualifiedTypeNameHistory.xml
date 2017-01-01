@@ -20,7 +20,6 @@
 <fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.LexicalParser"/>
 <fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.Term.TermParser"/>
 <fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.Condition.ConditionParser"/>
-<fullyQualifiedTypeName name="tp.pr3.Exception.LexicalAnalysisException"/>
 <fullyQualifiedTypeName name="tp.pr3.ProgramCompiler.Instruction.ParserInstruction"/>
 <fullyQualifiedTypeName name="tp.pr3.ByteCode.ByteCodeProgram"/>
 <fullyQualifiedTypeName name="tp.pr3.ByteCode.Load"/>
@@ -31,5 +30,10 @@
 <fullyQualifiedTypeName name="tp.pr3.ByteCode.ByteCode"/>
 <fullyQualifiedTypeName name="tp.pr3.ByteCode.GoTo"/>
 <fullyQualifiedTypeName name="tp.pr3.Exception.BadFormatByteCode"/>
+<fullyQualifiedTypeName name="tp.pr3.Exception.DivisionByZero"/>
+<fullyQualifiedTypeName name="tp.pr3.Exception.BadFormatCommand"/>
 <fullyQualifiedTypeName name="tp.pr3.Exception.ArrayException"/>
+<fullyQualifiedTypeName name="tp.pr3.Exception.StackException"/>
+<fullyQualifiedTypeName name="tp.pr3.Exception.StackTooSmall"/>
+<fullyQualifiedTypeName name="tp.pr3.Exception.LexicalAnalysisException"/>
 </qualifiedTypeNameHistroy>

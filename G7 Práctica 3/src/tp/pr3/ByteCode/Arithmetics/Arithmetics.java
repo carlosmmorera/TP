@@ -2,40 +2,39 @@ package tp.pr3.ByteCode.Arithmetics;
 
 import tp.pr3.ByteCode.ByteCode;
 import tp.pr3.CPU.CPU;
+import tp.pr3.Exception.*;
 /**
- * Clase abstracta que gestiona los ByteCode aritméticos
+ * Clase abstracta que gestiona los ByteCode aritméticos.
  * 
- * De ella heredan: Add, Div, Mul y Sub
+ * De ella heredan: Add, Div, Mul y Sub.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  *
  */
 public abstract class Arithmetics implements ByteCode{
-	final static int NUMOPERANDOS = 2;
 	
 	/**
-	 * Método que ejecuta la operación aritmética deseada si es posible 
-	 * @param cpu elemento de la clase @see {@link tp.pr2.CPU}
-	 * @return booleano dependiendo de si la operación se ha llevado con éxito o no
+	 * Método que ejecuta la operación aritmética deseada si es posible.
+	 * @param cpu elemento de la clase @see {@link tp.pr2.CPU}.
+	 * @throws DivisionByZero: producido al intentar dividir por cero.
 	 */
-	public void execute(CPU cpu){
-		if (cpu.haynelempila(NUMOPERANDOS)){
-			int op2 = cpu.pilapop();
-			this.ejec(cpu, cpu.pilapop(), op2);
-			cpu.aumentarCont();
-		}
+	public void execute(CPU cpu)throws DivisionByZero, StackTooSmall, StackException{
+		int op2 = cpu.pilapop();
+		this.ejec(cpu, cpu.pilapop(), op2);
+		cpu.aumentarCont();
 	}
 	/**
-	 * Método que parsea la instrucción aritmética
-	 * @param s recibe la cadena de caracteres que representa el ByteCode introducido
+	 * Método que parsea la instrucción aritmética.
+	 * @param s cadena de caracteres que representa el ByteCode introducido.
 	 * @return ByteCode dependiendo si la cadena introducida por el
-	 * usuario se corresponde con algún operador aritmético o no
+	 * usuario se corresponde con algún operador aritmético o no.
 	 */
 	public ByteCode parse(String[] s){
 		if (s.length == 1)return parseArith(s);
 		else return null;
 	}
-	abstract public void ejec(CPU cpu, int op1, int op2);
+	abstract public void ejec(CPU cpu, int op1, int op2) 
+			throws DivisionByZero, StackException;
 	abstract public ByteCode parseArith(String[] s);
 }

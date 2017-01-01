@@ -1,9 +1,20 @@
 package tp.pr3.ProgramCompiler.Term;
 
+/**
+ * Clase que se encarga del parseo de términos.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
 public class TermParser {
 	private final static Term[] terms = {
 		new Variable(), new Number(),
 	};
+	/**
+	 * Método que parsea el término dado.
+	 * @param s: término dado por el usuario.
+	 * @return Term
+	 */
 	public static Term parse(String s){
 		Term t =  null;
 		int i = 0;

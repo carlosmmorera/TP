@@ -1,22 +1,22 @@
 package tp.pr3.CPU;
 
 import tp.pr3.ByteCode.*;
-import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.*;
 
 /**
- * Clase que gestiona la ejecución de las instrucciones bytecode
+ * Clase que gestiona la ejecución de las instrucciones bytecode.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  */
 public class CPU {
 	/**
-	 * Memoria es un objeto de la clase @see TP.PR1.MV.Memory
-	 * pila es un objeto de la clase @see TP.PR1.MV.OperandStack
-	 * end es un booleano que indica cuando acaba la ejecución 
-	 * de las intrucciones bytecode
-	 * programCounter es un entero que representa al contador de programa
-	 * bcProgram es un objeto de la clase @see tp.pr2.ByteCode.ByteCodeProgram
+	 * Memoria es un objeto de la clase @see TP.PR1.MV.Memory.
+	 * pila es un objeto de la clase @see TP.PR1.MV.OperandStack.
+	 * end es un booleano que indica cuando acaba la ejecución
+	 * de las intrucciones bytecode.
+	 * programCounter es un entero que representa al contador de programa.
+	 * bcProgram es un objeto de la clase @see tp.pr2.ByteCode.ByteCodeProgram.
 	 */
 	private Memory memoria;
 	private OperandStack pila;
@@ -25,8 +25,8 @@ public class CPU {
 	private ByteCodeProgram bcProgram;
 	
 	/**
-	 * Constructor de la clase
-	 * @param prog es el programa con el que se inicializa la CPU
+	 * Constructor de la clase.
+	 * @param prog es el programa con el que se inicializa la CPU.
 	 */
 	public CPU(ByteCodeProgram prog){
 		this.memoria = new Memory();
@@ -36,10 +36,11 @@ public class CPU {
 		this.bcProgram = prog;
 	}
 	/**
-	 * Método que ejecuta el programa dado
-	 * @return un booleano dependiendo de si la ejecución fue correcta 
+	 * Método que ejecuta el programa dado. 
 	 */
-	public void run() throws ArrayException{
+	public void run() throws ArrayException, DivisionByZero, 
+		StackException, StackTooSmall{
+		
 		ByteCode bc = null;
 		
 		while (!acabar()){
@@ -48,25 +49,16 @@ public class CPU {
 		}
 	}
 	/**
-	 * Método que comprueba el número de elementos que hay en pila
-	 * @param n: número de elementos que queremos comprobar
-	 * @return boolean dependiendo de si hay n elementos en la pila
+	 * Método que implementa la instrucción LOAD.
+	 * @param pos posición de memoria.
 	 */
-	public boolean haynelempila(int n){
-		return n <= this.pila.getNumOperand();
-	}
-	/**
-	 * Método que implementa la instrucción LOAD
-	 * @param pos posición de memoria
-	 * @return booleano dependiendo de si la carga fue correcta
-	 */
-	public void load(int pos){
+	public void load(int pos) throws ArrayException, StackException{
 		//Leo el elemento de memoria
 		int elem = this.memoria.read(pos);
 		this.pila.push(elem);
 	}
 	/**
-	 * Método que muestra el estado de la CPU, mostrando el de la pila y memoria
+	 * Método que muestra el estado de la CPU, mostrando el de la pila y memoria.
 	 */
 	public String toString(){
 		String cadena = "Estado de la CPU:\n";
@@ -75,68 +67,63 @@ public class CPU {
 		return cadena;
 	}
 	/**
-	 * Método que devuelve el BC que se debe ejecutar
+	 * Método que devuelve el BC que se debe ejecutar.
 	 * @return ByteCode de la instrucción que se va
-	 * ejecutar @see {@link ByteCodeProgram#getBcAtn(int)}
+	 * ejecutar @see {@link ByteCodeProgram#getBcAtn(int)}.
 	 */
 	public ByteCode getInstr() throws ArrayException{
 		return this.bcProgram.getBcAtn(this.programCounter);
 	}
 	/**
-	 * Método que extrae un elemento de la cima de la pila
+	 * Método que extrae un elemento de la cima de la pila.
 	 * @return int que será el elemento en la cima de la
-	 * pila @see {@link OperandStack#pop()}
+	 * pila @see {@link OperandStack#pop()}.
 	 */
-	public int pilapop(){
+	public int pilapop()throws StackTooSmall{
 		return pila.pop();
 	}
 	/**
-	 * Método que introduce un elemento en la pila
-	 * @param n elemento a introducir
+	 * Método que introduce un elemento en la pila.
+	 * @param n elemento a introducir.
 	 */
-	public void push(int n){
+	public void push(int n)throws StackException{
 		pila.push(n);
 	}
 	/**
-	 * Método que salta a la n-ésima instrucción del programa
-	 * @param n número de instrucción a la que se desea saltar
+	 * Método que salta a la n-ésima instrucción del programa.
+	 * @param n número de instrucción a la que se desea saltar.
 	 */
 	public void goTo(int n){
-		if (n >= 0 && n < this.bcProgram.getTam()){
-			this.programCounter = n;
-		}
+		this.programCounter = n;
 	}
 	/**
-	 * Método que ejecuta el ByteCode store
-	 * @param n posición de memoria
+	 * Método que ejecuta el ByteCode store.
+	 * @param n posición de memoria.
 	 */
-	public void store(int n){
-		if (!pila.vacia()) 
-			this.memoria.write(n, pila.pop());
+	public void store(int n)throws ArrayException, StackTooSmall{
+		this.memoria.write(n, pila.pop());
 	}
 	/**
-	 * Método que ejecuta el ByteCode Halt
+	 * Método que ejecuta el ByteCode Halt.
 	 */
 	public void halt(){
 		this.end = true;
 	}
 	/**
-	 * Método que ejecuta el ByteCode Out
+	 * Método que ejecuta el ByteCode Out.
 	 */
-	public void out(){
-		if (!pila.vacia()) {
-			System.out.println(Integer.toString(pila.pop()));
-		}
+	public void out() throws StackTooSmall{
+		System.out.println(Integer.toString(pila.pop()));
 	}
 	/**
-	 * Método que comprueba si el programa debe acabar o no
-	 * @return booleano dependiendo de si el programa debe acabar
+	 * Método que comprueba si el programa debe acabar o no.
+	 * @return booleano dependiendo de si el programa debe acabar.
 	 */
 	public boolean acabar(){
 		return (this.end || this.bcProgram.cerrarPrograma(this.programCounter));
 	}
 	/**
-	 * Método que aumenta en uno el valor del contador de programa
+	 * Método que aumenta en uno el valor del contador de programa.
 	 */
 	public void aumentarCont(){
 		++this.programCounter;

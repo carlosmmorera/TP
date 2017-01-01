@@ -3,15 +3,15 @@ package tp.pr3.ByteCode.ConditionalJumps;
 import tp.pr3.ByteCode.ByteCode;
 import tp.pr3.CPU.CPU;
 /**
- * Clase que gestiona el operador de salto condicional IfLeq
+ * Clase que gestiona el operador de salto condicional IfLeq.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  */
 public class IfLeq extends ConditionalJumps{
 	/**
-	 * Constructores de la clase
-	 * @param n: número de instrucción a la que se desea saltar
+	 * Constructores de la clase.
+	 * @param n: número de instrucción a la que se desea saltar.
 	 */
 	public IfLeq(int n){
 		super(n);
@@ -20,11 +20,10 @@ public class IfLeq extends ConditionalJumps{
 		super();
 	}
 	/**
-	 * Método que ejecuta el ByteCode
-	 * @param cpu: @see {@link tp.pr2.CPU}
-	 * @param op1 primer operando a comparar
-	 * @param op2 segundo operando a comparar
-	 * @return booleano dependiendo de si se ejecuta el ByteCode con éxito
+	 * Método que ejecuta el ByteCode.
+	 * @param cpu: @see {@link tp.pr2.CPU}.
+	 * @param op1 primer operando a comparar.
+	 * @param op2 segundo operando a comparar.
 	 */
 	public void ejec(CPU cpu, int op1, int op2){
 		if (op1 <= op2){
@@ -33,21 +32,28 @@ public class IfLeq extends ConditionalJumps{
 		else cpu.goTo(this.pos);
 	}
 	/**
-	 * Método que parsea el salto condicional IfLeq
-	 * @param s recibe la cadena de caracteres que representa el ByteCode introducido
+	 * Método que parsea el salto condicional IfLeq.
+	 * @param s recibe la cadena de caracteres que representa el ByteCode introducido.
 	 * @return ByCode dependiendo de si la cadena introducida por el
-	 * usuario se corresponde con IfLeq o no
+	 * usuario se corresponde con IfLeq o no.
 	 */
 	public ByteCode parseCondJump(String[] s){
-		if(s[0].equalsIgnoreCase("IFLEQ")){
-			int numinstr = Integer.parseInt(s[1]);
-			return new IfLeq(numinstr);
+		try{
+			if(s[0].equalsIgnoreCase("IFLEQ")){
+				int numinstr = Integer.parseInt(s[1]);
+				return new IfLeq(numinstr);
+			}
+			else return null;
 		}
-		else return null;
+		catch(NumberFormatException e){
+			System.out.println("Error al introducir el ByteCode IFLEQ");
+			System.out.println("A 'IFLEQ' debe precederle un caracter numérico");
+			return null;
+		}
 	}
 	
 	/**
-	 * @return la cadena de caracteres que corresponde al ByteCode introducida
+	 * @return la cadena de caracteres que corresponde al ByteCode introducida.
 	 */
 	public String toString(){
 		return "IFLEQ " + this.pos;

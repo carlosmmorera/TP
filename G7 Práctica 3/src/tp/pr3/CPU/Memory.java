@@ -1,26 +1,28 @@
 package tp.pr3.CPU;
 
+import tp.pr3.Exception.ArrayException;
+
 /**
- * Clase que gestiona la memoria
+ * Clase que gestiona la memoria.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  *
  */
 public class Memory {
 	final int TAM_INI = 100;
 	/**
-	 * memory array que usamos como memoria
+	 * memory array que usamos como memoria.
 	 * 
-	 * tam nos indica el tamaño de la memoria
+	 * tam nos indica el tamaño de la memoria.
 	 * 
 	 * posiciones es un array que guarda las posiciones
 	 * en que están guardados elementos de la memoria y así se evita
-	 * tener que recorrer la memoria entera cada vez que queramos mostrarla
+	 * tener que recorrer la memoria entera cada vez que queramos mostrarla.
 	 * 
-	 * tampos nos indica el tamaño de posiciones
+	 * tampos nos indica el tamaño de posiciones.
 	 * 
-	 * numelem nos indica cuántos elementos tenemos guardados en memoria
+	 * numelem nos indica cuántos elementos tenemos guardados en memoria.
 	 */
 	private Integer[] memory;
 	private int tam;
@@ -28,7 +30,7 @@ public class Memory {
 	private int tampos;
 	private int numelem;
 	/**
-	 * Constructor de la clase que inicializa la memoria a 100 por defecto
+	 * Constructor de la clase que inicializa la memoria a 100 por defecto.
 	 */
 	
  	public Memory(){
@@ -40,30 +42,29 @@ public class Memory {
 		this.numelem = 0;
 	}
  	/**
- 	 * Método que escribe en memoria
- 	 * @param pos posición de la memoria en la que hay que escribir
- 	 * @param value valor que hay que escribir en la memoria
- 	 * @return booleano dependiendo de si la ejecución ha sido correcta
+ 	 * Método que escribe en memoria.
+ 	 * @param pos posición de la memoria en la que hay que escribir.
+ 	 * @param value valor que hay que escribir en la memoria.
  	 */
-	public void write(int pos, int value){
-		//compruebo que la posición sea correcta
-		if (pos >= 0){
+	public void write(int pos, int value) throws ArrayException{
+		if (pos < 0) throw new ArrayException();
+		
 		//Redimensiono el vector para que exista la posición pedida
-			if (pos >= this.tam) this.resize(pos);
-			//Escribo el elemento en su posición
-			this.memory[pos] = value;
-					
-			//Añado la posición del elemento recién guardado al vector posiciones
-			this.insertarpos(pos);
-		}
+		if (pos >= this.tam) this.resize(pos);
+		//Escribo el elemento en su posición
+		this.memory[pos] = value;
+				
+		//Añado la posición del elemento recién guardado al vector posiciones
+		this.insertarpos(pos);
 	}
 	/**
-	 * Método que lee de memoria
-	 * @param pos posición de la memoria que tenemos que leer
+	 * Método que lee de memoria.
+	 * @param pos posición de la memoria que tenemos que leer.
 	 * @return un entero que se corresponde con el numero 
-	 * que hay en esa posición de la memoria
+	 * que hay en esa posición de la memoria.
 	 */
-	public int read(int pos){
+	public int read(int pos) throws ArrayException{
+		if (pos < 0) throw new ArrayException();
 		//Redimensiono la memoria tanto como haga falta
 		if (pos >= this.tam) this.resize(pos);
 		
@@ -72,9 +73,9 @@ public class Memory {
 		return this.memory[pos];
 	}
 	/**
-	 * Método que redimensiona la memoria
+	 * Método que redimensiona la memoria.
 	 * @param pos es la posición a la que queremos acceder y por la que
-	 * necesitamos acceder a la memori
+	 * necesitamos acceder a la memoria.
 	 */
 	public void resize(int pos){
 		Integer newmemory[] = new Integer[2*pos];
@@ -90,7 +91,7 @@ public class Memory {
 		this.memory = newmemory;
 	}
 	/**
-	 * Método que redimensiona el vector de posiciones
+	 * Método que redimensiona el vector de posiciones.
 	 */
 	public void resizepos(){
 		//Creo un vector del doble de su tamaño actual
@@ -103,8 +104,8 @@ public class Memory {
 		this.posiciones = newposiciones;
 	}
 	/**
-	 * Método que muestra el estado de la memoria
-	 * @return string que muestra el estado de la memoria
+	 * Método que muestra el estado de la memoria.
+	 * @return string que muestra el estado de la memoria.
 	 */
 	public String toString(){
 		String cadena = "Memoria: ";
@@ -128,8 +129,8 @@ public class Memory {
 		return cadena;
 	}
 	/**
-	 * Método que añade la posición del elemento guardado al vector posiciones
-	 * @param pos posición que se guarda
+	 * Método que añade la posición del elemento guardado al vector posiciones.
+	 * @param pos posición que se guarda.
 	 */
 	public void insertarpos(int pos){
 		if(numelem == 0) {

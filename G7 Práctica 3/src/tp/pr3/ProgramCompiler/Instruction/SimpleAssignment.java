@@ -2,6 +2,7 @@ package tp.pr3.ProgramCompiler.Instruction;
 
 import tp.pr3.ByteCode.*;
 import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.LexicalAnalysisException;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.*;
 

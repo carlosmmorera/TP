@@ -1,16 +1,17 @@
 package tp.pr3.ByteCode;
 
 import tp.pr3.CPU.CPU;
+import tp.pr3.Exception.StackException;
 /**
- * Clase que gestiona el ByteCode Push
+ * Clase que gestiona el ByteCode Push.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  */
 public class Push implements ByteCode{
 	private int n;
 	/**
-	 * Constructores de la clase
+	 * Constructores de la clase.
 	 */
 	public Push(){
 		this.n = 0;
@@ -19,28 +20,33 @@ public class Push implements ByteCode{
 		this.n = a;
 	}
 	/**
-	 * Método que ejecuta el ByteCode Push
-	 * @param cpu: @see {@link tp.pr2.CPU.CPU}
-	 * @return booleano dependiendo de si se pudo realizar la operación 
-	 * con éxito o no
+	 * Método que ejecuta el ByteCode Push.
+	 * @param cpu: @see {@link tp.pr2.CPU.CPU}.
 	 */
-	public void execute(CPU cpu){
+	public void execute(CPU cpu)throws StackException{
 		cpu.push(this.n);
 		cpu.aumentarCont();
 	}
 	/**
-	 * Método que parsea la instruccion Push
-	 * @param s recibe la cadena de caracteres que representa el ByteCode introducido
+	 * Método que parsea la instruccion Push.
+	 * @param s recibe la cadena de caracteres que representa el ByteCode introducido.
 	 * @return ByteCode dependiendo si la cadena introducida por el
-	 * usuario se corresponde con Push o no
+	 * usuario se corresponde con Push o no.
 	 */
 	public ByteCode parse(String[] s){
-		if (s.length == 2 && s[0].equalsIgnoreCase("PUSH"))
-			return new Push(Integer.parseInt(s[1]));
-		else return null;
+		try{
+			if (s.length == 2 && s[0].equalsIgnoreCase("PUSH"))
+				return new Push(Integer.parseInt(s[1]));
+			else return null;
+		}
+		catch(NumberFormatException e){
+			System.out.println("Error al introducir el ByteCode PUSH");
+			System.out.println("A 'PUSH' debe precederle un caracter numérico");
+			return null;
+		}
 	}
 	/**
-	 * @return String con el nombre del ByteCode
+	 * @return String con el nombre del ByteCode.
 	 */
 	public String toString(){
 		return "PUSH " + this.n;

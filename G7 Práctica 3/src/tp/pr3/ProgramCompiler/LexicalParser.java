@@ -1,6 +1,5 @@
 package tp.pr3.ProgramCompiler;
 
-import tp.pr3.Exception.LexicalAnalysisException;
 import tp.pr3.ProgramCompiler.Instruction.*;
 
 public class LexicalParser {
@@ -21,8 +20,7 @@ public class LexicalParser {
 //	}
 	
 	//TIENE QUE INCREMENTAR EL CONTADOR
-	public void lexicalParser(ParsedProgram pProgram, String stopKey)
-			throws LexicalAnalysisException{
+	public void lexicalParser(ParsedProgram pProgram, String stopKey){
 		String instr = "";
 		boolean stop = false;
 		Instruction instruction = null;

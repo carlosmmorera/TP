@@ -17,7 +17,7 @@ public class IfThen implements Instruction{
 		this.condition = cnd;
 		this.ifThenBody = iBody;
 	}
-	public Instruction lexParse(String[] words, LexicalParser lexParser) {
+	public Instruction lexParse(String[] words, LexicalParser lexParser){
 		if (words.length != NUMCOMPONENTES || 
 				!words[0].equalsIgnoreCase("IF")) return null;
 		else {

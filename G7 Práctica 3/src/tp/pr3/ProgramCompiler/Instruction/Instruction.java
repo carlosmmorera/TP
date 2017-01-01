@@ -1,6 +1,6 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
-import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 
 public interface Instruction {

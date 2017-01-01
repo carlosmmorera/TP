@@ -16,7 +16,7 @@ public class While implements Instruction{
 		this.condition = cnd;
 		this.whileBody = wBody;
 	}
-	public Instruction lexParse(String[] words, LexicalParser lexParser) {
+	public Instruction lexParse(String[] words, LexicalParser lexParser){
 		if (words.length != NUMCOMPONENTES || 
 				!words[0].equalsIgnoreCase("WHILE")) return null;
 		else {
