@@ -1,31 +1,22 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
-import tp.pr3.Exception.LexicalAnalysisException;
 import tp.pr3.ProgramCompiler.LexicalParser;
 /**
- * Clase que se encarga del parseo de las instrucciones del código.
+ * Clase que se encarga del parseo de las instrucciones del código
  * @author Carlos Moreno Morera
  * @author Manuel Suárez
  * @version 30/12/2016
  */
 public class ParserInstruction {
 	final static int LONG_MAX_INSTRUCTION = 5;
-	
 	private final static Instruction[] instructions = {
 		new SimpleAssignment(), new CompoundAssignment(), new IfThen(),
 		new While(), new Return(), new Write(),
 	};
-	/**
-	 * Método encargado del parseo de las instrucciones.
-	 * @param line: línea de código introducida.
-	 * @param parser
-	 * @return Instruction dependiendo de la instrucción de la que se trate.
-	 * @throws LexicalAnalysisException si no coincide con ninguna instrucción conocida.
-	 */
-	public static Instruction parse(String line, LexicalParser parser)
-				throws LexicalAnalysisException{
+	
+	public static Instruction parse(String line, LexicalParser parser){
 		String[] s = line.split(" ");
-		if (s.length > LONG_MAX_INSTRUCTION) throw new LexicalAnalysisException();
+		if (s.length > LONG_MAX_INSTRUCTION) return null;
 		else{
 			Instruction instr = null;
 			int i = 0;
@@ -36,7 +27,6 @@ public class ParserInstruction {
 				if (instr != null) encontrado = true;
 				++i;
 			}
-			if (!encontrado) throw new LexicalAnalysisException();
 			return instr;
 		}
 	}

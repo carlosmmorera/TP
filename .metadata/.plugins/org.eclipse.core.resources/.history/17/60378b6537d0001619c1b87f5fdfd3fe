@@ -20,12 +20,11 @@ public class ParserInstruction {
 	 * @param line: línea de código introducida.
 	 * @param parser
 	 * @return Instruction dependiendo de la instrucción de la que se trate.
-	 * @throws LexicalAnalysisException si no coincide con ninguna instrucción conocida.
 	 */
 	public static Instruction parse(String line, LexicalParser parser)
 				throws LexicalAnalysisException{
 		String[] s = line.split(" ");
-		if (s.length > LONG_MAX_INSTRUCTION) throw new LexicalAnalysisException();
+		if (s.length > LONG_MAX_INSTRUCTION) return null;
 		else{
 			Instruction instr = null;
 			int i = 0;
@@ -36,7 +35,6 @@ public class ParserInstruction {
 				if (instr != null) encontrado = true;
 				++i;
 			}
-			if (!encontrado) throw new LexicalAnalysisException();
 			return instr;
 		}
 	}

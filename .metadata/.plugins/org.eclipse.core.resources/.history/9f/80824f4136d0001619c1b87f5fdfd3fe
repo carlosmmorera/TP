@@ -1,6 +1,5 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
-import tp.pr3.Exception.ArrayException;
 import tp.pr3.ProgramCompiler.*;
 import tp.pr3.ProgramCompiler.Condition.*;
 /**
@@ -14,20 +13,12 @@ public class IfThen implements Instruction{
 	ParsedProgram ifThenBody;
 	
 	final int NUMCOMPONENTES = 4;
-	/**
-	 * Constructores de la clase.
-	 */
+	
 	public IfThen(){ }
 	public IfThen(Condition cnd, ParsedProgram iBody){
 		this.condition = cnd;
 		this.ifThenBody = iBody;
 	}
-	/**
-	 * Método que parsea la instrucción.
-	 * @param words: instrucción introducida en el programa.
-	 * @param lexparser encargada del análisis léxico.
-	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
-	 */
 	public Instruction lexParse(String[] words, LexicalParser lexParser){
 		if (words.length != NUMCOMPONENTES || 
 				!words[0].equalsIgnoreCase("IF")) return null;
@@ -44,11 +35,6 @@ public class IfThen implements Instruction{
 			}
 		}
 	}
-	/**
-	 * Método que compila la instrucción.
-	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
-	 * @throws ArrayException
-	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler){
 		this.condition.compile(compiler);
 		compiler.compile(this.ifThenBody);

@@ -20,7 +20,6 @@ public class ParserInstruction {
 	 * @param line: línea de código introducida.
 	 * @param parser
 	 * @return Instruction dependiendo de la instrucción de la que se trate.
-	 * @throws LexicalAnalysisException si no coincide con ninguna instrucción conocida.
 	 */
 	public static Instruction parse(String line, LexicalParser parser)
 				throws LexicalAnalysisException{
