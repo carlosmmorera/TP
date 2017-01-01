@@ -1,14 +1,11 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
-import tp.pr3.ProgramCompiler.*;
-import tp.pr3.ProgramCompiler.Condition.*;
-/**
- * Clase que implementa la instrucción IfThen.
- * @author Carlos Moreno
- * @author Manuel Suárez
- * @version 30/12/2016
- *
- */
+import tp.pr3.Exception.*;
+import tp.pr3.ProgramCompiler.LexicalParser;
+import tp.pr3.ProgramCompiler.ParsedProgram;
+import tp.pr3.ProgramCompiler.Condition.Condition;
+import tp.pr3.ProgramCompiler.Condition.ConditionParser;
+
 public class IfThen implements Instruction{
 	Condition condition;
 	ParsedProgram ifThenBody;
@@ -36,7 +33,7 @@ public class IfThen implements Instruction{
 			}
 		}
 	}
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler){
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
 		this.condition.compile(compiler);
 		compiler.compile(this.ifThenBody);
 		this.condition.setJump(compiler.getProgramCounter());

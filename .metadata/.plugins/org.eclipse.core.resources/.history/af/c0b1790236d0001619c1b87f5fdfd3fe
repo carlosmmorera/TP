@@ -6,7 +6,6 @@ import tp.pr3.ProgramCompiler.Condition.*;
  * Clase que implementa la instrucción IfThen.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
  *
  */
 public class IfThen implements Instruction{

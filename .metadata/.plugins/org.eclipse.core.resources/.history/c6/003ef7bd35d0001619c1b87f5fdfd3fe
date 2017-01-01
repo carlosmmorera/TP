@@ -1,14 +1,9 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
 import tp.pr3.ProgramCompiler.*;
-import tp.pr3.ProgramCompiler.Condition.*;
-/**
- * Clase que implementa la instrucción IfThen.
- * @author Carlos Moreno
- * @author Manuel Suárez
- * @version 30/12/2016
- *
- */
+import tp.pr3.ProgramCompiler.Condition.Condition;
+import tp.pr3.ProgramCompiler.Condition.ConditionParser;
+
 public class IfThen implements Instruction{
 	Condition condition;
 	ParsedProgram ifThenBody;

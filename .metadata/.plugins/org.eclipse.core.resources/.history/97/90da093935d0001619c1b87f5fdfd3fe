@@ -65,9 +65,8 @@ public class CompoundAssignment implements Instruction{
 				|| op.equals("/"));
 	}
 	/**
-	 * Método que compila la instrucción.
+	 * Método que compila la instrucción
 	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
-	 * @throws ArrayException
 	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)throws ArrayException {
 		compiler.addByteCode(this.term1.compile(compiler));
@@ -76,10 +75,6 @@ public class CompoundAssignment implements Instruction{
 		ByteCode bc = new Store(compiler.getIndex(this.var_name));
 		compiler.addByteCode(bc);
 	}
-	/**
-	 * Método que genera el ByteCode correspondiente al operador de la Instrucción.
-	 * @return ByteCode que se corresponde con el operador aritmético
-	 */
 	private ByteCode generateBCArithmeticOper(){
 		if (this.operator.equals("+")) return new Add();
 		else if (this.operator.equals("-")) return new Sub();

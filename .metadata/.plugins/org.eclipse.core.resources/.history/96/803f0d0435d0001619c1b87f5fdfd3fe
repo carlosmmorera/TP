@@ -10,7 +10,7 @@ public class Compiler {
 	private String[] varTable;
 	private int numVars;
 	
-	public void compile(ParsedProgram pProgram){
+	public void compile(ParsedProgram pProgram) throws ArrayException {
 		int i = 0;
 		try {
 			while (i < pProgram.getNumeroInstrucciones()){
