@@ -47,7 +47,8 @@ public class Memory {
  	 * @param value valor que hay que escribir en la memoria.
  	 */
 	public void write(int pos, int value) throws ArrayException{
-		if (pos < 0) throw new ArrayException();
+		if (pos < 0) throw new ArrayException("Acceso a posición de "
+				+ "memoria inexistente.");
 		
 		//Redimensiono el vector para que exista la posición pedida
 		if (pos >= this.tam) this.resize(pos);
@@ -64,7 +65,7 @@ public class Memory {
 	 * que hay en esa posición de la memoria.
 	 */
 	public int read(int pos) throws ArrayException{
-		if (pos < 0) throw new ArrayException();
+		if (pos < 0) throw new ArrayException("Posición de memoria inexistente.");
 		//Redimensiono la memoria tanto como haga falta
 		if (pos >= this.tam) this.resize(pos);
 		
@@ -108,7 +109,7 @@ public class Memory {
 	 * @return string que muestra el estado de la memoria.
 	 */
 	public String toString(){
-		String cadena = "Memoria: ";
+		String cadena = "\tMemoria: ";
 		
 		//Si la memoria no está vacía debo mostrar sus elementos
 		if (this.numelem > 0){

@@ -37,15 +37,21 @@ public class CPU {
 	}
 	/**
 	 * Método que ejecuta el programa dado. 
+	 * @throws ExecutionError 
 	 */
-	public void run() throws ArrayException, DivisionByZero, 
-		StackException, StackTooSmall{
-		
+	public void run() throws ExecutionError{
 		ByteCode bc = null;
-		
-		while (!acabar()){
-			bc = getInstr();
-			bc.execute(this);
+		try{
+			while (!acabar()){
+				bc = getInstr();
+				bc.execute(this);
+			}
+		}
+		catch(Exception e){
+			String ExceptionMessage = "Excepción en la ejecución del bytecode ";
+			ExceptionMessage += this.programCounter + ".\nExcepción-bytecode ";
+			ExceptionMessage += bc.toString() + ": " + e.getMessage();
+			throw new ExecutionError(ExceptionMessage);
 		}
 	}
 	/**
@@ -61,7 +67,7 @@ public class CPU {
 	 * Método que muestra el estado de la CPU, mostrando el de la pila y memoria.
 	 */
 	public String toString(){
-		String cadena = "Estado de la CPU:\n";
+		String cadena = "\nEstado de la CPU:\n";
 		cadena += this.memoria.toString();
 		cadena += this.pila.toString();
 		return cadena;
@@ -113,7 +119,7 @@ public class CPU {
 	 * Método que ejecuta el ByteCode Out.
 	 */
 	public void out() throws StackTooSmall{
-		System.out.println(Integer.toString(pila.pop()));
+		System.out.println("consola: " + Integer.toString(pila.pop()));
 	}
 	/**
 	 * Método que comprueba si el programa debe acabar o no.

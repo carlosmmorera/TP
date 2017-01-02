@@ -30,7 +30,8 @@ public class OperandStack {
 	 * @param op operando a introducir.
 	 */
 	public void push(int op)throws StackException{
-		if (this.pilallena())throw new StackException();
+		if (this.pilallena())throw new StackException("Superado el tamaño máximo"
+				+ "permitido de la pila.");
 		
 		//lo introduce en la cima
 		this.stack[this.numoperand] = op;
@@ -43,7 +44,7 @@ public class OperandStack {
 	 * @throws StackTooSmall cuando no hay elementos que extraer de la pila
 	 */
 	public int pop()throws StackTooSmall{
-		if (this.numoperand == 0) throw new StackTooSmall();
+		if (this.numoperand == 0) throw new StackTooSmall("Tamaño de pila insuficiente.");
 		
 		int valor = this.stack[numoperand - 1];
 		--numoperand;
@@ -53,7 +54,7 @@ public class OperandStack {
 	 * Método que muestra el estado de la pila.
 	 */
 	public String toString(){
-		String cadena = "Pila: ";
+		String cadena = "\tPila: ";
 		if (this.numoperand > 0){
 			for (int i = 0; i < numoperand - 1; ++i){
 				cadena += Integer.toString(this.stack[i]) + " ";

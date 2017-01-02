@@ -32,7 +32,7 @@ public class ByteCodeProgram {
 	 * las instrucciones almacenadas en el programa.
 	 */
 	public String toString(){
-		String cadena = "\nPrograma bytecode almacenado:\n";
+		String cadena = "Programa bytecode almacenado:\n";
 		
 		//Recorre todo el array
 		for (int i = 0; i < this.newinst; ++i){
@@ -47,7 +47,8 @@ public class ByteCodeProgram {
 	 * @throws ArrayException.
 	 */
 	public void pushbc(ByteCode bc)throws ArrayException{
-		if (this.newinst == TAM_MAX) throw new ArrayException();
+		if (this.newinst == TAM_MAX) throw new ArrayException("Superado el tamaño "
+				+ "máximo permitido de un programa bytecode.");
 		
 		this.program[this.newinst] = bc;
 		++this.newinst;
@@ -104,6 +105,13 @@ public class ByteCodeProgram {
 	 * @throws ArrayException.
 	 */
 	private void AccesoPosicionInexistente(int pos) throws ArrayException{
-		if (pos < 0 || pos >= this.newinst) throw new ArrayException();
+		if (pos < 0 || pos >= this.newinst) throw new ArrayException("Acceso a"
+				+ "posición del programa bytecode inexistente.");
+	}
+	/**
+	 * Método que resetea el ByteCodeProgram.
+	 */
+	public void reset(){
+		this.newinst = 0;
 	}
 }

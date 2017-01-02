@@ -1,0 +1,7 @@
+package tp.pr3.Exception;
+
+public class ExecutionError extends Exception{
+	public ExecutionError(){
+		super("Excepción en la ejecución del bytecode ");
+	}
+}

@@ -34,7 +34,7 @@ public class ByteCodeParser {
 		//Divido el string en un string por cada paralabra separada de un espacio
 		String[] subcadenas = line.split(" ");
 		
-		if (subcadenas.length > BC_LONG_MAX) throw new BadFormatByteCode();
+		if (subcadenas.length > BC_LONG_MAX)ThrowException(line);
 		
 		ByteCode bc = null;
 		int i = 0;
@@ -45,7 +45,16 @@ public class ByteCodeParser {
 			if (bc != null) encontrado = true;
 			++i;
 		}
-		if (!encontrado) throw new BadFormatByteCode();
+		if (!encontrado)ThrowException(line);
 		return bc;
+	}
+	/**
+	 * Método encargado de crear el mensaje de la excepción y lanzarla.
+	 * @param line
+	 * @throws BadFormatByteCode
+	 */
+	private static void ThrowException(String line)throws BadFormatByteCode{
+		throw new BadFormatByteCode("Error en la sintáxis del ByteCode introducido\n"
+				+ "El ByteCode '" + line + "' no existe");
 	}
 }

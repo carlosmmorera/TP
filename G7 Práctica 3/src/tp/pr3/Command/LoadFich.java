@@ -32,6 +32,7 @@ public class LoadFich implements Command{
 	 * @throws ArrayException 
 	 */
 	public void execute(Engine engine) throws ArrayException {
+		engine.resetProgram();
 		BufferedReader fIn = null;
 		try {
 			fIn = new BufferedReader(new FileReader(this.nombre));

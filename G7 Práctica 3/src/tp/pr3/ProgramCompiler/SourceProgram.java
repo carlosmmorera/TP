@@ -25,7 +25,8 @@ public class SourceProgram {
 	 * @throws ArrayException
 	 */
 	public void cargarInst(String s)throws ArrayException{
-		if (this.numInstruc == TAM_MAX) throw new ArrayException();
+		if (this.numInstruc == TAM_MAX) throw new ArrayException("Superado el tamaño "
+				+ "máximo permitido para un código fuente.");
 		
 		this.sProgram[this.numInstruc] = s;
 		++this.numInstruc;
@@ -44,7 +45,8 @@ public class SourceProgram {
 	 * @throws ArrayException
 	 */
 	public String getInstructionAt(int n)throws ArrayException{
-		if (n < 0 && n >= this.numInstruc) throw new ArrayException();
+		if (n < 0 && n >= this.numInstruc) throw new ArrayException("Acceso a posición "
+				+ "del código fuente inexistente.");
 
 		return this.sProgram[n];
 	}
@@ -57,5 +59,8 @@ public class SourceProgram {
 			strProgram += i + ": " + this.sProgram[i] + "\n";
 		}
 		return strProgram;
+	}
+	public void reset(){
+		this.numInstruc = 0;
 	}
 }

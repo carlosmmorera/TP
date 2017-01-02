@@ -1,5 +1,0 @@
-package tp.pr3.Command;
-
-public class Compile implements Command{
-
-}

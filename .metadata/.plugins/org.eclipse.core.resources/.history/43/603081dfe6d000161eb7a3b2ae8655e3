@@ -1,0 +1,54 @@
+package tp.pr3.ProgramCompiler;
+
+import tp.pr3.Exception.ArrayException;
+import tp.pr3.ProgramCompiler.Instruction.*;
+/**
+ * Clase encargada de gestionar el programa parseado.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
+public class ParsedProgram {
+	final int TAM_MAX = 100;
+	
+	private Instruction[] pProgram;
+	private int numInstruc;
+	/**
+	 * Constructor de la clase.
+	 */
+	public ParsedProgram(){
+		this.pProgram = new Instruction[TAM_MAX];
+		this.numInstruc = 0;
+	}
+	/**
+	 * Método encargado de cargar la instrucción dada.
+	 * @param instr: instrucción dada para cargar.
+	 * @throws ArrayException
+	 */
+	public void cargarInst(Instruction instr)throws ArrayException{
+		if (this.numInstruc == TAM_MAX) throw new ArrayException("Superado el tamaño "
+				+ "máximo permitido de un programa parseado.");
+		
+		this.pProgram[this.numInstruc] = instr;
+		++this.numInstruc;
+	}
+	/**
+	 * Método con el que se obtiene el número de instrucciones parseadas.
+	 * @return int número de instrucciones parseadas.
+	 */
+	public int getNumeroInstrucciones() {
+		return this.numInstruc;
+	}
+	/**
+	 * Método que devuelve la instrucción n-ésima del programa parseado.
+	 * @param n
+	 * @return Instruction.
+	 * @throws ArrayException
+	 */
+	public Instruction getInstructionAt(int n) throws ArrayException{
+		if (n < 0 && n >= this.numInstruc) throw new ArrayException();
+		
+		return this.pProgram[n];
+		
+	}
+}

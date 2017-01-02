@@ -1,5 +1,6 @@
 package tp.pr3.Command;
 
+import tp.pr3.Exception.ExecutionError;
 import tp.pr3.mv.Engine;
 /**
  * Clase que gestiona el comando Run.
@@ -11,8 +12,9 @@ public class Run implements Command {
 	/**
 	 * Método que ejecuta el comando Run.
 	 * @param engine: @see {@link Engine}.
+	 * @throws ExecutionError 
 	  */
-	public void execute(Engine engine){
+	public void execute(Engine engine) throws ExecutionError{
 		engine.run();
 	}
 	/**

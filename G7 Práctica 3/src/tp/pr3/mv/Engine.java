@@ -46,28 +46,19 @@ public class Engine {
 				//Se parsea
 				com = CommandParser.parse(line);
 				
-				System.out.println("Comienza la ejecucion de " + com.toString()
-						+ '\n');
+				System.out.println("Comienza la ejecucion de " + com.toString() + ".");
 				com.execute(this);
+				
+				if (!this.end){
+					if (this.sProgram.getNumeroInstrucciones() > 0)
+						System.out.println(this.sProgram.toString());
+					//Si el programa tiene instrucciones añadidas se muestra al usuario
+					if (this.bytecodeProgram.getTam() > 0) 
+						System.out.println(this.bytecodeProgram.toString());
+				}
 			}
-			catch (BadFormatByteCode e){
+			catch (Exception e){
 				System.out.println(e);
-			}
-			catch (ArrayException e){
-				System.out.println(e);
-			}
-			catch (BadFormatCommand e){
-				System.out.println(e);
-			}
-			catch(LexicalAnalysisException e){
-				System.out.println(e);
-			}
-			finally{
-				if (this.sProgram.getNumeroInstrucciones() > 0)
-					System.out.println(this.sProgram.toString());
-				//Si el programa tiene instrucciones añadidas se muestra al usuario
-				if (this.bytecodeProgram.getTam() > 0) 
-					System.out.println(this.bytecodeProgram.toString());
 			}
 		}
 		System.out.println("Fin de la ejecucion...");
@@ -78,34 +69,21 @@ public class Engine {
 	public void quit(){ this.end = true; }
 	/**
 	 * Método que implementa el comando RUN.
+	 * @throws ExecutionError
 	 */
-	public void run(){
-		try{
-			//Inicializo una CPU
-			CPU cpu = new CPU(this.bytecodeProgram);
-			cpu.run();
-			System.out.println("El estado de la maquina tras ejecutar "
-					+ "el programa es:");
-			System.out.println(cpu.toString());
-		}
-		catch (ArrayException e){
-			System.out.println(e);
-		}
-		catch(DivisionByZero e){
-			System.out.println(e);
-		}
-		catch(StackException e){
-			System.out.println(e);
-		}
-		catch(StackTooSmall e){
-			System.out.println(e);
-		}
+	public void run()throws ExecutionError{
+		//Inicializo una CPU
+		CPU cpu = new CPU(this.bytecodeProgram);
+		cpu.run();
+		System.out.println("El estado de la maquina tras ejecutar "
+				+ "el programa es:");
+		System.out.println(cpu.toString());
 	}
 	/**
 	 * Método que ejecuta el comando REPLACE.
 	 * @param rep instrucción a reemplazar
 	 */
-	public void replace(int rep) throws BadFormatByteCode, ArrayException{ 
+	public void replaceBC(int rep) throws BadFormatByteCode, ArrayException{ 
 		this.bytecodeProgram.replace(rep);
 	}
 	/**
@@ -114,6 +92,8 @@ public class Engine {
 	 * @throws LexicalAnalysisException 
 	 */
 	public void compile() throws LexicalAnalysisException, ArrayException {
+		this.pProgram.reset();
+		this.bytecodeProgram.reset();
 		this.lexicalAnalysis();
 		this.generateByteCode();
 	}
@@ -141,5 +121,13 @@ public class Engine {
 	private void generateByteCode() throws ArrayException{
 		Compiler compiler = new Compiler(this.bytecodeProgram);
 		compiler.compile(this.pProgram);
+	}
+	/**
+	 * Método que resetea el SourceProgram, ParsedProgram y ByteCodeProgram.
+	 */
+	public void resetProgram(){
+		this.sProgram.reset();
+		this.pProgram.reset();
+		this.bytecodeProgram.reset();
 	}
 }

@@ -19,7 +19,7 @@ public class Div extends Arithmetics{
 	 * @throws DivisionByZero al intentar dividir por 0.
 	 */
 	public void ejec(CPU cpu, int op1, int op2)throws DivisionByZero, StackException{
-		if (op2 == 0) throw new DivisionByZero();
+		if (op2 == 0) throw new DivisionByZero("Cociente nulo.");
 		cpu.push(op1 / op2);
 	}
 	/**

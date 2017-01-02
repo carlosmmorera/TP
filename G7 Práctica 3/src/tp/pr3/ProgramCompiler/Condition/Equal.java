@@ -4,7 +4,7 @@ import tp.pr3.ByteCode.ConditionalJumps.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.Term;
 /**
- * Clase que implementa la condición '=='.
+ * Clase que implementa la condición '='.
  * @author Carlos Moreno
  * @author Manuel Suárez
  * @version 30/12/2016
@@ -29,7 +29,7 @@ public class Equal extends Condition{
 	 */
 	public Condition parseAux(Term t1, String op, Term t2,
 			LexicalParser parser){
-		if (op.equals("==")) return new Equal(t1, t2);
+		if (op.equals("=")) return new Equal(t1, t2);
 		else return null;
 	}
 	/**

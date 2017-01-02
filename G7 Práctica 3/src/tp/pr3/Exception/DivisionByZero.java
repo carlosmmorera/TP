@@ -1,7 +1,7 @@
 package tp.pr3.Exception;
 
-public class DivisionByZero extends Exception{
-	public DivisionByZero(){
-		super("Error de ejecución al intentar dividir por cero");
+public class DivisionByZero extends ExecutionError{
+	public DivisionByZero(String ExceptionMessage){
+		super(ExceptionMessage);
 	}
 }

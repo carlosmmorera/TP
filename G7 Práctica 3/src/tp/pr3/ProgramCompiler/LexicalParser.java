@@ -48,4 +48,11 @@ public class LexicalParser {
 	public void increaseProgramCounter(){
 		this.programCounter++;
 	}
+	/**
+	 * Método con el que se obtiene el contador de programa.
+	 * @return int ProgramCounter
+	 */
+	public int getProgramCounter(){
+		return this.programCounter;
+	}
 }

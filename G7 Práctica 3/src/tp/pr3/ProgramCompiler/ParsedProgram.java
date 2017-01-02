@@ -26,7 +26,8 @@ public class ParsedProgram {
 	 * @throws ArrayException
 	 */
 	public void cargarInst(Instruction instr)throws ArrayException{
-		if (this.numInstruc == TAM_MAX) throw new ArrayException();
+		if (this.numInstruc == TAM_MAX) throw new ArrayException("Superado el tamaño "
+				+ "máximo permitido de un programa parseado.");
 		
 		this.pProgram[this.numInstruc] = instr;
 		++this.numInstruc;
@@ -45,9 +46,15 @@ public class ParsedProgram {
 	 * @throws ArrayException
 	 */
 	public Instruction getInstructionAt(int n) throws ArrayException{
-		if (n < 0 && n >= this.numInstruc) throw new ArrayException();
+		if (n < 0 && n >= this.numInstruc) throw new ArrayException("Acceso a posición "
+				+ "del programa parseado inexistente.");
 		
 		return this.pProgram[n];
-		
+	}
+	/**
+	 * Método utilizado para resetear el Progarma Parseado.
+	 */
+	public void reset(){
+		this.numInstruc = 0;
 	}
 }

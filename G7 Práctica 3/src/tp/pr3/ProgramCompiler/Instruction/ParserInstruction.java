@@ -27,19 +27,31 @@ public class ParserInstruction {
 	public static Instruction parse(String line, LexicalParser parser)
 				throws LexicalAnalysisException, ArrayException{
 		String[] s = line.split(" ");
-		if (s.length > LONG_MAX_INSTRUCTION) throw new LexicalAnalysisException();
-		else{
-			Instruction instr = null;
-			int i = 0;
-			boolean encontrado = false;
-			
-			while (i < instructions.length && !encontrado){
-				instr = instructions[i].lexParse(s, parser);
-				if (instr != null) encontrado = true;
-				++i;
-			}
-			if (!encontrado) throw new LexicalAnalysisException();
-			return instr;
+		if (s.length > LONG_MAX_INSTRUCTION) ThrowException(line, parser);
+		
+		Instruction instr = null;
+		int i = 0;
+		boolean encontrado = false;
+		
+		while (i < instructions.length && !encontrado){
+			instr = instructions[i].lexParse(s, parser);
+			if (instr != null) encontrado = true;
+			++i;
 		}
+		if (!encontrado) ThrowException(line, parser);
+		return instr;
+	}
+	/**
+	 * Método que se encarga de crear el mensaje de la excepción y lanzarla
+	 * @param line
+	 * @param parser
+	 * @throws LexicalAnalysisException
+	 */
+	private static void ThrowException(String line, LexicalParser parser)
+			throws LexicalAnalysisException{
+		
+		throw new LexicalAnalysisException("Error en la sintáxis del código fuente en la "
+				+ "línea " + parser.getProgramCounter() + "\nLa instrucción '" + line + 
+				"' no existe");
 	}
 }
