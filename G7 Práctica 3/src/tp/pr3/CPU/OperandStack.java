@@ -68,7 +68,7 @@ public class OperandStack {
 	 * Método que comprueba si la pila está llena.
 	 * @return booleano dependiendo de si la pila está llena.
 	 */
-	public boolean pilallena(){
+	private boolean pilallena(){
 		return this.numoperand == TAM;
 	}
 }

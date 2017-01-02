@@ -4,20 +4,36 @@ import tp.pr3.ByteCode.ConditionalJumps.ConditionalJumps;
 import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.*;
-
+/**
+ * Clase abstracta que implementa las condiciones de las instrucciones IfThen y While.
+ * 
+ * De ella heradan las clases Equal, Less, LessEq y NotEqual.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
 public abstract class Condition {
 	private Term t1;
 	private Term t2;
 	private ConditionalJumps condition;
 	
 	final int TAM_MAX_CONDITION = 2;
-	
+	/**
+	 * Constructores de la clase.
+	 */
 	public Condition(){	}
 	public Condition(Term term1, Term term2){
 		this.t1 = term1;
 		this.t2 = term2;
 	}
-	
+	/**
+	 * Método que parsea la condición.
+	 * @param t1: primer término a parsear.
+	 * @param op: operador booleano a parsear.
+	 * @param t2: segundo término a parsear.
+	 * @param parser
+	 * @return Condition en función de la condición introducida por el usuario.
+	 */
 	public Condition parse(String t1, String op, String t2,
 			LexicalParser parser){
 		if (op.length() <= TAM_MAX_CONDITION){
@@ -31,21 +47,38 @@ public abstract class Condition {
 		}
 		else return null;
 	}
+	/**
+	 * Método abstracto que parsea la condición concreta.
+	 * @param t1
+	 * @param op
+	 * @param t2
+	 * @param parser
+	 * @return Condition en función de la condición introducida por el usuario.
+	 */
 	abstract public Condition parseAux(Term t1, String op, Term t2,
 			LexicalParser parser);
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler){
-		try{
-			compiler.addByteCode(this.t1.compile(compiler));
-			compiler.addByteCode(this.t2.compile(compiler));
-			this.condition = compileAux();
-			compiler.addByteCode(this.condition);
-		}
-		catch(ArrayException e){
-			
-		}
+	/**
+	 * Método que compila la condición.
+	 * @param compiler @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @throws ArrayException
+	 */
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)throws ArrayException{
+		compiler.addByteCode(this.t1.compile(compiler));
+		compiler.addByteCode(this.t2.compile(compiler));
+		this.condition = compileAux();
+		compiler.addByteCode(this.condition);
 	}
+	/**
+	 * Método que fija la instrucción a la que se va a saltar en caso de que
+	 * no se cumpla la condición.
+	 * @param n: instrucción a saltar.
+	 */
 	public void setJump(int n){
 		this.condition.setPos(n);
 	}
+	/**
+	 * Método abstracto que compila la condición concreta.
+	 * @return ConditionalJumps en función de la condición dada.
+	 */
 	abstract public ConditionalJumps compileAux();
 }

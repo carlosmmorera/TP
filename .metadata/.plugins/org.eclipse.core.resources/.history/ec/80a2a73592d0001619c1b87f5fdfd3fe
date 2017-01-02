@@ -1,0 +1,46 @@
+package tp.pr3.ProgramCompiler.Instruction;
+
+import tp.pr3.ByteCode.*;
+import tp.pr3.Exception.ArrayException;
+import tp.pr3.ProgramCompiler.LexicalParser;
+/**
+ * Clase que implementa la instrucción Write.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
+public class Write implements Instruction{
+	private String varName;
+	
+	final int LENGTH_INSTRUCTION = 2;
+	/**
+	 * Constructores de la clase.
+	 */
+	public Write(){
+		this.varName = "";
+	}
+	public Write(String var_name){
+		this.varName = var_name;
+	}
+	/**
+	 * Método que parsea la instrucción.
+	 * @param words: instrucción introducida en el programa.
+	 * @param lexparser encargada del análisis léxico.
+	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
+	 */
+	public Instruction lexParse(String[] words, LexicalParser lexParser){
+		if (words.length != LENGTH_INSTRUCTION 
+				|| !words[0].equalsIgnoreCase("WRITE")) return null;
+		else return new Write(words[1]);
+	}
+	/**
+	 * Método que compila la instrucción.
+	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @throws ArrayException
+	 */
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+		ByteCode bc = new Load(compiler.getIndex(this.varName));
+		compiler.addByteCode(bc);
+		compiler.addByteCode(new Out());
+	}
+}

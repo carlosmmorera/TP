@@ -14,7 +14,8 @@ import tp.pr3.mv.Engine;
  *
  */
 public interface Command {
-	public void execute(Engine engine) throws BadFormatByteCode, ArrayException, LexicalAnalysisException;
+	public void execute(Engine engine) throws BadFormatByteCode, 
+		ArrayException, LexicalAnalysisException;
 	public Command parse(String[] s);
 	public String textHelp();
 }

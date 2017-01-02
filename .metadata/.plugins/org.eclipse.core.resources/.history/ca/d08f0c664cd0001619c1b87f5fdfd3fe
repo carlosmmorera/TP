@@ -1,0 +1,59 @@
+package tp.pr3.ProgramCompiler;
+
+import tp.pr3.ByteCode.*;
+import tp.pr3.Exception.*;
+import tp.pr3.ProgramCompiler.Instruction.Instruction;
+/**
+ * Clase encargada de generar el programa ByteCode.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
+public class Compiler {
+	private ByteCodeProgram bytecode;
+	private String[] varTable;
+	private int numVars;
+	
+	final int TAM_MAX = 100;
+	/**
+	 * Constructor de la clase
+	 * @param bcProgram
+	 */
+	public Compiler(ByteCodeProgram bcProgram){
+		this.bytecode = bcProgram;
+		this.varTable = new String[TAM_MAX];
+		this.numVars = 0;
+	}
+	/**
+	 * Método que compila el programa parseado
+	 * @param pProgram: programa parseado.
+	 */
+	public void compile(ParsedProgram pProgram){
+		int i = 0;
+		while (i < pProgram.getNumeroInstrucciones()){
+			Instruction inst = pProgram.getInstructionAt(i);
+			inst.compile(this);
+			++i;
+		}
+	}
+	public void addByteCode(ByteCode b) throws ArrayException {
+		this.bytecode.pushbc(b);
+	}
+	public int getIndex(String varName) {
+		int i = 0;
+		boolean encontrado = false;
+		
+		while (i < this.numVars && !encontrado){
+			if (this.varTable[i].equals(varName)) encontrado = true;
+			else ++i;
+		}
+		if (!encontrado){
+			this.varTable[this.numVars] = varName;
+			++this.numVars;
+		}
+		return i;
+	}
+	public int getProgramCounter(){
+		return this.bytecode.getTam();
+	}
+}

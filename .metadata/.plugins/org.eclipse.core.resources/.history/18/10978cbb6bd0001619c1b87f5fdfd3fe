@@ -1,0 +1,36 @@
+package tp.pr3.ProgramCompiler;
+
+import tp.pr3.Exception.ArrayException;
+/**
+ * Clase en la que se almacen el código introducido por el usuario.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
+public class SourceProgram {
+	final int TAM_MAX = 100;
+	
+	private String[] sProgram;
+	private int numInstruc;
+	/**
+	 * Constructor de la clase.	
+	 */
+	public SourceProgram(){
+		this.sProgram = new String[TAM_MAX];
+		this.numInstruc = 0;
+	}
+	public void cargarInst(String s)throws ArrayException{
+		if (this.numInstruc == TAM_MAX) throw new ArrayException();
+		
+		this.sProgram[this.numInstruc] = s;
+		++this.numInstruc;
+	}
+	public int getNumeroInstrucciones(){
+		return this.numInstruc;
+	}
+	public String getInstructionAt(int n)throws ArrayException{
+		if (n < 0 && n >= this.numInstruc) throw new ArrayException();
+
+		return this.sProgram[n];
+	}
+}

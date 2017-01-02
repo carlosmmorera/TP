@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import tp.pr3.Exception.ArrayException;
 import tp.pr3.mv.Engine;
 
 /**
@@ -27,23 +29,23 @@ public class LoadFich implements Command{
 	/**
 	 * Método que ejecuta el comando Load.
 	 * @param engine: @see {@link Engine}.
+	 * @throws ArrayException 
 	 */
-	public void execute(Engine engine) {
+	public void execute(Engine engine) throws ArrayException {
 		BufferedReader fIn = null;
 		try {
 			fIn = new BufferedReader(new FileReader(this.nombre));
 			String s;
-			boolean error = false;
 			
 			s = fIn.readLine();
-			while(s != null && !error){
-				error = !engine.cargarInstrProg(s);
+			while(s != null){
+				engine.cargarInstrProg(s);
 				s = fIn.readLine();
 			}
 			fIn.close();
 		} 
 		catch (FileNotFoundException e){
-			System.out.println("Archivo no encontrado");
+			System.out.println("Excepcion: Fichero no Encontrado...");
 		}
 		catch (IOException e){
 			System.out.println("Error en la lectura del archivo");

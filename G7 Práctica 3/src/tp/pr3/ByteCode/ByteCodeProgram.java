@@ -32,7 +32,7 @@ public class ByteCodeProgram {
 	 * las instrucciones almacenadas en el programa.
 	 */
 	public String toString(){
-		String cadena = "\nPrograma almacenado:\n";
+		String cadena = "\nPrograma bytecode almacenado:\n";
 		
 		//Recorre todo el array
 		for (int i = 0; i < this.newinst; ++i){

@@ -1,5 +1,6 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
+import tp.pr3.Exception.ArrayException;
 import tp.pr3.Exception.LexicalAnalysisException;
 import tp.pr3.ProgramCompiler.LexicalParser;
 /**
@@ -21,9 +22,10 @@ public class ParserInstruction {
 	 * @param parser
 	 * @return Instruction dependiendo de la instrucción de la que se trate.
 	 * @throws LexicalAnalysisException si no coincide con ninguna instrucción conocida.
+	 * @throws ArrayException 
 	 */
 	public static Instruction parse(String line, LexicalParser parser)
-				throws LexicalAnalysisException{
+				throws LexicalAnalysisException, ArrayException{
 		String[] s = line.split(" ");
 		if (s.length > LONG_MAX_INSTRUCTION) throw new LexicalAnalysisException();
 		else{

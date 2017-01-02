@@ -1,26 +1,33 @@
 package tp.pr3.ProgramCompiler;
 
+import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.Instruction.*;
-
+/**
+ * Clase que se encarga de parsear el programa.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
 public class LexicalParser {
 	private SourceProgram sProgram;
 	private int programCounter;
-	
-//	public LexicalParser(){
-//		this.sProgram = new SourceProgram();
-//		this.programCounter = 0;
-//	}
-//	public LexicalParser(SourceProgram srcPr){
-//		this.sProgram = srcPr;
-//		this.programCounter = 0;
-//	}
-//	public LexicalParser(SourceProgram srcPr, int n){
-//		this.sProgram = srcPr;
-//		this.programCounter = n;
-//	}
-	
-	//TIENE QUE INCREMENTAR EL CONTADOR
-	public void lexicalParser(ParsedProgram pProgram, String stopKey){
+	/**
+	 * Constructor de la clase.
+	 * @param srcPr
+	 */
+	public LexicalParser(SourceProgram srcPr){
+		this.sProgram = srcPr;
+		this.programCounter = 0;
+	}
+	/**
+	 * Método que se encarga de parsear el código introducido.
+	 * @param pProgram: Programa parseado.
+	 * @param stopKey: centinela en el que acaba el programa a parsear.
+	 * @throws LexicalAnalysisException
+	 * @throws ArrayException
+	 */
+	public void lexicalParser(ParsedProgram pProgram, String stopKey)
+		throws LexicalAnalysisException, ArrayException{
 		String instr = "";
 		boolean stop = false;
 		Instruction instruction = null;
@@ -32,14 +39,13 @@ public class LexicalParser {
 			else {
 				instruction = ParserInstruction.parse(instr,this);
 				pProgram.cargarInst(instruction);
-				this.increaseProgramCounter();
 			}
 		}
 	}
+	/**
+	 * Método que incrementa el contador de programa.
+	 */
 	public void increaseProgramCounter(){
 		this.programCounter++;
-	}
-	public int getProgramCounter(){
-		return this.programCounter;
 	}
 }

@@ -32,8 +32,8 @@
 <fullyQualifiedTypeName name="tp.pr3.Exception.BadFormatByteCode"/>
 <fullyQualifiedTypeName name="tp.pr3.Exception.DivisionByZero"/>
 <fullyQualifiedTypeName name="tp.pr3.Exception.BadFormatCommand"/>
-<fullyQualifiedTypeName name="tp.pr3.Exception.ArrayException"/>
 <fullyQualifiedTypeName name="tp.pr3.Exception.StackException"/>
 <fullyQualifiedTypeName name="tp.pr3.Exception.StackTooSmall"/>
 <fullyQualifiedTypeName name="tp.pr3.Exception.LexicalAnalysisException"/>
+<fullyQualifiedTypeName name="tp.pr3.Exception.ArrayException"/>
 </qualifiedTypeNameHistroy>

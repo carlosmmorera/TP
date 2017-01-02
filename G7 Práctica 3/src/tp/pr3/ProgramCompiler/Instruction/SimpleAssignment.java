@@ -4,13 +4,20 @@ import tp.pr3.ByteCode.*;
 import tp.pr3.Exception.ArrayException;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.*;
-
+/**
+ * Clase que implementa la instrucción SimpleAssignment.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
 public class SimpleAssignment implements Instruction{
 	private String var_name;
 	private Term rhs;
 	
 	final int NUMCOMPONENTES = 3;
-	
+	/**
+	 * Constructores de la clase.
+	 */
 	public SimpleAssignment(){
 		this.var_name = "";
 	}
@@ -18,6 +25,12 @@ public class SimpleAssignment implements Instruction{
 		this.var_name = varName;
 		this.rhs = term;
 	}
+	/**
+	 * Método que parsea la instrucción.
+	 * @param words: instrucción introducida en el programa.
+	 * @param lexparser encargada del análisis léxico.
+	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
+	 */
 	public Instruction lexParse(String[] words, LexicalParser lexparser){
 		if (words.length != NUMCOMPONENTES || words[1].length() != 1) return null;
 		else{
@@ -32,14 +45,14 @@ public class SimpleAssignment implements Instruction{
 			}
 		}
 	}
+	/**
+	 * Método que compila la instrucción.
+	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @throws ArrayException
+	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
-		try{
-			compiler.addByteCode(this.rhs.compile(compiler));
-			ByteCode bc = new Store(compiler.getIndex(this.var_name));
-			compiler.addByteCode(bc);
-		}
-		catch (ArrayException e){
-			System.out.println(e + "Error de compilación");
-		}
+		compiler.addByteCode(this.rhs.compile(compiler));
+		ByteCode bc = new Store(compiler.getIndex(this.var_name));
+		compiler.addByteCode(bc);
 	}
 }

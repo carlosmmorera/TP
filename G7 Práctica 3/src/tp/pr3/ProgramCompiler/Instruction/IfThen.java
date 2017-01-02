@@ -1,6 +1,7 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
 import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.LexicalAnalysisException;
 import tp.pr3.ProgramCompiler.*;
 import tp.pr3.ProgramCompiler.Condition.*;
 /**
@@ -27,8 +28,10 @@ public class IfThen implements Instruction{
 	 * @param words: instrucción introducida en el programa.
 	 * @param lexparser encargada del análisis léxico.
 	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
+	 * @throws ArrayException 
 	 */
-	public Instruction lexParse(String[] words, LexicalParser lexParser){
+	public Instruction lexParse(String[] words, LexicalParser lexParser) 
+			throws ArrayException{
 		if (words.length != NUMCOMPONENTES || 
 				!words[0].equalsIgnoreCase("IF")) return null;
 		else {
@@ -37,10 +40,16 @@ public class IfThen implements Instruction{
 			
 			if (cnd == null) return null;
 			else{
-				ParsedProgram iBody = new ParsedProgram();
-				lexParser.lexicalParser(iBody, "ENDIF");
-				lexParser.increaseProgramCounter();
-				return new IfThen(cnd, iBody);
+				try{
+					ParsedProgram iBody = new ParsedProgram();
+					lexParser.increaseProgramCounter();
+					lexParser.lexicalParser(iBody, "ENDIF");
+					lexParser.increaseProgramCounter();
+					return new IfThen(cnd, iBody);
+				}
+				catch (LexicalAnalysisException e){
+					return null;
+				}
 			}
 		}
 	}
@@ -49,7 +58,7 @@ public class IfThen implements Instruction{
 	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
 	 * @throws ArrayException
 	 */
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler){
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)throws ArrayException{
 		this.condition.compile(compiler);
 		compiler.compile(this.ifThenBody);
 		this.condition.setJump(compiler.getProgramCounter());

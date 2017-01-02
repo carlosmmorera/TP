@@ -6,38 +6,36 @@ import tp.pr3.CPU.CPU;
 import tp.pr3.Command.*;
 import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.*;
+import tp.pr3.ProgramCompiler.Compiler;
 /**
- * Clase que gestiona la ejecución de la máquina virtual
+ * Clase que gestiona la ejecución de la máquina virtual.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/12/2016
+ * @version 30/12/2016
  */
 public class Engine {
-	/**
-	 * program es un objeto de tipo tp.pr2.ByteCode.ByteCodeProgram
-	 * 
-	 * end es un booleano que indica si se ha acabado la introducción 
-	 * de instrucciones BC o no
-	 */
 	private SourceProgram sProgram;
-	private ParsedProgram parsedProgram;
+	private ParsedProgram pProgram;
 	private ByteCodeProgram bytecodeProgram;
 	private boolean end;
+	
 	final static Scanner entrada = new Scanner(System.in);
 	/**
-	 * Constructor de la clase
+	 * Constructor de la clase.
 	 */
 	public Engine(){
 		this.bytecodeProgram = new ByteCodeProgram();
 		this.end = false;
+		this.sProgram = new SourceProgram();
+		this.pProgram = new ParsedProgram();
 	}
 	
 	/**
-	 * Método que dirige todo el programa
+	 * Método que dirige todo el programa.
 	 */
 	public void start(){
-		String line;
-		Command com;
+		String line = "";
+		Command com = null;
 		
 		//Hasta que el usuario no ejecute "quit" no finalizará el pograma
 		while(!this.end){
@@ -65,6 +63,8 @@ public class Engine {
 				System.out.println(e);
 			}
 			finally{
+				if (this.sProgram.getNumeroInstrucciones() > 0)
+					System.out.println(this.sProgram.toString());
 				//Si el programa tiene instrucciones añadidas se muestra al usuario
 				if (this.bytecodeProgram.getTam() > 0) 
 					System.out.println(this.bytecodeProgram.toString());
@@ -73,13 +73,11 @@ public class Engine {
 		System.out.println("Fin de la ejecucion...");
 	}
 	/**
-	 * Método que implementa el comando QUIT
-	 * @return boolean dependiendo de si el comando se ejecutó con éxito
+	 * Método que implementa el comando QUIT.
 	 */
 	public void quit(){ this.end = true; }
 	/**
-	 * Método que implementa el comando RUN
-	 * @return un booleano dependiendo de si la ejecución del comando fue correcta
+	 * Método que implementa el comando RUN.
 	 */
 	public void run(){
 		try{
@@ -104,27 +102,44 @@ public class Engine {
 		}
 	}
 	/**
-	 * Método que ejecuta el comando REPLACE
+	 * Método que ejecuta el comando REPLACE.
 	 * @param rep instrucción a reemplazar
-	 * @return un booleano dependiendo de 
-	 * si @see {@link ByteCodeProgram#replace(int)}
 	 */
 	public void replace(int rep) throws BadFormatByteCode, ArrayException{ 
 		this.bytecodeProgram.replace(rep);
 	}
-	
+	/**
+	 * Método que ejecuta el comando COMPILE.
+	 * @throws ArrayException 
+	 * @throws LexicalAnalysisException 
+	 */
 	public void compile() throws LexicalAnalysisException, ArrayException {
 		this.lexicalAnalysis();
 		this.generateByteCode();
 	}
-	public boolean cargarInstrProg(String s){
+	/**
+	 * Método que carga una línea de código.
+	 * @param s: línea de código a cargar.
+	 * @throws ArrayException
+	 */
+	public void cargarInstrProg(String s)throws ArrayException{
 		this.sProgram.cargarInst(s);
-		return true;
 	}
-	private void lexicalAnalysis() throws LexicalAnalysisException {
-		
+	/**
+	 * Método encargado de realizar el análisis léxico y parsear el programa.
+	 * @throws LexicalAnalysisException
+	 * @throws ArrayException
+	 */
+	private void lexicalAnalysis() throws LexicalAnalysisException, ArrayException{
+		LexicalParser lx = new LexicalParser(this.sProgram);
+		lx.lexicalParser(this.pProgram, "END");
 	}
+	/**
+	 * Método encargado de compilar el programa y generar el ByteCode correspondiente.
+	 * @throws ArrayException
+	 */
 	private void generateByteCode() throws ArrayException{
-		
+		Compiler compiler = new Compiler(this.bytecodeProgram);
+		compiler.compile(this.pProgram);
 	}
 }

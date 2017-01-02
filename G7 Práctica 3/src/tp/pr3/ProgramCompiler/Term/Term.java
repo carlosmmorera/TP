@@ -2,7 +2,7 @@ package tp.pr3.ProgramCompiler.Term;
 
 import tp.pr3.ByteCode.ByteCode;
 /**
- * Interfaz que representa los términos del código de la que heredan Number y Variable.
+ * Interfaz que representa los términos del código, implemenatada por Number y Variable.
  * @author Carlos Moreno
  * @author Manuel Suárez
  * @version 30/12/2016
