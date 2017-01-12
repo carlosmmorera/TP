@@ -7,7 +7,7 @@ import tp.pr3.Exception.BadFormatByteCode;
  * Clase que gestiona el parseo del ByteCode que se ha introducido.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 12/01/2017
  *
  */
 public class ByteCodeParser {
@@ -54,7 +54,7 @@ public class ByteCodeParser {
 	 * @throws BadFormatByteCode
 	 */
 	private static void ThrowException(String line)throws BadFormatByteCode{
-		throw new BadFormatByteCode("Error en la sintáxis del ByteCode introducido\n"
-				+ "El ByteCode '" + line + "' no existe");
+		throw new BadFormatByteCode("Error en la sintáxis del ByteCode "
+				+ "introducido\nEl ByteCode '" + line + "' no existe");
 	}
 }

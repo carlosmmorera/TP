@@ -25,8 +25,8 @@ public class SourceProgram {
 	 * @throws ArrayException
 	 */
 	public void cargarInst(String s)throws ArrayException{
-		if (this.numInstruc == TAM_MAX) throw new ArrayException("Superado el tamaño "
-				+ "máximo permitido para un código fuente.");
+		if (this.numInstruc == TAM_MAX) throw new ArrayException("Superado el "
+				+ "tamaño máximo permitido para un código fuente.");
 		
 		this.sProgram[this.numInstruc] = s;
 		++this.numInstruc;

@@ -29,7 +29,8 @@ public class Compiler {
 	 * @param pProgram: programa parseado.
 	 * @throws ArrayException 
 	 */
-	public void compile(ParsedProgram pProgram) throws ArrayException{
+	public void compile(ParsedProgram pProgram) 
+			throws ArrayException, VariableTableOverflow{
 		int i = 0;
 		while (i < pProgram.getNumeroInstrucciones()){
 			Instruction inst = pProgram.getInstructionAt(i);
@@ -50,7 +51,7 @@ public class Compiler {
 	 * @param varName
 	 * @return int posición en la que se encuentra la variable.
 	 */
-	public int getIndex(String varName) {
+	public int getIndex(String varName) throws VariableTableOverflow{
 		int i = 0;
 		boolean encontrado = false;
 		
@@ -58,10 +59,7 @@ public class Compiler {
 			if (this.varTable[i].equals(varName)) encontrado = true;
 			else ++i;
 		}
-		if (!encontrado){
-			this.varTable[this.numVars] = varName;
-			++this.numVars;
-		}
+		if (!encontrado) addVar(varName);
 		return i;
 	}
 	/**
@@ -70,5 +68,19 @@ public class Compiler {
 	 */
 	public int getProgramCounter(){
 		return this.bytecode.getTam();
+	}
+	/**
+	 * Método que inserta una nueva variable en la tabla.
+	 * @param varName: nombre de la variable a insertar.
+	 * @throws VariableTableOverflow: que se produce cuando se supera el tamaño
+	 * máximo del array varTable.
+	 */
+	private void addVar(String varName) throws VariableTableOverflow{
+		if (this.numVars == TAM_MAX) 
+			throw new VariableTableOverflow("Superado el número máximo "
+					+ "permitido de variables en un programa.");
+		
+		this.varTable[this.numVars] = varName;
+		++this.numVars;
 	}
 }

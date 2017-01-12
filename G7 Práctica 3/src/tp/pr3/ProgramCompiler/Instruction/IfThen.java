@@ -1,6 +1,6 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
-import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.*;
 import tp.pr3.Exception.LexicalAnalysisException;
 import tp.pr3.ProgramCompiler.*;
 import tp.pr3.ProgramCompiler.Condition.*;
@@ -58,7 +58,8 @@ public class IfThen implements Instruction{
 	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
 	 * @throws ArrayException
 	 */
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)throws ArrayException{
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)
+			throws ArrayException, VariableTableOverflow{
 		this.condition.compile(compiler);
 		compiler.compile(this.ifThenBody);
 		this.condition.setJump(compiler.getProgramCounter());

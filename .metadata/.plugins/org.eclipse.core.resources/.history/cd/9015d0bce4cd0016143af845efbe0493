@@ -1,8 +1,0 @@
-package tp.pr3.ProgramCompiler.Instruction;
-
-public class ParserInstruction {
-	
-	public static Instruction parse(String[] s){
-		
-	}
-}

@@ -1,7 +1,7 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
 import tp.pr3.ByteCode.*;
-import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.*;
 /**
@@ -50,7 +50,8 @@ public class SimpleAssignment implements Instruction{
 	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
 	 * @throws ArrayException
 	 */
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
+			throws ArrayException, VariableTableOverflow{
 		compiler.addByteCode(this.rhs.compile(compiler));
 		ByteCode bc = new Store(compiler.getIndex(this.var_name));
 		compiler.addByteCode(bc);

@@ -12,11 +12,11 @@ import tp.pr3.Exception.StackTooSmall;
  * y ConditionalJumps.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 12/01/2017
  *
  */
 public interface ByteCode {
-	void execute(CPU cpu) throws DivisionByZero, ArrayException, 
+	public void execute(CPU cpu) throws DivisionByZero, ArrayException, 
 		StackException, StackTooSmall;
-	ByteCode parse(String[] s);
+	public ByteCode parse(String[] s);
 }

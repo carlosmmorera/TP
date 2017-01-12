@@ -1,6 +1,8 @@
 package tp.pr3.Command;
 
-import tp.pr3.Exception.*;
+import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.LexicalAnalysisException;
+import tp.pr3.Exception.VariableTableOverflow;
 import tp.pr3.mv.Engine;
 
 /**
@@ -14,11 +16,13 @@ public class Compile implements Command{
 	/**
 	 * Método que ejecuta el comando Compile.
 	 * @param engine @see {@link Engine}.
+	 * @throws VariableTableOverflow 
+	 * @throws ArrayException 
 	 * @throws LexicalAnalysisException 
-	 * @throws ArrayException
 	 * @Override
 	 */
-	public void execute(Engine engine) throws LexicalAnalysisException, ArrayException{
+	public void execute(Engine engine) 
+			throws LexicalAnalysisException, ArrayException, VariableTableOverflow {
 		engine.compile();
 	}
 	/**

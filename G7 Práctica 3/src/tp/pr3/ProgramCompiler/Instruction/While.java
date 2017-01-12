@@ -57,8 +57,11 @@ public class While implements Instruction{
 	 * Método que compila la instrucción.
 	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
 	 * @throws ArrayException
+	 * @throws VariableTableOverflow
 	 */
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
+			throws ArrayException, VariableTableOverflow{
+		
 		int pc1 = compiler.getProgramCounter();
 		this.condition.compile(compiler);
 		compiler.compile(this.whileBody);

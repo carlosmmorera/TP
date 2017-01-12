@@ -69,7 +69,9 @@ public class CompoundAssignment implements Instruction{
 	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
 	 * @throws ArrayException
 	 */
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)throws ArrayException {
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)
+			throws ArrayException, VariableTableOverflow {
+		
 		compiler.addByteCode(this.term1.compile(compiler));
 		compiler.addByteCode(this.term2.compile(compiler));
 		compiler.addByteCode(this.generateBCArithmeticOper());

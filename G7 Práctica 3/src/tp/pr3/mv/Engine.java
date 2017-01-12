@@ -1,5 +1,9 @@
 package tp.pr3.mv;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import tp.pr3.ByteCode.*;
 import tp.pr3.CPU.CPU;
@@ -11,7 +15,7 @@ import tp.pr3.ProgramCompiler.Compiler;
  * Clase que gestiona la ejecución de la máquina virtual.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 12/01/2017
  */
 public class Engine {
 	private SourceProgram sProgram;
@@ -39,20 +43,29 @@ public class Engine {
 		
 		//Hasta que el usuario no ejecute "quit" no finalizará el pograma
 		while(!this.end){
+			System.out.print("> ");
+			//Se lee el comando
+			line = entrada.nextLine();
 			try{
-				System.out.print("> ");
-				//Se lee el comando
-				line = entrada.nextLine();
-				//Se parsea
 				com = CommandParser.parse(line);
 				
-				System.out.println("Comienza la ejecucion de " + com.toString() + ".");
+				System.out.println("Comienza la ejecucion de " + 
+				com.toString() + ".");
 				com.execute(this);
 				
+				/*
+				 * Solo se mostrará el programa almacenado si no se ejecutado
+				 * el comando quit y si no se ha producido ningún error en la
+				 * ejecución del comando (en cuyo caso se lanzaría una 
+				 * excepción que es gestionada en el catch).
+				 */
 				if (!this.end){
 					if (this.sProgram.getNumeroInstrucciones() > 0)
 						System.out.println(this.sProgram.toString());
-					//Si el programa tiene instrucciones añadidas se muestra al usuario
+					/*
+					 * Si el programa tiene instrucciones añadidas se 
+					 * muestra al usuario
+					 */
 					if (this.bytecodeProgram.getTam() > 0) 
 						System.out.println(this.bytecodeProgram.toString());
 				}
@@ -91,19 +104,12 @@ public class Engine {
 	 * @throws ArrayException 
 	 * @throws LexicalAnalysisException 
 	 */
-	public void compile() throws LexicalAnalysisException, ArrayException {
+	public void compile() throws LexicalAnalysisException, ArrayException,
+		VariableTableOverflow{
 		this.pProgram.reset();
 		this.bytecodeProgram.reset();
 		this.lexicalAnalysis();
 		this.generateByteCode();
-	}
-	/**
-	 * Método que carga una línea de código.
-	 * @param s: línea de código a cargar.
-	 * @throws ArrayException
-	 */
-	public void cargarInstrProg(String s)throws ArrayException{
-		this.sProgram.cargarInst(s);
 	}
 	/**
 	 * Método encargado de realizar el análisis léxico y parsear el programa.
@@ -118,16 +124,48 @@ public class Engine {
 	 * Método encargado de compilar el programa y generar el ByteCode correspondiente.
 	 * @throws ArrayException
 	 */
-	private void generateByteCode() throws ArrayException{
+	private void generateByteCode() throws ArrayException, VariableTableOverflow{
 		Compiler compiler = new Compiler(this.bytecodeProgram);
 		compiler.compile(this.pProgram);
 	}
 	/**
 	 * Método que resetea el SourceProgram, ParsedProgram y ByteCodeProgram.
 	 */
-	public void resetProgram(){
+	private void resetProgram(){
 		this.sProgram.reset();
 		this.pProgram.reset();
 		this.bytecodeProgram.reset();
+	}
+	/**
+	 * Método que implementa el comando LOAD
+	 * @param nombre: nombre del fichero a cargar
+	 * @throws ArrayException 
+	 */
+	public void loadfich(String nombre) throws ArrayException{
+		resetProgram();
+		BufferedReader fIn = null;
+		try {
+			fIn = new BufferedReader(new FileReader(nombre));
+			String s;
+			
+			s = fIn.readLine();
+			while(s != null){
+				this.sProgram.cargarInst(s);
+				s = fIn.readLine();
+			}
+			fIn.close();
+		} 
+		catch (FileNotFoundException e){
+			System.out.println("Excepcion: Fichero no Encontrado...");
+		}
+		catch (IOException e){
+			System.out.println("Error en la lectura del archivo");
+			try {
+				fIn.close();
+			}
+			catch (IOException e1) {
+				
+			}
+		}
 	}
 }

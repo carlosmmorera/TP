@@ -21,24 +21,16 @@ public class Number implements Term{
 	/**
 	 * Método que parsea el término dado.
 	 * @param term: término dado a parsear.
-	 * @return Term dependiendo si el término introducido en el programa es númerico.
+	 * @return Term dependiendo si el término introducido en 
+	 * el programa es númerico.
 	 */
 	public Term parse(String term){
 		try{
-			return StringToInt(term);
+			return new Number(Integer.parseInt(term));
 		}
 		catch(NumberFormatException e){
 			return null;
 		}
-	}
-	/**
-	 * Método que devuelve un término numérico dado el término en el programa.
-	 * @param term: término dado.
-	 * @return Term
-	 * @throws NumberFormatException
-	 */
-	private Term StringToInt(String term) throws NumberFormatException{
-		return new Number(Integer.parseInt(term));
 	}
 	/**
 	 * Método que compila el término numérico.

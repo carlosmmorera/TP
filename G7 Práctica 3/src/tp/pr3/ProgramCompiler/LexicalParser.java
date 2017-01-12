@@ -32,8 +32,10 @@ public class LexicalParser {
 		boolean stop = false;
 		Instruction instruction = null;
 		
-		while (this.programCounter < this.sProgram.getNumeroInstrucciones()&& !stop){
+		while (this.programCounter < this.sProgram.getNumeroInstrucciones()
+				&& !stop){
 			instr = sProgram.getInstructionAt(this.programCounter);
+			instr = instr.trim();
 			
 			if (instr.equalsIgnoreCase(stopKey))stop = true;
 			else {

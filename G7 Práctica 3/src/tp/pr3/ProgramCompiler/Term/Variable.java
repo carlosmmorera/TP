@@ -1,6 +1,7 @@
 package tp.pr3.ProgramCompiler.Term;
 
 import tp.pr3.ByteCode.*;
+import tp.pr3.Exception.VariableTableOverflow;
 /**
  * Clase que implementa las variables del código.
  * @author Carlos Moreno
@@ -41,7 +42,8 @@ public class Variable implements Term {
 	 * 
 	 * @Override
 	 */
-	public ByteCode compile(tp.pr3.ProgramCompiler.Compiler compiler){
+	public ByteCode compile(tp.pr3.ProgramCompiler.Compiler compiler)
+		throws VariableTableOverflow{
 		return new Load(compiler.getIndex(this.varName));
 	}
 	/**

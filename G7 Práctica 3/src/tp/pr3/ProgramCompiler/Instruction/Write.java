@@ -1,7 +1,7 @@
 package tp.pr3.ProgramCompiler.Instruction;
 
 import tp.pr3.ByteCode.*;
-import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 /**
  * Clase que implementa la instrucción Write.
@@ -26,7 +26,8 @@ public class Write implements Instruction{
 	 * Método que parsea la instrucción.
 	 * @param words: instrucción introducida en el programa.
 	 * @param lexparser encargada del análisis léxico.
-	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
+	 * @return Instruction dependiendo de si coincide con la instrucción 
+	 * de esta clase.
 	 */
 	public Instruction lexParse(String[] words, LexicalParser lexParser){
 		if (words.length != LENGTH_INSTRUCTION 
@@ -41,7 +42,8 @@ public class Write implements Instruction{
 	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
 	 * @throws ArrayException
 	 */
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException{
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
+			throws ArrayException, VariableTableOverflow{
 		ByteCode bc = new Load(compiler.getIndex(this.varName));
 		compiler.addByteCode(bc);
 		compiler.addByteCode(new Out());

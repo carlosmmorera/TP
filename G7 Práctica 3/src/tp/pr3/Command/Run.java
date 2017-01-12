@@ -14,7 +14,7 @@ public class Run implements Command {
 	 * @param engine: @see {@link Engine}.
 	 * @throws ExecutionError 
 	  */
-	public void execute(Engine engine) throws ExecutionError{
+	public void execute(Engine engine) throws ExecutionError {
 		engine.run();
 	}
 	/**

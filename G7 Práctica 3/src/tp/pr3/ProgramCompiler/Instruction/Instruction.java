@@ -12,6 +12,8 @@ import tp.pr3.ProgramCompiler.LexicalParser;
  * @verison 30/12/2016
  */
 public interface Instruction {
-	Instruction lexParse(String[] words, LexicalParser lexParser) throws ArrayException;
-	void compile(tp.pr3.ProgramCompiler.Compiler compiler) throws ArrayException;
+	Instruction lexParse(String[] words, LexicalParser lexParser) 
+			throws ArrayException;
+	void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
+			throws ArrayException, VariableTableOverflow;
 }

@@ -1,6 +1,7 @@
 package tp.pr3.Command;
 
-import tp.pr3.Exception.*;
+import tp.pr3.Exception.ArrayException;
+import tp.pr3.Exception.BadFormatByteCode;
 import tp.pr3.mv.Engine;
 /**
  * Clase que gestiona el comando Replace.
@@ -22,8 +23,10 @@ public class ReplaceBC implements Command {
 	/**
 	 * Método que ejecuta el comando Replace.
 	 * @param engine: @see {@link Engine}.
+	 * @throws ArrayException 
+	 * @throws BadFormatByteCode 
 	  */
-	public void execute(Engine engine)throws BadFormatByteCode, ArrayException{
+	public void execute(Engine engine) throws BadFormatByteCode, ArrayException{
 		engine.replaceBC(this.pos);
 	}
 	/**

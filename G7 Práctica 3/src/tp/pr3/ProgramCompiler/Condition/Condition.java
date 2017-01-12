@@ -62,7 +62,8 @@ public abstract class Condition {
 	 * @param compiler @see {@link tp.pr3.ProgramCompiler.Compiler}.
 	 * @throws ArrayException
 	 */
-	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)throws ArrayException{
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)
+			throws ArrayException, VariableTableOverflow{
 		compiler.addByteCode(this.t1.compile(compiler));
 		compiler.addByteCode(this.t2.compile(compiler));
 		this.condition = compileAux();

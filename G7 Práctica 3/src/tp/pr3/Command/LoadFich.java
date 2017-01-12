@@ -1,10 +1,5 @@
 package tp.pr3.Command;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import tp.pr3.Exception.ArrayException;
 import tp.pr3.mv.Engine;
 
@@ -31,26 +26,8 @@ public class LoadFich implements Command{
 	 * @param engine: @see {@link Engine}.
 	 * @throws ArrayException 
 	 */
-	public void execute(Engine engine) throws ArrayException {
-		engine.resetProgram();
-		BufferedReader fIn = null;
-		try {
-			fIn = new BufferedReader(new FileReader(this.nombre));
-			String s;
-			
-			s = fIn.readLine();
-			while(s != null){
-				engine.cargarInstrProg(s);
-				s = fIn.readLine();
-			}
-			fIn.close();
-		} 
-		catch (FileNotFoundException e){
-			System.out.println("Excepcion: Fichero no Encontrado...");
-		}
-		catch (IOException e){
-			System.out.println("Error en la lectura del archivo");
-		}
+	public void execute(Engine engine) throws ArrayException{
+		engine.loadfich(this.nombre);
 	}
 	/**
 	 * Método que parsea el comando introducido por el usuario.
