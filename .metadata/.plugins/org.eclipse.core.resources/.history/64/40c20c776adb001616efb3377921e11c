@@ -6,7 +6,6 @@ import tp.pr3.Exception.ArrayException;
 import tp.pr3.Exception.BadFormatByteCode;
 import tp.pr3.Exception.ExecutionError;
 import tp.pr3.Exception.LexicalAnalysisException;
-import tp.pr3.Exception.NonexistentBCProgram;
 import tp.pr3.Exception.NonexistentVariable;
 import tp.pr3.Exception.VariableTableOverflow;
 import tp.pr3.mv.Engine;
@@ -22,7 +21,7 @@ public interface Command {
 	public void execute(Engine engine) 
 			throws LexicalAnalysisException, ArrayException, 
 			VariableTableOverflow, BadFormatByteCode, ExecutionError, 
-			NonexistentVariable, FileNotFoundException, NonexistentBCProgram;
+			NonexistentVariable, FileNotFoundException;
 	public Command parse(String[] s);
 	public String textHelp();
 }

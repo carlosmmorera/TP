@@ -1,7 +1,6 @@
 package tp.pr3.Command;
 
 import tp.pr3.Exception.ExecutionError;
-import tp.pr3.Exception.NonexistentBCProgram;
 import tp.pr3.mv.Engine;
 /**
  * Clase que gestiona el comando Run.
@@ -14,9 +13,8 @@ public class Run implements Command {
 	 * Método que ejecuta el comando Run.
 	 * @param engine: @see {@link Engine}.
 	 * @throws ExecutionError 
-	 * @throws NonexistentBCProgram 
 	  */
-	public void execute(Engine engine) throws ExecutionError, NonexistentBCProgram {
+	public void execute(Engine engine) throws ExecutionError {
 		engine.run();
 	}
 	/**

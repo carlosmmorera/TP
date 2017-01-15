@@ -98,12 +98,6 @@ public class Engine {
 			catch (FileNotFoundException e){
 				System.out.println(e.getMessage());
 			}
-			catch (NonexistentBCProgram e){
-				System.out.println(e);
-				
-				if (!this.end && this.sProgram.getNumeroInstrucciones() > 0)
-					System.out.println(this.sProgram.toString());
-			}
 		}
 		System.out.println("Fin de la ejecucion...");
 	}

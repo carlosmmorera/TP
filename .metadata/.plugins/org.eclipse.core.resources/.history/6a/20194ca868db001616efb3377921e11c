@@ -98,12 +98,6 @@ public class Engine {
 			catch (FileNotFoundException e){
 				System.out.println(e.getMessage());
 			}
-			catch (NonexistentBCProgram e){
-				System.out.println(e);
-				
-				if (!this.end && this.sProgram.getNumeroInstrucciones() > 0)
-					System.out.println(this.sProgram.toString());
-			}
 		}
 		System.out.println("Fin de la ejecucion...");
 	}
@@ -114,12 +108,9 @@ public class Engine {
 	/**
 	 * Método que implementa el comando RUN.
 	 * @throws ExecutionError
-	 * @throws NonexistentBCProgram 
 	 */
-	public void run()throws ExecutionError, NonexistentBCProgram{
+	public void run()throws ExecutionError{
 		//Inicializo una CPU
-		if (this.bytecodeProgram.getTam() == 0) throw new NonexistentBCProgram("Error: "
-				+ "No hay ningún programa ByteCode a ejecutar.");
 		CPU cpu = new CPU(this.bytecodeProgram);
 		cpu.run();
 		System.out.println("El estado de la maquina tras ejecutar "
