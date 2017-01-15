@@ -35,17 +35,18 @@ public class While implements Instruction{
 			throws ArrayException, LexicalAnalysisException{
 		if (words.length != NUMCOMPONENTES || 
 				!words[0].equalsIgnoreCase("WHILE")) return null;
-		else {
-			Condition cnd = ConditionParser.parse(words[1], words[2], 
-					words[3], lexParser);
-			
-			if (cnd == null) return null;
-			ParsedProgram wBody = new ParsedProgram();
-			lexParser.increaseProgramCounter();
-			lexParser.lexicalParser(wBody, "ENDWHILE");
-			lexParser.increaseProgramCounter();
-			return new While(cnd, wBody);
-		}
+
+		Condition cnd = ConditionParser.parse(words[1], words[2], 
+				words[3], lexParser);
+		
+		if (cnd == null) return null;
+		
+		ParsedProgram wBody = new ParsedProgram();
+		lexParser.increaseProgramCounter();
+		lexParser.lexicalParser(wBody, "ENDWHILE");
+		lexParser.increaseProgramCounter();
+		
+		return new While(cnd, wBody);
 	}
 	/**
 	 * Método que compila la instrucción.

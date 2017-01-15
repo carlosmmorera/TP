@@ -8,7 +8,6 @@ import tp.pr3.mv.Engine;
 /**
  * Clase que gestiona el comando Load.
  * @author Carlos Moreno
- * @author Manuel Suárez
  * @version 30/12/2016
  */
 public class LoadFich implements Command{
@@ -27,6 +26,7 @@ public class LoadFich implements Command{
 	 * Método que ejecuta el comando Load.
 	 * @param engine: @see {@link Engine}.
 	 * @throws ArrayException 
+	 * @throws FileNotFoundException
 	 */
 	public void execute(Engine engine) throws ArrayException, FileNotFoundException{
 		engine.loadfich(this.nombre);
@@ -43,7 +43,7 @@ public class LoadFich implements Command{
 		else return null;
 	}
 	/**
-	 * Método que devuele un string con información sobre el comando LOAD.
+	 * Método que devuelve un string con información sobre el comando LOAD.
 	 */
 	public String textHelp(){
 		return " LOAD FICH: Carga el fichero FICH como programa fuente " +

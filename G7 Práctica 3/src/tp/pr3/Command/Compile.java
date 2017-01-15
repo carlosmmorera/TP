@@ -39,7 +39,7 @@ public class Compile implements Command{
 		else return null;
 	}
 	/**
-	 * Método que devuele un string con información sobre el comando HELP.
+	 * Método que devuelve un string con información sobre el comando HELP.
 	 */
 	public String textHelp(){
 		return " COMPILE: Compila el programa introducido " +

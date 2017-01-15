@@ -70,7 +70,7 @@ public class Compiler {
 			else ++i;
 		}
 		if (!encontrado) throw new NonexistentVariable("La variable '" + varName + 
-				"' que se desea obtener no ha sido declarada.");
+				"' que se desea obtener no ha sido declarada anteriormente.");
 		
 		return i;
 	}

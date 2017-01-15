@@ -6,7 +6,6 @@ import tp.pr3.ProgramCompiler.Term.Term;
 /**
  * Método que implementa la condición menor o igual.
  * @author Carlos Moreno
- * @author Manuel Suárez
  * @version 15/01/2017
  */
 public class LessEq extends Condition{

@@ -1,0 +1,13 @@
+package tp.pr3.Exception;
+/**
+ * Excepción que se produce cuando se intenta acceder a una posición del
+ * array inexistente.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ *	@version 30/12/2016
+ */
+public class ArrayException extends Exception{
+	public ArrayException(String ExceptionMessage){
+		super(ExceptionMessage);
+	}
+}

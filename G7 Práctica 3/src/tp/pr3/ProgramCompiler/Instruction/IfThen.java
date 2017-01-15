@@ -34,18 +34,17 @@ public class IfThen implements Instruction{
 			throws ArrayException, LexicalAnalysisException{
 		if (words.length != NUMCOMPONENTES || 
 				!words[0].equalsIgnoreCase("IF")) return null;
-		else {
-			Condition cnd = ConditionParser.parse(words[1], words[2], 
-					words[3], lexParser);
-			
-			if (cnd == null) return null;
-			
-			ParsedProgram iBody = new ParsedProgram();
-			lexParser.increaseProgramCounter();
-			lexParser.lexicalParser(iBody, "ENDIF");
-			lexParser.increaseProgramCounter();
-			return new IfThen(cnd, iBody);
-		}
+
+		Condition cnd = ConditionParser.parse(words[1], words[2], 
+				words[3], lexParser);
+		
+		if (cnd == null) return null;
+		
+		ParsedProgram iBody = new ParsedProgram();
+		lexParser.increaseProgramCounter();
+		lexParser.lexicalParser(iBody, "ENDIF");
+		lexParser.increaseProgramCounter();
+		return new IfThen(cnd, iBody);
 	}
 	/**
 	 * Método que compila la instrucción.

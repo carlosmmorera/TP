@@ -2,7 +2,6 @@ package tp.pr3.ProgramCompiler.Term;
 
 import tp.pr3.ByteCode.ByteCode;
 import tp.pr3.Exception.NonexistentVariable;
-import tp.pr3.Exception.VariableTableOverflow;
 /**
  * Interfaz que representa los términos del código, implemenatada 
  * por Number y Variable.
@@ -11,7 +10,7 @@ import tp.pr3.Exception.VariableTableOverflow;
  * @version 15/01/2017
  */
 public interface Term {
-	Term parse(String term);
-	ByteCode compile(tp.pr3.ProgramCompiler.Compiler compiler) 
-			throws VariableTableOverflow;
+	public Term parse(String term);
+	public ByteCode compile(tp.pr3.ProgramCompiler.Compiler compiler) 
+			throws NonexistentVariable;
 }

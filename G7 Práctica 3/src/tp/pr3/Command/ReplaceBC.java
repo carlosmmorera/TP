@@ -49,7 +49,7 @@ public class ReplaceBC implements Command {
 		}
 	}
 	/**
-	 * Método que devuele un string con información sobre el comando REPLACE.
+	 * Método que devuelve un string con información sobre el comando REPLACE.
 	 */
 	public String textHelp(){
 		return " REPLACEBC N: Reemplaza la instruccion N por la solicitada"

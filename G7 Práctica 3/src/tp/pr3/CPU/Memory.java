@@ -38,7 +38,9 @@ public class Memory {
 		this.posiciones = new int[TAM_INI];
 		this.tampos = 100;
 		this.tam = 100;
-		for (Integer x : memory) x = null;
+		for (int i = 0; i < TAM_INI; ++i){
+			memory[i] = null;
+		}
 		this.numelem = 0;
 	}
  	/**
@@ -81,7 +83,7 @@ public class Memory {
 	 * necesitamos acceder a la memoria.
 	 */
 	public void resize(int pos){
-		Integer newmemory[] = new Integer[2*pos];
+		Integer newmemory[] = new Integer[2 * pos];
 		//Copio todos los elementos en el nuevo vector
 		for (int i = 0; i < tam; ++i)
 			newmemory[i] = this.memory[i];

@@ -40,19 +40,20 @@ public class SimpleAssignment implements Instruction{
 		
 		Term term = TermParser.parse(words[2]);
 		if (term == null) return null;
-		else{
-			lexparser.increaseProgramCounter();
-			return new SimpleAssignment(words[0], term);
-		}
+
+		lexparser.increaseProgramCounter();
+		return new SimpleAssignment(words[0], term);
 	}
 	/**
 	 * Método que compila la instrucción.
 	 * @param compiler
 	 * @throws ArrayException
 	 * @throws VariableTableOverflow
+	 * @throws NonexistentVariable 
 	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
-			throws ArrayException, VariableTableOverflow{
+			throws ArrayException, VariableTableOverflow, NonexistentVariable{
+		
 		compiler.addByteCode(this.rhs.compile(compiler));
 		int index = 0;
 		try{

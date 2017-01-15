@@ -48,10 +48,9 @@ public class CompoundAssignment implements Instruction{
 		Term t2 = TermParser.parse(words[4]);
 		
 		if (t1 == null || t2 == null) return null;
-		else{
-			lexparser.increaseProgramCounter();
-			return new CompoundAssignment(words[0], words[3], t1, t2);
-		}
+
+		lexparser.increaseProgramCounter();
+		return new CompoundAssignment(words[0], words[3], t1, t2);
 	}
 	/**
 	 * Método que comprueba si el String es un operador válido.
@@ -68,10 +67,11 @@ public class CompoundAssignment implements Instruction{
 	 * Método que compila la instrucción.
 	 * @param compiler
 	 * @throws ArrayException
-	 * @throws VariableTableOverflow
+	 * @throws NonexistentVariable
+	 * @throws VariableTableOverflow 
 	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)
-			throws ArrayException, VariableTableOverflow {
+			throws ArrayException, NonexistentVariable, VariableTableOverflow {
 		
 		compiler.addByteCode(this.term1.compile(compiler));
 		compiler.addByteCode(this.term2.compile(compiler));

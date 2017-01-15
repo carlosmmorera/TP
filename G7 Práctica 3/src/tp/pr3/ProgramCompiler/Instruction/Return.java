@@ -20,10 +20,9 @@ public class Return implements Instruction{
 	public Instruction lexParse(String[] words, LexicalParser lexParser){
 		if(words.length != LENGTH_INSTRUCTION 
 				|| !words[0].equalsIgnoreCase("RETURN")) return null;
-		else{
-			lexParser.increaseProgramCounter();
-			return new Return();
-		}
+
+		lexParser.increaseProgramCounter();
+		return new Return();
 	}
 	/**
 	 * Método que compila la instrucción.

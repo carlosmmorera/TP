@@ -27,7 +27,7 @@ public class Quit implements Command {
 		else return null;
 	}
 	/**
-	 * Método que devuele un string con información sobre el comando QUIT.
+	 * Método que devuelve un string con información sobre el comando QUIT.
 	 */
 	public String textHelp(){
 		return " QUIT: Cierra la aplicacion " +

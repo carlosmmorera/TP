@@ -10,14 +10,6 @@ import tp.pr3.Exception.*;
  * @version 30/12/2016
  */
 public class CPU {
-	/**
-	 * Memoria es un objeto de la clase @see TP.PR1.MV.Memory.
-	 * pila es un objeto de la clase @see TP.PR1.MV.OperandStack.
-	 * end es un booleano que indica cuando acaba la ejecución
-	 * de las intrucciones bytecode.
-	 * programCounter es un entero que representa al contador de programa.
-	 * bcProgram es un objeto de la clase @see tp.pr2.ByteCode.ByteCodeProgram.
-	 */
 	private Memory memoria;
 	private OperandStack pila;
 	private boolean end;
@@ -41,17 +33,23 @@ public class CPU {
 	 */
 	public void run() throws ExecutionError{
 		ByteCode bc = null;
-		try{
-			while (!acabar()){
+		while (!acabar()){
+			try{
 				bc = getInstr();
 				bc.execute(this);
 			}
-		}
-		catch(Exception e){
-			String ExceptionMessage = "Excepción en la ejecución del bytecode ";
-			ExceptionMessage += this.programCounter + ".\nExcepción-bytecode ";
-			ExceptionMessage += bc.toString() + ": " + e.getMessage();
-			throw new ExecutionError(ExceptionMessage);
+			catch (DivisionByZero e){
+				ThrowException(bc, e);
+			}
+			catch(ArrayException e){
+				ThrowException(bc, e);
+			}
+			catch(StackException e){
+				ThrowException(bc, e);
+			}
+			catch(StackTooSmall e){
+				ThrowException(bc, e);
+			}
 		}
 	}
 	/**
@@ -67,6 +65,7 @@ public class CPU {
 	}
 	/**
 	 * Método que muestra el estado de la CPU, mostrando el de la pila y memoria.
+	 * @return String
 	 */
 	public String toString(){
 		String cadena = "\nEstado de la CPU:\n";
@@ -81,7 +80,7 @@ public class CPU {
 	 * @throws ArrayException
 	 * 
 	 */
-	public ByteCode getInstr() throws ArrayException{
+	private ByteCode getInstr() throws ArrayException{
 		return this.bcProgram.getBcAtn(this.programCounter);
 	}
 	/**
@@ -134,7 +133,7 @@ public class CPU {
 	 * Método que comprueba si el programa debe acabar o no.
 	 * @return booleano dependiendo de si el programa debe acabar.
 	 */
-	public boolean acabar(){
+	private boolean acabar(){
 		return (this.end || this.bcProgram.cerrarPrograma(this.programCounter));
 	}
 	/**
@@ -142,5 +141,17 @@ public class CPU {
 	 */
 	public void aumentarCont(){
 		++this.programCounter;
+	}
+	/**
+	 * Método privado que crea la Excepción de ejecución.
+	 * @param bc ByteCode que produjo la excepción.
+	 * @param e excepción que se produjo.
+	 * @throws ExecutionError
+	 */
+	private void ThrowException(ByteCode bc, Exception e) throws ExecutionError{
+		String ExceptionMessage = "Excepción en la ejecución del bytecode ";
+		ExceptionMessage += this.programCounter + ".\nExcepción-bytecode ";
+		ExceptionMessage += bc.toString() + ": " + e.getMessage();
+		throw new ExecutionError(ExceptionMessage);
 	}
 }

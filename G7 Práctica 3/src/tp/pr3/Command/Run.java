@@ -29,7 +29,7 @@ public class Run implements Command {
 		else return null;
 	}
 	/**
-	 * Método que devuele un string con información sobre el comando RUN.
+	 * Método que devuelve un string con información sobre el comando RUN.
 	 */
 	public String textHelp(){
 		return " RUN: Ejecuta el programa " +

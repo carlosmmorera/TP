@@ -2,7 +2,6 @@ package tp.pr3.ProgramCompiler.Term;
 
 import tp.pr3.ByteCode.*;
 import tp.pr3.Exception.NonexistentVariable;
-import tp.pr3.Exception.VariableTableOverflow;
 /**
  * Clase que implementa las variables del código.
  * @author Carlos Moreno
@@ -38,19 +37,13 @@ public class Variable implements Term {
 	 * Método que compila la variable dada.
 	 * @param compiler
 	 * @return ByteCode correspondiente con la variable.
-	 * @throws VariableTableOverflow
+	 * @throws NonexistentVariable 
 	 */
 	public ByteCode compile(tp.pr3.ProgramCompiler.Compiler compiler) 
-			throws VariableTableOverflow{
+			throws NonexistentVariable{
 		int index = 0;
-		try{
-			index = compiler.getIndex(this.varName);
-			return new Load(index);
-		}
-		catch(NonexistentVariable e){
-			index = compiler.addVar(this.varName);
-			return new Load(index);
-		}
+		index = compiler.getIndex(this.varName);
+		return new Load(index);
 	}
 	/**
 	 * Método que pasa a un String esta clase.

@@ -47,8 +47,8 @@ public class Engine {
 			System.out.print("> ");
 			//Se lee el comando
 			line = entrada.nextLine();
+			com = CommandParser.parse(line);
 			try{
-				com = CommandParser.parse(line);
 				if (com == null) throw new BadFormatCommand("Error en la sintáxis "
 						+ "del Comando introducido.\nEl Comando '" + line 
 						+ "' no existe.");
@@ -96,7 +96,7 @@ public class Engine {
 				System.out.println(e);
 			}
 			catch (FileNotFoundException e){
-				System.out.println(e);
+				System.out.println(e.getMessage());
 			}
 		}
 		System.out.println("Fin de la ejecucion...");
