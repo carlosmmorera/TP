@@ -21,7 +21,7 @@ public class GoTo implements ByteCode{
 	}
 	/**
 	 * Método que ejecuta el salto a la línea n.
-	 * @param cpu parámetro de la clase @see {@link tp.pr2.CPU.CPU}.
+	 * @param cpu parámetro de la clase @see {@link tp.pr3.CPU.CPU}.
 	 */
 	public void execute(CPU cpu){
 		cpu.goTo(this.n);
@@ -47,7 +47,7 @@ public class GoTo implements ByteCode{
 	}
 	/**
 	 * @return una string con el nombre del BC y el número de
-	 * la línea a saltar @see {@link tp.pr2.ByteCode.GoTo#n}.
+	 * la línea a saltar @see {@link tp.pr3.ByteCode.GoTo#n}.
 	 */
 	public String toString(){
 		return "GOTO " + this.n;

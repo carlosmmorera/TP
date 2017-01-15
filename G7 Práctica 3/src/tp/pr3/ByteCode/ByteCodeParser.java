@@ -2,7 +2,6 @@ package tp.pr3.ByteCode;
 
 import tp.pr3.ByteCode.Arithmetics.*;
 import tp.pr3.ByteCode.ConditionalJumps.*;
-import tp.pr3.Exception.BadFormatByteCode;
 /**
  * Clase que gestiona el parseo del ByteCode que se ha introducido.
  * @author Carlos Moreno
@@ -28,13 +27,12 @@ public class ByteCodeParser {
 	 * Método que se encarga del parseo del ByteCode escrito por el usuario.
 	 * @param line un string que representa el ByteCode introducido.
 	 * @return el ByteCode introducido con su tipo adecuado.
-	 * @throws BadFormatByteCode: producida al introducir un ByteCode incorrecto.
 	 */
-	public static ByteCode parse(String line) throws BadFormatByteCode{
+	public static ByteCode parse(String line){
 		//Divido el string en un string por cada paralabra separada de un espacio
 		String[] subcadenas = line.split(" ");
 		
-		if (subcadenas.length > BC_LONG_MAX)ThrowException(line);
+		if (subcadenas.length > BC_LONG_MAX) return null;
 		
 		ByteCode bc = null;
 		int i = 0;
@@ -45,16 +43,6 @@ public class ByteCodeParser {
 			if (bc != null) encontrado = true;
 			++i;
 		}
-		if (!encontrado)ThrowException(line);
 		return bc;
-	}
-	/**
-	 * Método encargado de crear el mensaje de la excepción y lanzarla.
-	 * @param line
-	 * @throws BadFormatByteCode
-	 */
-	private static void ThrowException(String line)throws BadFormatByteCode{
-		throw new BadFormatByteCode("Error en la sintáxis del ByteCode "
-				+ "introducido\nEl ByteCode '" + line + "' no existe");
 	}
 }

@@ -21,7 +21,7 @@ public class IfNeq extends ConditionalJumps{
 	}
 	/**
 	 * Método que ejecuta el ByteCode.
-	 * @param cpu: @see {@link tp.pr2.CPU}.
+	 * @param cpu: @see {@link tp.pr3.CPU}.
 	 * @param op1 primer operando a comparar.
 	 * @param op2 segundo operando a comparar.
 	 */

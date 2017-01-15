@@ -7,7 +7,7 @@ import tp.pr3.ProgramCompiler.LexicalParser;
  * Clase que implementa la instrucción Write.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class Write implements Instruction{
 	private String varName;
@@ -25,7 +25,7 @@ public class Write implements Instruction{
 	/**
 	 * Método que parsea la instrucción.
 	 * @param words: instrucción introducida en el programa.
-	 * @param lexparser encargada del análisis léxico.
+	 * @param lexParser encargada del análisis léxico.
 	 * @return Instruction dependiendo de si coincide con la instrucción 
 	 * de esta clase.
 	 */
@@ -39,13 +39,21 @@ public class Write implements Instruction{
 	}
 	/**
 	 * Método que compila la instrucción.
-	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @param compiler
 	 * @throws ArrayException
+	 * @throws NonexistentVariable
 	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
-			throws ArrayException, VariableTableOverflow{
+			throws ArrayException, NonexistentVariable{
 		ByteCode bc = new Load(compiler.getIndex(this.varName));
 		compiler.addByteCode(bc);
 		compiler.addByteCode(new Out());
+	}
+	/**
+	 * Método que genera un String de la instrucción.
+	 */
+	public String toString(){
+		String s = "write " + this.varName;
+		return s;
 	}
 }

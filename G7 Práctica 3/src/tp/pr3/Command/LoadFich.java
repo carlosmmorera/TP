@@ -1,5 +1,7 @@
 package tp.pr3.Command;
 
+import java.io.FileNotFoundException;
+
 import tp.pr3.Exception.ArrayException;
 import tp.pr3.mv.Engine;
 
@@ -26,7 +28,7 @@ public class LoadFich implements Command{
 	 * @param engine: @see {@link Engine}.
 	 * @throws ArrayException 
 	 */
-	public void execute(Engine engine) throws ArrayException{
+	public void execute(Engine engine) throws ArrayException, FileNotFoundException{
 		engine.loadfich(this.nombre);
 	}
 	/**

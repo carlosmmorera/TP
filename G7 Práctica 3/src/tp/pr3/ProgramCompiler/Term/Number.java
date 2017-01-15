@@ -34,7 +34,7 @@ public class Number implements Term{
 	}
 	/**
 	 * Método que compila el término numérico.
-	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @param compiler
 	 * @return Bytecode en el que se traduce el término.
 	 */
 	public ByteCode compile(tp.pr3.ProgramCompiler.Compiler compiler){

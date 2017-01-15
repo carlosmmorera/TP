@@ -45,6 +45,7 @@ public class Memory {
  	 * Método que escribe en memoria.
  	 * @param pos posición de la memoria en la que hay que escribir.
  	 * @param value valor que hay que escribir en la memoria.
+ 	 * @throws ArrayException
  	 */
 	public void write(int pos, int value) throws ArrayException{
 		if (pos < 0) throw new ArrayException("Acceso a posición de "
@@ -63,6 +64,7 @@ public class Memory {
 	 * @param pos posición de la memoria que tenemos que leer.
 	 * @return un entero que se corresponde con el numero 
 	 * que hay en esa posición de la memoria.
+	 * @throws ArrayException
 	 */
 	public int read(int pos) throws ArrayException{
 		if (pos < 0) throw new ArrayException("Posición de memoria inexistente.");

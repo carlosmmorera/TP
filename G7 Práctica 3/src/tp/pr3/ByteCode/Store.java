@@ -21,7 +21,9 @@ public class Store implements ByteCode{
 	}
 	/**
 	 * Método que ejecuta el ByteCode Store.
-	 * @param cpu: @see {@link tp.pr2.CPU.CPU}.
+	 * @param cpu: @see {@link tp.pr3.CPU.CPU}.
+	 * @throws ArrayException
+	 * @throws StackTooSmall
 	 */
 	public void execute(CPU cpu)throws ArrayException, StackTooSmall{
 		cpu.store(this.n);

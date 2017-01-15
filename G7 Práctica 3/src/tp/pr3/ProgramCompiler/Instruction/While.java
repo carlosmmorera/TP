@@ -8,7 +8,7 @@ import tp.pr3.ProgramCompiler.Condition.*;
  * Clase que implementa la instrucción While.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class While implements Instruction{
 	Condition condition;
@@ -26,12 +26,13 @@ public class While implements Instruction{
 	/**
 	 * Método que parsea la instrucción.
 	 * @param words: instrucción introducida en el programa.
-	 * @param lexparser encargada del análisis léxico.
+	 * @param lexParser encargada del análisis léxico.
 	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
 	 * @throws ArrayException 
+	 * @throws LexicalAnalysisException 
 	 */
 	public Instruction lexParse(String[] words, LexicalParser lexParser) 
-			throws ArrayException{
+			throws ArrayException, LexicalAnalysisException{
 		if (words.length != NUMCOMPONENTES || 
 				!words[0].equalsIgnoreCase("WHILE")) return null;
 		else {
@@ -39,33 +40,35 @@ public class While implements Instruction{
 					words[3], lexParser);
 			
 			if (cnd == null) return null;
-			else{
-				try{
-					ParsedProgram wBody = new ParsedProgram();
-					lexParser.increaseProgramCounter();
-					lexParser.lexicalParser(wBody, "ENDWHILE");
-					lexParser.increaseProgramCounter();
-					return new While(cnd, wBody);
-				}
-				catch (LexicalAnalysisException e){
-					return null;
-				}
-			}
+			ParsedProgram wBody = new ParsedProgram();
+			lexParser.increaseProgramCounter();
+			lexParser.lexicalParser(wBody, "ENDWHILE");
+			lexParser.increaseProgramCounter();
+			return new While(cnd, wBody);
 		}
 	}
 	/**
 	 * Método que compila la instrucción.
-	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @param compiler
 	 * @throws ArrayException
 	 * @throws VariableTableOverflow
+	 * @throws NonexistentVariable 
 	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
-			throws ArrayException, VariableTableOverflow{
+			throws ArrayException, VariableTableOverflow, NonexistentVariable{
 		
 		int pc1 = compiler.getProgramCounter();
 		this.condition.compile(compiler);
 		compiler.compile(this.whileBody);
 		compiler.addByteCode(new GoTo(pc1));
 		this.condition.setJump(compiler.getProgramCounter());
+	}
+	/**
+	 * Método que genera un String de la instrucción.
+	 */
+	public String toString(){
+		String s = "while " + this.condition.toString() + '\n' + this.whileBody.toString()
+				+ "endwhile";
+		return s;
 	}
 }

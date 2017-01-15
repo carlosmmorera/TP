@@ -7,7 +7,7 @@ import tp.pr3.ProgramCompiler.LexicalParser;
  * Clase que se encarga del parseo de las instrucciones del código.
  * @author Carlos Moreno Morera
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class ParserInstruction {
 	final static int LONG_MAX_INSTRUCTION = 5;
@@ -25,9 +25,9 @@ public class ParserInstruction {
 	 * @throws ArrayException 
 	 */
 	public static Instruction parse(String line, LexicalParser parser)
-				throws LexicalAnalysisException, ArrayException{
+			throws ArrayException, LexicalAnalysisException{
 		String[] s = line.split(" ");
-		if (s.length > LONG_MAX_INSTRUCTION) ThrowException(line, parser);
+		if (s.length > LONG_MAX_INSTRUCTION) return null;
 		
 		Instruction instr = null;
 		int i = 0;
@@ -38,20 +38,6 @@ public class ParserInstruction {
 			if (instr != null) encontrado = true;
 			++i;
 		}
-		if (!encontrado) ThrowException(line, parser);
 		return instr;
-	}
-	/**
-	 * Método que se encarga de crear el mensaje de la excepción y lanzarla
-	 * @param line
-	 * @param parser
-	 * @throws LexicalAnalysisException
-	 */
-	private static void ThrowException(String line, LexicalParser parser)
-			throws LexicalAnalysisException{
-		
-		throw new LexicalAnalysisException("Error en la sintáxis del código fuente en la "
-				+ "línea " + parser.getProgramCounter() + "\nLa instrucción '" + line + 
-				"' no existe");
 	}
 }

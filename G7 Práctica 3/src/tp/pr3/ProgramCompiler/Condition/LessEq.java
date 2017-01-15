@@ -4,10 +4,10 @@ import tp.pr3.ByteCode.ConditionalJumps.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.Term;
 /**
- * Método que implementa la condición '<='.
+ * Método que implementa la condición menor o igual.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class LessEq extends Condition{
 	/**
@@ -38,5 +38,12 @@ public class LessEq extends Condition{
 	 */
 	public ConditionalJumps compileAux(){
 		return new IfLeq();
+	}
+	/**
+	 * Método que genera un String de la condición.
+	 */
+	public String toString(){
+		String s = "<=";
+		return s;
 	}
 }

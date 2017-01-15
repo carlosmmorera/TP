@@ -28,7 +28,7 @@ public abstract class ConditionalJumps implements ByteCode{
 	}
 	/**
 	 * Método que ejecuta la operación de salto condicional deseada si es posible.
-	 * @param cpu elemento de la clase @see {@link tp.pr2.CPU}.
+	 * @param cpu elemento de la clase @see {@link tp.pr3.CPU}.
 	 */
 	public void execute(CPU cpu)throws StackTooSmall{
 		int op2 = cpu.pilapop();

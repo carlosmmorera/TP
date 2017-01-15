@@ -4,10 +4,10 @@ import tp.pr3.ByteCode.ConditionalJumps.*;
 import tp.pr3.ProgramCompiler.LexicalParser;
 import tp.pr3.ProgramCompiler.Term.*;
 /**
- * Clase que implementa la condición '<'.
+ * Clase que implementa la condición menor.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  *
  */
 public class Less extends Condition{
@@ -39,5 +39,12 @@ public class Less extends Condition{
 	 */
 	public ConditionalJumps compileAux(){
 		return new IfLe();
+	}
+	/**
+	 * Método que genera un String de la condición.
+	 */
+	public String toString(){
+		String s = "<";
+		return s;
 	}
 }

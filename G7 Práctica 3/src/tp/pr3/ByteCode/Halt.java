@@ -11,7 +11,7 @@ import tp.pr3.CPU.CPU;
 public class Halt implements ByteCode{
 	/**
 	 * Método que ejecuta el ByteCode (para el programa).
-	 * @param cpu: @see {@link tp.pr2.CPU.CPU}.
+	 * @param cpu: @see {@link tp.pr3.CPU.CPU}.
 	 */
 	public void execute(CPU cpu){
 		cpu.halt();

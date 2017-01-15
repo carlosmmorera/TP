@@ -60,6 +60,9 @@ public class SourceProgram {
 		}
 		return strProgram;
 	}
+	/**
+	 * Método que resetea el programa.
+	 */
 	public void reset(){
 		this.numInstruc = 0;
 	}

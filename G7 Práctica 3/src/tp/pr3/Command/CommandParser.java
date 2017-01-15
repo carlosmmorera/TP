@@ -28,11 +28,11 @@ public class CommandParser {
 	 * @param line string que se va a parsear.
 	 * @return ByteCode que se corresponde con el string.
 	 */
-	public static Command parse(String line)throws BadFormatCommand{
+	public static Command parse(String line){
 		//Divido el string en un string por cada paralabra separada de un espacio
 		String[] subcadenas = line.split(" ");
 		
-		if (subcadenas.length > COMMAND_LONG_MAX) ThrowException(line);
+		if (subcadenas.length > COMMAND_LONG_MAX) return null;
 		
 		Command comando = null;
 		int i = 0;
@@ -43,7 +43,6 @@ public class CommandParser {
 			if (comando != null) encontrado = true;
 			++i;
 		}
-		if (!encontrado) ThrowException(line);
 		return comando;
 	}
 	/**
@@ -53,14 +52,5 @@ public class CommandParser {
 		for (int i = 0; i < commands.length; ++i){
 			System.out.print(commands[i].textHelp());
 		}
-	}
-	/**
-	 * Método que se encarga de generar el mensaje de la excepción y lanzarla.
-	 * @param line
-	 * @throws BadFormatCommand
-	 */
-	private static void ThrowException(String line)throws BadFormatCommand{
-		throw new BadFormatCommand("Error en la sintáxis del Comando introducido.\n"
-				+ "El Comando '" + line + "' no existe.");
 	}
 }

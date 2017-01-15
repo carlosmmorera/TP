@@ -9,11 +9,11 @@ import tp.pr3.ProgramCompiler.LexicalParser;
  * While y Write.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @verison 30/12/2016
+ * @version 15/01/2017
  */
 public interface Instruction {
-	Instruction lexParse(String[] words, LexicalParser lexParser) 
-			throws ArrayException;
-	void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
-			throws ArrayException, VariableTableOverflow;
+	public Instruction lexParse(String[] words, LexicalParser lexParser) 
+			throws ArrayException, LexicalAnalysisException;
+	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
+			throws ArrayException, VariableTableOverflow, NonexistentVariable;
 }

@@ -21,7 +21,8 @@ public class Push implements ByteCode{
 	}
 	/**
 	 * Método que ejecuta el ByteCode Push.
-	 * @param cpu: @see {@link tp.pr2.CPU.CPU}.
+	 * @param cpu: @see {@link tp.pr3.CPU.CPU}.
+	 * @throws StackException
 	 */
 	public void execute(CPU cpu)throws StackException{
 		cpu.push(this.n);

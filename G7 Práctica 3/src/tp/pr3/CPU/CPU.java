@@ -57,6 +57,8 @@ public class CPU {
 	/**
 	 * Método que implementa la instrucción LOAD.
 	 * @param pos posición de memoria.
+	 * @throws ArrayException
+	 * @throws StackException
 	 */
 	public void load(int pos) throws ArrayException, StackException{
 		//Leo el elemento de memoria
@@ -76,6 +78,8 @@ public class CPU {
 	 * Método que devuelve el BC que se debe ejecutar.
 	 * @return ByteCode de la instrucción que se va
 	 * ejecutar @see {@link ByteCodeProgram#getBcAtn(int)}.
+	 * @throws ArrayException
+	 * 
 	 */
 	public ByteCode getInstr() throws ArrayException{
 		return this.bcProgram.getBcAtn(this.programCounter);
@@ -84,6 +88,7 @@ public class CPU {
 	 * Método que extrae un elemento de la cima de la pila.
 	 * @return int que será el elemento en la cima de la
 	 * pila @see {@link OperandStack#pop()}.
+	 * @throws StackTooSmall
 	 */
 	public int pilapop()throws StackTooSmall{
 		return pila.pop();
@@ -91,6 +96,7 @@ public class CPU {
 	/**
 	 * Método que introduce un elemento en la pila.
 	 * @param n elemento a introducir.
+	 * @throws StackException
 	 */
 	public void push(int n)throws StackException{
 		pila.push(n);
@@ -105,6 +111,8 @@ public class CPU {
 	/**
 	 * Método que ejecuta el ByteCode store.
 	 * @param n posición de memoria.
+	 * @throws ArrayException
+	 * @throws StackTooSmall
 	 */
 	public void store(int n)throws ArrayException, StackTooSmall{
 		this.memoria.write(n, pila.pop());
@@ -117,6 +125,7 @@ public class CPU {
 	}
 	/**
 	 * Método que ejecuta el ByteCode Out.
+	 * @throws StackTooSmall
 	 */
 	public void out() throws StackTooSmall{
 		System.out.println("consola: " + Integer.toString(pila.pop()));

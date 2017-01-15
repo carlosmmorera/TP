@@ -7,7 +7,7 @@ import tp.pr3.ProgramCompiler.Term.Term;
  * Clase que implementa la condición '!='.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class NotEqual extends Condition{
 	/**
@@ -38,5 +38,12 @@ public class NotEqual extends Condition{
 	 */
 	public ConditionalJumps compileAux(){
 		return new IfNeq();
+	}
+	/**
+	 * Método que genera un String de la condición.
+	 */
+	public String toString(){
+		String s = "!=";
+		return s;
 	}
 }

@@ -7,7 +7,7 @@ import tp.pr3.ProgramCompiler.Instruction.Instruction;
  * Clase encargada de generar el programa ByteCode.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class Compiler {
 	private ByteCodeProgram bytecode;
@@ -28,14 +28,23 @@ public class Compiler {
 	 * Método que compila el programa parseado.
 	 * @param pProgram: programa parseado.
 	 * @throws ArrayException 
+	 * @throws NonexistentVariable 
+	 * @throws VariableTableOverflow
 	 */
-	public void compile(ParsedProgram pProgram) 
-			throws ArrayException, VariableTableOverflow{
+	public void compile(ParsedProgram pProgram)throws ArrayException,
+		NonexistentVariable, VariableTableOverflow{
 		int i = 0;
+		Instruction inst = null;
 		while (i < pProgram.getNumeroInstrucciones()){
-			Instruction inst = pProgram.getInstructionAt(i);
-			inst.compile(this);
-			++i;
+			inst = pProgram.getInstructionAt(i);
+			try{
+				inst.compile(this);
+				++i;
+			}
+			catch(NonexistentVariable e){
+				throw new NonexistentVariable("Error en la instrucción '" + 
+						inst.toString() + "' de la línea " + i + ".\n" + e.getMessage());
+			}
 		}
 	}
 	/**
@@ -50,8 +59,9 @@ public class Compiler {
 	 * Método que obtiene el índice de la variable.
 	 * @param varName
 	 * @return int posición en la que se encuentra la variable.
+	 * @throws NonexistentVariable
 	 */
-	public int getIndex(String varName) throws VariableTableOverflow{
+	public int getIndex(String varName) throws NonexistentVariable{
 		int i = 0;
 		boolean encontrado = false;
 		
@@ -59,7 +69,9 @@ public class Compiler {
 			if (this.varTable[i].equals(varName)) encontrado = true;
 			else ++i;
 		}
-		if (!encontrado) addVar(varName);
+		if (!encontrado) throw new NonexistentVariable("La variable '" + varName + 
+				"' que se desea obtener no ha sido declarada.");
+		
 		return i;
 	}
 	/**
@@ -72,15 +84,18 @@ public class Compiler {
 	/**
 	 * Método que inserta una nueva variable en la tabla.
 	 * @param varName: nombre de la variable a insertar.
-	 * @throws VariableTableOverflow: que se produce cuando se supera el tamaño
+	 * @return índice en el que se ha añadido la variable en la tabla.
+	 * @throws VariableTableOverflow que se produce cuando se supera el tamaño
 	 * máximo del array varTable.
 	 */
-	private void addVar(String varName) throws VariableTableOverflow{
+	public int addVar(String varName) throws VariableTableOverflow{
 		if (this.numVars == TAM_MAX) 
 			throw new VariableTableOverflow("Superado el número máximo "
 					+ "permitido de variables en un programa.");
 		
 		this.varTable[this.numVars] = varName;
 		++this.numVars;
+		
+		return this.numVars - 1;
 	}
 }

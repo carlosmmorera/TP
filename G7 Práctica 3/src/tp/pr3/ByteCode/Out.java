@@ -11,7 +11,8 @@ import tp.pr3.Exception.StackTooSmall;
 public class Out implements ByteCode{
 	/**
 	 * Método que ejecuta el ByteCode Out.
-	 * @param cpu: @see {@link tp.pr2.CPU.CPU}.
+	 * @param cpu: @see {@link tp.pr3.CPU.CPU}.
+	 * @throws StackTooSmall
 	 */
 	public void execute(CPU cpu)throws StackTooSmall{
 		cpu.out();

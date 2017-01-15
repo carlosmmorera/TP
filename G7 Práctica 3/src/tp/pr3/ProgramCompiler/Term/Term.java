@@ -1,13 +1,14 @@
 package tp.pr3.ProgramCompiler.Term;
 
 import tp.pr3.ByteCode.ByteCode;
+import tp.pr3.Exception.NonexistentVariable;
 import tp.pr3.Exception.VariableTableOverflow;
 /**
  * Interfaz que representa los términos del código, implemenatada 
  * por Number y Variable.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public interface Term {
 	Term parse(String term);

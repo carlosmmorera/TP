@@ -2,6 +2,7 @@ package tp.pr3.Command;
 
 import tp.pr3.Exception.ArrayException;
 import tp.pr3.Exception.LexicalAnalysisException;
+import tp.pr3.Exception.NonexistentVariable;
 import tp.pr3.Exception.VariableTableOverflow;
 import tp.pr3.mv.Engine;
 
@@ -9,20 +10,21 @@ import tp.pr3.mv.Engine;
  * Clase que gestiona el comando Compile.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 
 public class Compile implements Command{
 	/**
 	 * Método que ejecuta el comando Compile.
-	 * @param engine @see {@link Engine}.
+	 * @param engine
 	 * @throws VariableTableOverflow 
 	 * @throws ArrayException 
 	 * @throws LexicalAnalysisException 
-	 * @Override
+	 * @throws NonexistentVariable
 	 */
 	public void execute(Engine engine) 
-			throws LexicalAnalysisException, ArrayException, VariableTableOverflow {
+			throws LexicalAnalysisException, ArrayException, 
+			VariableTableOverflow, NonexistentVariable {
 		engine.compile();
 	}
 	/**

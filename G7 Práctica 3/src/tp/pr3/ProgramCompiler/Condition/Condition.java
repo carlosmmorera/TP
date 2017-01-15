@@ -10,7 +10,7 @@ import tp.pr3.ProgramCompiler.Term.*;
  * De ella heradan las clases Equal, Less, LessEq y NotEqual.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public abstract class Condition {
 	private Term t1;
@@ -59,8 +59,9 @@ public abstract class Condition {
 			LexicalParser parser);
 	/**
 	 * Método que compila la condición.
-	 * @param compiler @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @param compiler
 	 * @throws ArrayException
+	 * @throws VariableTableOverflow
 	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)
 			throws ArrayException, VariableTableOverflow{
@@ -76,6 +77,13 @@ public abstract class Condition {
 	 */
 	public void setJump(int n){
 		this.condition.setPos(n);
+	}
+	/**
+	 * Método que genera un String de la condición.
+	 */
+	public String toString(){
+		String s = this.t1.toString() + ' ' + toString() + ' ' + this.t2.toString();
+		return s;
 	}
 	/**
 	 * Método abstracto que compila la condición concreta.

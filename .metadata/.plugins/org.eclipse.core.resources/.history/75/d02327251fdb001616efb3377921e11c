@@ -1,0 +1,5 @@
+x = y - r
+write x
+write y
+write r
+end

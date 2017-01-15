@@ -9,7 +9,7 @@ import tp.pr3.ProgramCompiler.Term.*;
  * Clase que gestiona la instrucción CompoundAssignment.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class CompoundAssignment implements Instruction{
 	private String var_name;
@@ -38,19 +38,19 @@ public class CompoundAssignment implements Instruction{
 	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
 	 */
 	public Instruction lexParse(String[] words, LexicalParser lexparser){
-		if (words.length != NUMCOMPONENTES || words[1].length() != 1) return null;
-		else {
-			if (!words[1].equals("=") || !IsAnOperator(words[3])) return null;
-			else{
-				Term t1 = TermParser.parse(words[2]);
-				Term t2 = TermParser.parse(words[4]);
-				
-				if (t1 == null || t2 == null) return null;
-				else{
-					lexparser.increaseProgramCounter();
-					return new CompoundAssignment(words[0], words[3], t1, t2);
-				}
-			}
+		if (words.length != NUMCOMPONENTES || !words[1].equals("=") || 
+				words[0].length() != 1 || !IsAnOperator(words[3])) return null;
+		
+		char var = words[0].charAt(0);
+		if (var < 'a' || var > 'z') return null;
+
+		Term t1 = TermParser.parse(words[2]);
+		Term t2 = TermParser.parse(words[4]);
+		
+		if (t1 == null || t2 == null) return null;
+		else{
+			lexparser.increaseProgramCounter();
+			return new CompoundAssignment(words[0], words[3], t1, t2);
 		}
 	}
 	/**
@@ -66,8 +66,9 @@ public class CompoundAssignment implements Instruction{
 	}
 	/**
 	 * Método que compila la instrucción.
-	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @param compiler
 	 * @throws ArrayException
+	 * @throws VariableTableOverflow
 	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler)
 			throws ArrayException, VariableTableOverflow {
@@ -75,8 +76,17 @@ public class CompoundAssignment implements Instruction{
 		compiler.addByteCode(this.term1.compile(compiler));
 		compiler.addByteCode(this.term2.compile(compiler));
 		compiler.addByteCode(this.generateBCArithmeticOper());
-		ByteCode bc = new Store(compiler.getIndex(this.var_name));
-		compiler.addByteCode(bc);
+		int index = 0;
+		try{
+			index = compiler.getIndex(this.var_name);
+		}
+		catch(NonexistentVariable e){
+			index = compiler.addVar(this.var_name);
+		}
+		finally{
+			ByteCode bc = new Store(index);
+			compiler.addByteCode(bc);
+		}
 	}
 	/**
 	 * Método que genera el ByteCode correspondiente al operador de la Instrucción.
@@ -88,5 +98,13 @@ public class CompoundAssignment implements Instruction{
 		else if (this.operator.equals("*")) return new Mul();
 		else if (this.operator.equals("/")) return new Div();
 		else return null;
+	}
+	/**
+	 * Método que genera un String de la instrucción.
+	 */
+	public String toString(){
+		String s = this.var_name + " = " + this.term1.toString() + ' ' + this.operator +
+				' ' + this.term2.toString();
+		return s;
 	}
 }

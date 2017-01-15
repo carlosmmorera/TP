@@ -40,6 +40,11 @@ public class LexicalParser {
 			if (instr.equalsIgnoreCase(stopKey))stop = true;
 			else {
 				instruction = ParserInstruction.parse(instr,this);
+				
+				if (instruction == null) throw new LexicalAnalysisException("Error en "
+						+ "la sintáxis del código fuente en la línea " + 
+						this.programCounter + "\nLa instrucción '" + instr + 
+						"' no existe");
 				pProgram.cargarInst(instruction);
 			}
 		}
@@ -49,12 +54,5 @@ public class LexicalParser {
 	 */
 	public void increaseProgramCounter(){
 		this.programCounter++;
-	}
-	/**
-	 * Método con el que se obtiene el contador de programa.
-	 * @return int ProgramCounter
-	 */
-	public int getProgramCounter(){
-		return this.programCounter;
 	}
 }

@@ -8,7 +8,7 @@ import tp.pr3.ProgramCompiler.Term.*;
  * Clase que implementa la instrucción SimpleAssignment.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class SimpleAssignment implements Instruction{
 	private String var_name;
@@ -32,28 +32,45 @@ public class SimpleAssignment implements Instruction{
 	 * @return Instruction dependiendo de si coincide con la instrucción de esta clase.
 	 */
 	public Instruction lexParse(String[] words, LexicalParser lexparser){
-		if (words.length != NUMCOMPONENTES || words[1].length() != 1) return null;
+		if (words.length != NUMCOMPONENTES || !words[1].equals("=") || 
+				words[0].length() != 1) return null;
+		
+		char var = words[0].charAt(0);
+		if (var < 'a' || var > 'z') return null;
+		
+		Term term = TermParser.parse(words[2]);
+		if (term == null) return null;
 		else{
-			if (!words[1].equals("=")) return null;
-			else {
-				Term term = TermParser.parse(words[2]);
-				if (term == null) return null;
-				else{
-					lexparser.increaseProgramCounter();
-					return new SimpleAssignment(words[0], term);
-				}
-			}
+			lexparser.increaseProgramCounter();
+			return new SimpleAssignment(words[0], term);
 		}
 	}
 	/**
 	 * Método que compila la instrucción.
-	 * @param @see {@link tp.pr3.ProgramCompiler.Compiler}.
+	 * @param compiler
 	 * @throws ArrayException
+	 * @throws VariableTableOverflow
 	 */
 	public void compile(tp.pr3.ProgramCompiler.Compiler compiler) 
 			throws ArrayException, VariableTableOverflow{
 		compiler.addByteCode(this.rhs.compile(compiler));
-		ByteCode bc = new Store(compiler.getIndex(this.var_name));
-		compiler.addByteCode(bc);
+		int index = 0;
+		try{
+			index = compiler.getIndex(this.var_name);
+		}
+		catch(NonexistentVariable e){
+			index = compiler.addVar(this.var_name);
+		}
+		finally{
+			ByteCode bc = new Store(index);
+			compiler.addByteCode(bc);
+		}	
+	}
+	/**
+	 * Método que genera un String de la instrucción.
+	 */
+	public String toString(){
+		String s = this.var_name + " = " + this.rhs.toString();
+		return s;
 	}
 }

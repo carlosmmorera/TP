@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+
 import tp.pr3.ByteCode.*;
 import tp.pr3.CPU.CPU;
 import tp.pr3.Command.*;
@@ -15,7 +16,7 @@ import tp.pr3.ProgramCompiler.Compiler;
  * Clase que gestiona la ejecución de la máquina virtual.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 12/01/2017
+ * @version 15/01/2017
  */
 public class Engine {
 	private SourceProgram sProgram;
@@ -48,6 +49,9 @@ public class Engine {
 			line = entrada.nextLine();
 			try{
 				com = CommandParser.parse(line);
+				if (com == null) throw new BadFormatCommand("Error en la sintáxis "
+						+ "del Comando introducido.\nEl Comando '" + line 
+						+ "' no existe.");
 				
 				System.out.println("Comienza la ejecucion de " + 
 				com.toString() + ".");
@@ -70,7 +74,28 @@ public class Engine {
 						System.out.println(this.bytecodeProgram.toString());
 				}
 			}
-			catch (Exception e){
+			catch (BadFormatByteCode e){
+				System.out.println(e);
+			}
+			catch (BadFormatCommand e){
+				System.out.println(e);
+			}
+			catch (NonexistentVariable e){
+				System.out.println(e);
+			}
+			catch (ExecutionError e){
+				System.out.println(e);
+			}
+			catch (VariableTableOverflow e){
+				System.out.println(e);
+			}
+			catch (ArrayException e){
+				System.out.println(e);
+			}
+			catch (LexicalAnalysisException e){
+				System.out.println(e);
+			}
+			catch (FileNotFoundException e){
 				System.out.println(e);
 			}
 		}
@@ -95,6 +120,8 @@ public class Engine {
 	/**
 	 * Método que ejecuta el comando REPLACE.
 	 * @param rep instrucción a reemplazar
+	 * @throws BadFormatByteCode
+	 * @throws ArrayException
 	 */
 	public void replaceBC(int rep) throws BadFormatByteCode, ArrayException{ 
 		this.bytecodeProgram.replace(rep);
@@ -103,9 +130,11 @@ public class Engine {
 	 * Método que ejecuta el comando COMPILE.
 	 * @throws ArrayException 
 	 * @throws LexicalAnalysisException 
+	 * @throws NonexistentVariable 
+	 * @throws VariableTableOverflow
 	 */
 	public void compile() throws LexicalAnalysisException, ArrayException,
-		VariableTableOverflow{
+		VariableTableOverflow, NonexistentVariable{
 		this.pProgram.reset();
 		this.bytecodeProgram.reset();
 		this.lexicalAnalysis();
@@ -123,8 +152,10 @@ public class Engine {
 	/**
 	 * Método encargado de compilar el programa y generar el ByteCode correspondiente.
 	 * @throws ArrayException
+	 * @throws NonexistentVariable 
 	 */
-	private void generateByteCode() throws ArrayException, VariableTableOverflow{
+	private void generateByteCode() throws ArrayException, 
+		VariableTableOverflow, NonexistentVariable{
 		Compiler compiler = new Compiler(this.bytecodeProgram);
 		compiler.compile(this.pProgram);
 	}
@@ -140,8 +171,9 @@ public class Engine {
 	 * Método que implementa el comando LOAD
 	 * @param nombre: nombre del fichero a cargar
 	 * @throws ArrayException 
+	 * @throws FileNotFoundException
 	 */
-	public void loadfich(String nombre) throws ArrayException{
+	public void loadfich(String nombre) throws ArrayException, FileNotFoundException{
 		resetProgram();
 		BufferedReader fIn = null;
 		try {
@@ -156,7 +188,7 @@ public class Engine {
 			fIn.close();
 		} 
 		catch (FileNotFoundException e){
-			System.out.println("Excepcion: Fichero no Encontrado...");
+			throw new FileNotFoundException("Excepcion: Fichero no Encontrado...");
 		}
 		catch (IOException e){
 			System.out.println("Error en la lectura del archivo");

@@ -16,8 +16,8 @@ public abstract class Arithmetics implements ByteCode{
 	
 	/**
 	 * Método que ejecuta la operación aritmética deseada si es posible.
-	 * @param cpu elemento de la clase @see {@link tp.pr2.CPU}.
-	 * @throws DivisionByZero: producido al intentar dividir por cero.
+	 * @param cpu elemento de la clase @see {@link tp.pr3.CPU}.
+	 * @throws DivisionByZero producido al intentar dividir por cero.
 	 */
 	public void execute(CPU cpu)throws DivisionByZero, StackTooSmall, StackException{
 		int op2 = cpu.pilapop();

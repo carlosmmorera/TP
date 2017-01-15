@@ -13,7 +13,7 @@ import tp.pr3.Exception.StackException;
 public class Mul extends Arithmetics{
 	/**
 	 * Método que ejecuta el ByteCode.
-	 * @param cpu objeto de la clase @see {@link tp.pr2.CPU}.
+	 * @param cpu objeto de la clase @see {@link tp.pr3.CPU}.
 	 * @param op1 operando 1.
 	 * @param op2 operando 2.
 	 */

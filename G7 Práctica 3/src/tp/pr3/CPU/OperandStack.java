@@ -28,6 +28,7 @@ public class OperandStack {
 	/**
 	 * Método que introduce un operando en la pila.
 	 * @param op operando a introducir.
+	 * @throws StackException
 	 */
 	public void push(int op)throws StackException{
 		if (this.pilallena())throw new StackException("Superado el tamaño máximo"

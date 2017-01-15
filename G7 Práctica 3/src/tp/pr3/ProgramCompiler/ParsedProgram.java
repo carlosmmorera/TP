@@ -6,7 +6,7 @@ import tp.pr3.ProgramCompiler.Instruction.*;
  * Clase encargada de gestionar el programa parseado.
  * @author Carlos Moreno
  * @author Manuel Suárez
- * @version 30/12/2016
+ * @version 15/01/2017
  */
 public class ParsedProgram {
 	final int TAM_MAX = 100;
@@ -56,5 +56,15 @@ public class ParsedProgram {
 	 */
 	public void reset(){
 		this.numInstruc = 0;
+	}
+	/**
+	 * Método que genera un String de la clase.
+	 */
+	public String toString(){
+		String s = "";
+		for (int i = 0; i < this.numInstruc; ++i){
+			s = this.pProgram[i].toString() + '\n';
+		}
+		return s;
 	}
 }

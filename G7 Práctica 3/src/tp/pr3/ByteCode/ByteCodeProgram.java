@@ -1,8 +1,8 @@
 package tp.pr3.ByteCode;
 
 import java.util.Scanner;
-import tp.pr3.Exception.*;
 
+import tp.pr3.Exception.*;
 /**
  * Clase que gestiona el programa de bytecodes introducido.
  * @author Carlos Moreno
@@ -18,6 +18,8 @@ public class ByteCodeProgram {
 	 */
 	private ByteCode[] program;
 	int newinst;
+	
+	final static Scanner entrada = new Scanner(System.in);
 	
 	/**
 	 * Constructor de la clase que inicializa el vector por defecto a 100.
@@ -44,7 +46,7 @@ public class ByteCodeProgram {
 	/**
 	 * Método que inserta una nueva instrucción en el programa.
 	 * @param bc instrucción a insertar.
-	 * @throws ArrayException.
+	 * @throws ArrayException
 	 */
 	public void pushbc(ByteCode bc)throws ArrayException{
 		if (this.newinst == TAM_MAX) throw new ArrayException("Superado el tamaño "
@@ -56,7 +58,8 @@ public class ByteCodeProgram {
 	/**
 	 * Método que reemplaza la instrucción n-ésima del programa por otra dada.
 	 * @param n el número de la instrucción que hay que cambiar.
-	 * @throws BadFormatByteCode, ArrayException.
+	 * @throws BadFormatByteCode producida al introducir un ByteCode incorrecto.
+	 * @throws ArrayException
 	 */
 	public void replace(int n) throws BadFormatByteCode, ArrayException{
 		AccesoPosicionInexistente(n);
@@ -64,10 +67,13 @@ public class ByteCodeProgram {
 		System.out.print("Nueva instruccion: ");
 		
 		//Pido la nueva instrucción
-		Scanner entrada = new Scanner(System.in);
 		String strbc = entrada.nextLine();
 		
-		this.program[n] = ByteCodeParser.parse(strbc);
+		ByteCode bc = ByteCodeParser.parse(strbc);
+		
+		if (bc == null) throw new BadFormatByteCode("Error en la sintáxis del ByteCode "
+				+ "introducido.\nEl ByteCode '" + strbc + "' no existe");
+		this.program[n] = bc;
 	}
 	/**
 	 * Método que devuelve el tamaño del programa.
@@ -82,7 +88,7 @@ public class ByteCodeProgram {
 	 *
 	 * @return el ByteCode correspondiente ubicado en la posición n-ésima.
 	 * 
-	 * @throws ArrayException.
+	 * @throws ArrayException
 	 */
 	public ByteCode getBcAtn(int n) throws ArrayException{
 		AccesoPosicionInexistente(n);
