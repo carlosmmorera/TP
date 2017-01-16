@@ -42,6 +42,8 @@ public class Compiler {
 				++i;
 			}
 			catch(NonexistentVariable e){
+				pProgram.reset();
+				this.bytecode.reset();
 				throw new NonexistentVariable("Error en la instrucción '" + 
 						inst.toString() + "' de la línea " + i + ".\n" + e.getMessage());
 			}
