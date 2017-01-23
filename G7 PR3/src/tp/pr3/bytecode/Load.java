@@ -1,0 +1,56 @@
+package tp.pr3.bytecode;
+
+import tp.pr3.cpu.CPU;
+import tp.pr3.exception.*;
+/**
+ * Clase que gestiona el ByteCode Load.
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ * @version 30/12/2016
+ */
+public class Load implements ByteCode{
+	private int n;
+	/**
+	 * Constructores de la clase.
+	 */
+	public Load(){
+		this.n = 0;
+	}
+	public Load(int a){
+		this.n = a;
+	}
+	/**
+	 * Método que ejecuta el ByteCode Load.
+	 * @param cpu: @see {@link tp.pr3.cpu.CPU}.
+	 * @throws ArrayException
+	 * @throws StackException
+	 */
+	public void execute(CPU cpu)throws ArrayException, StackException{
+		cpu.load(this.n);
+		cpu.aumentarCont();
+	}
+	/**
+	 * Método que parsea la instruccion Load.
+	 * @param s recibe la cadena de caracteres que representa el ByteCode introducido.
+	 * @return ByteCode dependiendo si la cadena introducida por el
+	 * usuario se corresponde con Load o no.
+	 */
+	public ByteCode parse(String[] s){
+		try{
+			if (s.length == 2 && s[0].equalsIgnoreCase("LOAD"))
+				return new Load(Integer.parseInt(s[1]));
+			else return null;
+		}
+		catch(NumberFormatException e){
+			System.out.println("Error al introducir el ByteCode LOAD");
+			System.out.println("A 'LOAD' debe precederle un caracter numérico");
+			return null;
+		}
+	}
+	/**
+	 * @return String con el nombre del BC.
+	 */
+	public String toString(){
+		return "LOAD " + this.n;
+	}
+}

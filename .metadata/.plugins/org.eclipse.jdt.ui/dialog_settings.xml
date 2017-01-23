@@ -19,7 +19,7 @@
 	<section name="javadoc">
 		<item value="public" key="access"/>
 		<item value="false" key="noindex"/>
-		<item value="C:\Users\USUARIO\TP\G7 Práctica 3\javadoc.xml" key="antpath"/>
+		<item value="C:\Users\USUARIO\TP\G7 PR3\javadoc.xml" key="antpath"/>
 		<item value="false" key="nodeprecatedlist"/>
 		<item value="true" key="use"/>
 		<item value="true" key="author"/>
@@ -33,14 +33,9 @@
 		<item value="true" key="splitindex"/>
 		<item value="true" key="fromStandard"/>
 		<item value="false" key="notree"/>
-		<item value="C:\Users\USUARIO\TP\G7 Práctica 3\doc" key="destdir"/>
+		<item value="C:\Users\USUARIO\TP\G7 PR3\doc" key="destdir"/>
 		<item value="false" key="openinbrowser"/>
 		<section name="projects">
-			<section name="G7 Práctica 3">
-				<item value="C:\Users\USUARIO\TP\G7 Práctica 3\javadoc.xml" key="antpath"/>
-				<item value="C:\Users\USUARIO\TP\G7 Práctica 3\doc" key="destdir"/>
-				<item value="" key="href"/>
-			</section>
 			<section name="TP.PR1.MV">
 				<item value="C:\Users\USUARIO\TP\TP.PR1.MV\javadoc.xml" key="antpath"/>
 				<item value="C:\Users\USUARIO\TP\TP.PR1.MV\doc" key="destdir"/>
@@ -49,6 +44,11 @@
 			<section name="G7 Práctica 2">
 				<item value="C:\Users\USUARIO\TP\G7 Práctica 2\javadoc.xml" key="antpath"/>
 				<item value="C:\Users\USUARIO\TP\G7 Práctica 2\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="G7 PR3">
+				<item value="C:\Users\USUARIO\TP\G7 PR3\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\USUARIO\TP\G7 PR3\doc" key="destdir"/>
 				<item value="" key="href"/>
 			</section>
 		</section>

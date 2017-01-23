@@ -1,0 +1,11 @@
+tp.pr3.bytecode
+tp.pr3.bytecode.arithmetics
+tp.pr3.bytecode.conditionaljumps
+tp.pr3.command
+tp.pr3.cpu
+tp.pr3.exception
+tp.pr3.mv
+tp.pr3.programcompiler
+tp.pr3.programcompiler.condition
+tp.pr3.programcompiler.instruction
+tp.pr3.programcompiler.term

@@ -1,0 +1,18 @@
+package tp.pr3.exception;
+/**
+ * Excepción que se produce cuando se escribe una instrucción de manera incorrecta
+ * @author Carlos Moreno
+ * @author Manuel Suárez
+ *	@version 30/12/2016
+ */
+@SuppressWarnings("serial")
+public class LexicalAnalysisException extends Exception{
+	private String ExceptionMessage;
+	
+	public LexicalAnalysisException(String ExceptionMessage){
+		this.ExceptionMessage = ExceptionMessage;
+	}
+	public String toString(){
+		return this.ExceptionMessage;
+	}
+}

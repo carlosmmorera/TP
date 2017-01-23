@@ -1,0 +1,13 @@
+package tp.pr3.exception;
+/**
+ * Excepción que se produce cuando se intenta ejecutar un programa que no existe.
+ * @author Carlos Moreno
+ *	@version 30/12/2016
+ */
+@SuppressWarnings("serial")
+public class NonexistentBCProgram extends Exception{
+	
+	public NonexistentBCProgram(String ExceptionMessage){
+		super(ExceptionMessage);
+	}
+}

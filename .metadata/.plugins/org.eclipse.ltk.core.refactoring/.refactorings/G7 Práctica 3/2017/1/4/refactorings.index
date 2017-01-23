@@ -1,0 +1,16 @@
+1485191124755	Rename package 'tp.pr3.ProgramCompiler.Term'
+1485191139624	Rename package 'tp.pr3.ProgramCompiler.Instruction'
+1485191153020	Rename package 'tp.pr3.ProgramCompiler.Condition'
+1485191320841	Rename package 'tp.pr3.Command'
+1485191340174	Rename package 'tp.pr3.CPU'
+1485191361257	Rename package 'tp.pr3.Exception'
+1485191712191	Move compilation units
+1485191751573	Move compilation units
+1485191793991	Move compilation units
+1485191837009	Move compilation units
+1485191861186	Move packages
+1485191895405	Move compilation units
+1485191941866	Move compilation units
+1485191978545	Move compilation units
+1485192008435	Move compilation units
+1485192032566	Move files
